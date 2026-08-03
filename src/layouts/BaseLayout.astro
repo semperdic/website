@@ -17,6 +17,7 @@ const {
 const pageTitle = title === 'Semper' ? 'Semper — Digital Image Correlation' : `${title} · Semper`;
 const canonicalPath = path.endsWith('/') || path === '/' ? path : `${path}/`;
 const canonical = new URL(canonicalPath.replace(/^\//, ''), `${SITE_URL}/`).toString();
+const iconHref = withBase('/brand/semper-icon.webp');
 ---
 
 <!doctype html>
@@ -27,16 +28,28 @@ const canonical = new URL(canonicalPath.replace(/^\//, ''), `${SITE_URL}/`).toSt
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/webp" href={iconHref} />
+    <link rel="apple-touch-icon" href={iconHref} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:type" content="website" />
-    <meta name="theme-color" content="#0e1412" />
+    <meta property="og:image" content={new URL('brand/semper-icon.webp', `${SITE_URL}/`).toString()} />
+    <meta name="theme-color" content="#0288D1" />
   </head>
   <body>
     <div class="shell">
       <header class="site-header">
-        <a class="brand" href={withBase('/')}>Semper<span>.</span></a>
+        <a class="brand" href={withBase('/')}>
+          <img
+            class="brand-mark"
+            src={withBase('/brand/semper-mark.webp')}
+            width="36"
+            height="36"
+            alt=""
+          />
+          Semper<span>.</span>
+        </a>
         <nav class="nav" aria-label="Primary">
           <a href={withBase('/download')} aria-current={path === '/download' ? 'page' : undefined}
             >Download</a
@@ -60,7 +73,7 @@ const canonical = new URL(canonicalPath.replace(/^\//, ''), `${SITE_URL}/`).toSt
       </main>
 
       <footer class="site-footer">
-        <span>Semper DIC · GitHub Pages</span>
+        <span>Semper · Digital Image Correlation</span>
         <span>
           <a href={githubRepoUrl}>GitHub</a>
           ·

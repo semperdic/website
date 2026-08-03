@@ -14,7 +14,11 @@ export function withBase(path = '/'): string {
   const normalized = path.startsWith('/') ? path.slice(1) : path;
   if (!normalized) return base.endsWith('/') ? base : `${base}/`;
   const prefix = base.endsWith('/') ? base : `${base}/`;
-  return `${prefix}${normalized}${normalized.endsWith('/') ? '' : '/'}`;
+  const isFile = /\.[a-z0-9]+$/i.test(normalized);
+  if (isFile || normalized.endsWith('/')) {
+    return `${prefix}${normalized}`;
+  }
+  return `${prefix}${normalized}/`;
 }
 
 export function discussionNewUrl(categorySlug: string): string {
