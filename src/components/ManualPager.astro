@@ -1,0 +1,36 @@
+---
+import { withBase } from '../lib/github';
+
+interface Link {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  prev?: Link;
+  next?: Link;
+}
+
+const { prev, next } = Astro.props;
+---
+
+<nav class="manual-pager" aria-label="Manual chapters">
+  {
+    prev ? (
+      <a class="manual-pager__prev" href={withBase(prev.href)}>
+        ← {prev.label}
+      </a>
+    ) : (
+      <span class="manual-pager__spacer" />
+    )
+  }
+  {
+    next ? (
+      <a class="manual-pager__next" href={withBase(next.href)}>
+        {next.label} →
+      </a>
+    ) : (
+      <span class="manual-pager__spacer" />
+    )
+  }
+</nav>

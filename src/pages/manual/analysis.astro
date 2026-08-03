@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Figure from '../../components/Figure.astro';
+import ManualPager from '../../components/ManualPager.astro';
 import { withBase } from '../../lib/github';
 ---
 
@@ -20,18 +21,20 @@ import { withBase } from '../../lib/github';
       <Figure
         src="/manual/wizard.svg"
         alt="Wizard steps: load frames, settings, optional sweep, then compute"
-        caption="Single mode goes straight to Compute; Sweep adds a setup step for ranges."
+        caption="Single mode goes straight to Compute. Sweep adds a setup step for ranges."
       />
 
       <h3>Step 1 — Load frames</h3>
       <p>
         <span class="lead-label">In the app:</span> tap each dropzone and pick images.
-        <strong>Photos</strong> is the system picker; <strong>Files</strong> is the only path to RAW
+      </p>
+      <p>
+        <strong>Photos</strong> is the system picker. <strong>Files</strong> is the only path to RAW
         and DNG.
       </p>
       <Figure
-        src="/manual/ui-step1.svg"
-        alt="Schematic of Step 1 with reference dropzone and numbered deformed frames"
+        src="/manual/screenshots/step1-frames.png"
+        alt="Step 1 with reference frame and three numbered deformed frames"
         caption="Number badges on deformed frames are the analysis order. Use Sort before you continue."
         phone
       />
@@ -55,9 +58,10 @@ import { withBase } from '../../lib/github';
       <p>Then tap <strong>Compute</strong>.</p>
 
       <h3>While it runs</h3>
+      <p>Points solved and convergence update live.</p>
       <p>
-        Points solved and convergence update live. <strong>Cancel</strong> stops at once — nothing
-        is kept. Keep the app open; there is no resume if Android kills the process.
+        <strong>Cancel</strong> stops at once — nothing is kept. Keep the app open; there is no
+        resume if Android kills the process.
       </p>
       <p>
         <span class="lead-label">If it fails:</span> two frames in a row below 50% convergence end
@@ -69,7 +73,7 @@ import { withBase } from '../../lib/github';
       <Figure
         src="/manual/subset-step.svg"
         alt="Diagram of subset window size versus step spacing on a grid"
-        caption="Subset is the match window; step is how far apart grid points are."
+        caption="Subset is the match window. Step is how far apart grid points are."
       />
       <table>
         <thead>
@@ -113,20 +117,20 @@ import { withBase } from '../../lib/github';
 
       <h3>Region of interest</h3>
       <Figure
-        src="/manual/ui-roi.svg"
-        alt="Schematic ROI editor with crop rectangle and erase hole"
+        src="/manual/screenshots/roi-editor.png"
+        alt="ROI editor with crop rectangle on a speckle image"
         caption="Crop sets the area to correlate. Erase punches out grips or markers that would decorrelate."
         phone
       />
       <p>
-        <span class="lead-label">If it fails:</span> an ROI smaller than the subset will not run —
-        enlarge the ROI or shrink the subset.
+        <span class="lead-label">If it fails:</span> an ROI smaller than the subset will not run.
+        Enlarge the ROI or shrink the subset.
       </p>
     </div>
 
-    <div class="cta-row" style="margin-top: 1.5rem">
-      <a class="btn btn-primary" href={withBase('/manual/sweeps-results')}>Open Sweeps &amp; results</a>
-      <a class="btn btn-ghost" href={withBase('/manual/getting-started')}>Back</a>
-    </div>
+    <ManualPager
+      prev={{ href: '/manual/getting-started', label: 'Getting started' }}
+      next={{ href: '/manual/sweeps-results', label: 'Sweeps & results' }}
+    />
   </section>
 </BaseLayout>

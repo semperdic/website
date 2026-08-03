@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SUPPORT_EMAIL, withBase } from '../lib/github';
+
+const mail = `mailto:${SUPPORT_EMAIL}`;
+---
+
+<BaseLayout
+  title="Privacy"
+  description="How Semper handles authentication, storage, data policy, and privacy."
+  path="/privacy"
+>
+  <section class="section" style="padding-top: 3rem">
+    <h2>Privacy</h2>
+    <p class="sub">
+      How you sign in, where data lives, what we collect, and how to erase it.
+    </p>
+
+    <ul class="privacy-toc">
+      <li><a href="#authentication">Authentication</a></li>
+      <li><a href="#data-storage">Data storage</a></li>
+      <li><a href="#data-policy">Data policy</a></li>
+      <li><a href="#privacy-policy">Privacy policy</a></li>
+    </ul>
+
+    <div class="prose">
+      <h3 id="authentication">Authentication</h3>
+      <p>Sign in with Google or email and password.</p>
+      <p>
+        Email passwords need 8+ characters with upper and lower case, a digit, and a special
+        character. <strong>Generate secure password</strong> can fill one in.
+      </p>
+      <p>
+        After email sign-up, open the verification link, then sign in. Unverified accounts cannot
+        sign in.
+      </p>
+      <p>
+        New accounts show <strong>Pending approval</strong>. An admin must approve you. Tap
+        <strong>Check status</strong> after approval — the screen does not poll.
+      </p>
+      <p>
+        Offline use works if this device was approved before. Import and solve need no network.
+        Uploads wait until you are online.
+      </p>
+      <p>
+        Deleting your account (Settings → Your data) re-checks identity on the sign-in screen first.
+        Confirm and Semper erases cloud backup, this device&apos;s data, and the sign-in, then signs
+        you out. If the cloud is unreachable, nothing is deleted.
+      </p>
+      <p>
+        More steps: <a href={withBase('/manual/getting-started')}>Manual · Getting started</a>.
+      </p>
+
+      <h3 id="data-storage">Data storage</h3>
+      <p>DIC correlation runs only on the phone. The cloud never recomputes fields.</p>
+      <p>Analyses are stored locally on the device by default.</p>
+      <p>
+        <strong>Save to cloud</strong> (optional) queues backups when online. <strong>Wi-Fi only</strong>
+        holds uploads until Wi-Fi.
+      </p>
+      <p>
+        A backup holds the analysis package (frames and results you already computed). Account and
+        device metadata live with the backend. Image bytes are not processed by the API — the client
+        uploads them to org storage.
+      </p>
+      <p>
+        Settings → Analyses data management lists local and cloud rows. You can back up, restore, or
+        delete per row.
+      </p>
+
+      <h3 id="data-policy">Data policy</h3>
+      <p><strong>What we collect</strong></p>
+      <ul>
+        <li>Account identity from Firebase Auth (email; name when the provider supplies it).</li>
+        <li>
+          A random device id (not IMEI, serial, or MAC), plus model and OS version used for device
+          binding.
+        </li>
+        <li>
+          Analysis backups when cloud backup is on (frames and computed results you choose to sync).
+        </li>
+        <li>
+          Support mail you send — the app can attach account, device id, app version, and phone
+          model.
+        </li>
+      </ul>
+      <p><strong>Why</strong></p>
+      <ul>
+        <li>Sign-in, email verification, and admin approval.</li>
+        <li>Optional backup and restore across devices.</li>
+        <li>Private account support.</li>
+      </ul>
+      <p><strong>Your controls</strong></p>
+      <ul>
+        <li>Leave cloud backup off. No new uploads are queued.</li>
+        <li>Delete local only, cloud backup only, or everywhere — read the dialog.</li>
+        <li>Delete the account to erase cloud copy, device data, and sign-in.</li>
+        <li>Email <a href={mail}>{SUPPORT_EMAIL}</a> for private account issues.</li>
+      </ul>
+      <p>
+        Community posts (Q&amp;A, bugs, features) go to GitHub. That content follows GitHub&apos;s
+        terms, not this app backup path.
+      </p>
+
+      <h3 id="privacy-policy">Privacy policy</h3>
+      <p>
+        Semper is provided by IndicVision. Contact: <a href={mail}>{SUPPORT_EMAIL}</a>.
+      </p>
+      <p>We do not sell your account or analysis data.</p>
+      <p>
+        We keep account and backup data while your account exists, or until you delete a backup or
+        the account. After account erasure, sign-in and stored backups for that account are removed
+        as described above.
+      </p>
+      <p>
+        Analytics of correlating images happens on device. Optional cloud backup stores what you
+        sync so you can restore it — not so the cloud can re-run DIC.
+      </p>
+      <p>
+        Material changes to this page will be posted here. Last updated: 3 Aug 2026.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ManualPager from '../../components/ManualPager.astro';
 import { withBase } from '../../lib/github';
 
 const idics = 'https://idics.org/guide/';
@@ -49,7 +50,7 @@ const faqs = [
   },
   {
     q: 'Where do I ask for help?',
-    a: 'In the app / site: use the Manual for how-to. For open questions, bugs, and features, open Community (GitHub login required to post). For account or private data, use Support email.',
+    a: 'In the app / site: use the Manual for how-to. For open questions, bugs, and features, open Community (GitHub login required to post). For account or private data, use Support email. For auth and storage, open Privacy.',
     practice:
       'When reporting a problem, include app version, device, image format/resolution, and exports (PDF/CSV) if results look wrong.',
   },
@@ -92,9 +93,14 @@ const faqs = [
       }
     </div>
 
-    <div class="cta-row" style="margin-top: 1.5rem">
-      <a class="btn btn-primary" href={withBase('/community')}>Open Community</a>
-      <a class="btn btn-ghost" href={withBase('/support')}>Open Support</a>
-    </div>
+    <p class="sub" style="margin-top: 1.25rem">
+      <a href={withBase('/privacy')}>Privacy</a>
+      ·
+      <a href={withBase('/community')}>Community</a>
+      ·
+      <a href={withBase('/support')}>Support</a>
+    </p>
+
+    <ManualPager prev={{ href: '/manual/exports-manage', label: 'Exports & manage' }} />
   </section>
 </BaseLayout>

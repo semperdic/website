@@ -49,7 +49,7 @@ const mail = `mailto:${SUPPORT_EMAIL}`;
             height="36"
             alt=""
           />
-          Semper<span>.</span>
+          Semper
         </a>
         <nav class="nav" aria-label="Primary">
           <a href={withBase('/download')} aria-current={path === '/download' ? 'page' : undefined}
@@ -108,6 +108,7 @@ const mail = `mailto:${SUPPORT_EMAIL}`;
             <h3>Project</h3>
             <ul>
               <li><a href={githubRepoUrl}>GitHub</a></li>
+              <li><a href={withBase('/privacy')}>Privacy</a></li>
               <li><a href={`${githubRepoUrl}/blob/main/CODE_OF_CONDUCT.md`}>Code of conduct</a></li>
               <li><a href={mail}>{SUPPORT_EMAIL}</a></li>
             </ul>

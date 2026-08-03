@@ -65,6 +65,17 @@ const mail = `mailto:${SUPPORT_EMAIL}`;
       </div>
 
       <div class="panel">
+        <h3 style="margin: 0 0 0.35rem; font-family: var(--font-display)">Privacy</h3>
+        <p style="margin: 0 0 0.85rem; color: var(--muted)">
+          Authentication, data storage, data policy, and privacy.
+        </p>
+        <div class="cta-row" style="margin: 0">
+          <a class="btn btn-primary" href={withBase('/privacy')}>Open Privacy</a>
+          <a class="btn btn-ghost" href={withBase('/privacy/#authentication')}>Authentication</a>
+        </div>
+      </div>
+
+      <div class="panel">
         <h3 style="margin: 0 0 0.35rem; font-family: var(--font-display)">Email support</h3>
         <p style="margin: 0 0 0.85rem; color: var(--muted)">
           Account approval, session limits, or anything you should not post publicly.

@@ -4,6 +4,10 @@ v1 ships on **GitHub Pages** at:
 
 **https://semperdic.github.io/website/**
 
+The org apex **https://semperdic.github.io/** is a separate public repo,
+[`semperdic/semperdic.github.io`](https://github.com/semperdic/semperdic.github.io), that redirects
+to `/website/`. The Astro product site stays in this repo (`semperdic/website`).
+
 No custom domain is required yet. When you outgrow Pages, point `semperdic.com` at Pages (or migrate to Firebase/Cloudflare) using the section below.
 
 ## How deploy works

@@ -16,11 +16,27 @@ A custom domain (`semperdic.com`) can be added later when traffic justifies it �
 
 | | |
 |---|---|
+| Site (apex redirects here) | https://semperdic.github.io/ → https://semperdic.github.io/website/ |
 | Download / Play | https://semperdic.github.io/website/download/ |
+| Manual | https://semperdic.github.io/website/manual/ |
 | Community | https://semperdic.github.io/website/community/ |
+| Privacy | https://semperdic.github.io/website/privacy/ |
 | Report a bug | [New bug report](https://github.com/semperdic/website/issues/new?template=bug_report.yml) |
 | Request a feature | [New feature request](https://github.com/semperdic/website/issues/new?template=feature_request.yml) |
 | Ask a question | [Discussions → Q&A](https://github.com/semperdic/website/discussions/new?category=q-a) |
+
+### Short paths (redirect into `/website`)
+
+| Path | Lands on |
+|---|---|
+| `/website/auth/` | Privacy · Authentication |
+| `/website/data/` | Privacy · Data storage |
+| `/website/data-policy/` | Privacy · Data policy |
+| `/website/privacy-policy/` | Privacy · Privacy policy |
+| `/website/legal/` | Privacy |
+| `/website/help/` | Support |
+| `/website/docs/` | Manual |
+| `/website/faq/` | Manual · FAQ |
 
 ## Code of conduct
 

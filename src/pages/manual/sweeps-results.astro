@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Figure from '../../components/Figure.astro';
+import ManualPager from '../../components/ManualPager.astro';
 import { withBase } from '../../lib/github';
 ---
 
@@ -19,10 +20,14 @@ import { withBase } from '../../lib/github';
     <div class="prose">
       <h3>Why sweep</h3>
       <p>
-        Strain is computed from displacement, so it depends on how much you smooth. A small virtual
-        strain gauge (VSG) keeps peaks but adds noise; a large VSG smooths peaks. A
-        <strong>sweep</strong> solves one deformed frame across many subset × window combinations so
-        you can see where the answer stops changing.
+        Strain is computed from displacement, so it depends on how much you smooth.
+      </p>
+      <p>
+        A small virtual strain gauge (VSG) keeps peaks but adds noise. A large VSG smooths peaks.
+      </p>
+      <p>
+        A <strong>sweep</strong> solves one deformed frame across many subset × window combinations
+        so you can see where the answer stops changing.
       </p>
       <p>
         <span class="lead-label">Why it matters:</span> good DIC practice asks you to show that
@@ -66,9 +71,10 @@ import { withBase } from '../../lib/github';
 
       <h3>Result lattice</h3>
       <Figure
-        src="/manual/lattice.svg"
-        alt="Lattice of filled and hollow result nodes"
-        caption="Filled dots solved; hollow rings were skipped — tap a hollow node for the reason."
+        src="/manual/screenshots/result-lattice.png"
+        alt="Sweep result lattice with filled and hollow nodes"
+        caption="Filled dots solved. Hollow rings were skipped — tap a hollow node for the reason."
+        phone
       />
       <ul>
         <li>Tap — highlight that curve</li>
@@ -78,18 +84,18 @@ import { withBase } from '../../lib/github';
 
       <h3>Reading results</h3>
       <Figure
-        src="/manual/ui-viewer.svg"
-        alt="Schematic result viewer with field tabs and Inspect tools"
-        caption="Field tabs along the top; Inspect, X/Y, and Max/Min below the map."
+        src="/manual/screenshots/result-viewer.png"
+        alt="Results viewer with U field map, Inspect tools, and max mean min strip"
+        caption="Field tabs along the top. Inspect, X/Y, and Max/Min below the map."
         phone
       />
-      <p>
-        Pinch to zoom, drag to pan. The strip under the image shows max, mean, and min.
-      </p>
+      <p>Pinch to zoom, drag to pan. The strip under the image shows max, mean, and min.</p>
       <p>
         <span class="lead-label">In the app:</span> colour scale defaults to Auto — each frame
-        rescales alone, so frames are not comparable by eye. Set fixed min/max, or use the summary
-        animation (one scale for the whole sequence).
+        rescales alone, so frames are not comparable by eye.
+      </p>
+      <p>
+        Set fixed min/max, or use the summary animation (one scale for the whole sequence).
       </p>
       <table>
         <thead>
@@ -119,9 +125,9 @@ import { withBase } from '../../lib/github';
       </p>
     </div>
 
-    <div class="cta-row" style="margin-top: 1.5rem">
-      <a class="btn btn-primary" href={withBase('/manual/exports-manage')}>Open Exports</a>
-      <a class="btn btn-ghost" href={withBase('/manual/analysis')}>Back</a>
-    </div>
+    <ManualPager
+      prev={{ href: '/manual/analysis', label: 'Running an analysis' }}
+      next={{ href: '/manual/exports-manage', label: 'Exports & manage' }}
+    />
   </section>
 </BaseLayout>

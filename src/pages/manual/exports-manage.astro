@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Figure from '../../components/Figure.astro';
+import ManualPager from '../../components/ManualPager.astro';
 import { withBase } from '../../lib/github';
 ---
 
@@ -18,8 +19,8 @@ import { withBase } from '../../lib/github';
 
     <div class="prose">
       <Figure
-        src="/manual/ui-home.svg"
-        alt="Schematic Home list of analyses"
+        src="/manual/screenshots/home.png"
+        alt="Semper Home screen listing analyses"
         caption="Home is where you open, rename, delete, and sync analyses."
         phone
       />
@@ -67,8 +68,10 @@ import { withBase } from '../../lib/github';
       </table>
       <p>
         <span class="lead-label">Why it matters:</span> build on the CSV. Coordinates and
-        displacements are image pixels. Filter on <code>znssd</code> (match residual) to drop poorly
-        correlated points.
+        displacements are image pixels.
+      </p>
+      <p>
+        Filter on <code>znssd</code> (match residual) to drop poorly correlated points.
       </p>
 
       <h3>Managing analyses</h3>
@@ -90,11 +93,14 @@ import { withBase } from '../../lib/github';
           issues
         </li>
       </ul>
+      <p>
+        Cloud backup and account erasure: <a href={withBase('/privacy')}>Privacy</a>.
+      </p>
     </div>
 
-    <div class="cta-row" style="margin-top: 1.5rem">
-      <a class="btn btn-primary" href={withBase('/manual/faq')}>Open FAQ</a>
-      <a class="btn btn-ghost" href={withBase('/manual/sweeps-results')}>Back</a>
-    </div>
+    <ManualPager
+      prev={{ href: '/manual/sweeps-results', label: 'Sweeps & results' }}
+      next={{ href: '/manual/faq', label: 'FAQ' }}
+    />
   </section>
 </BaseLayout>

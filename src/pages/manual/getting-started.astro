@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Figure from '../../components/Figure.astro';
+import ManualPager from '../../components/ManualPager.astro';
 import { withBase } from '../../lib/github';
 ---
 
@@ -20,8 +21,11 @@ import { withBase } from '../../lib/github';
       <h3>What it does</h3>
       <p>
         You give Semper one <strong>reference</strong> frame (undeformed) and several
-        <strong>deformed</strong> frames (one per load step). It matches small windows called
-        <strong>subsets</strong> on a grid and returns five maps per frame.
+        <strong>deformed</strong> frames (one per load step).
+      </p>
+      <p>
+        It matches small windows called <strong>subsets</strong> on a grid and returns five maps per
+        frame.
       </p>
       <Figure
         src="/manual/pipeline.svg"
@@ -51,8 +55,8 @@ import { withBase } from '../../lib/github';
       </table>
       <div class="callout">
         <span class="lead-label">Why it matters:</span> displacements are in
-        <strong>pixels</strong> — Semper does not apply a mm scale. Convert with your own factor.
-        Correlation runs on the phone; cloud backup only stores results.
+        <strong>pixels</strong>. Semper does not apply a mm scale — convert with your own factor.
+        Correlation runs on the phone. Cloud backup only stores results.
       </div>
 
       <h3>Getting in</h3>
@@ -76,15 +80,19 @@ import { withBase } from '../../lib/github';
           refresh by itself.
         </li>
       </ol>
+      <p>
+        Auth, storage, and erasure:
+        <a href={withBase('/privacy')}>Privacy</a>.
+      </p>
       <Figure
-        src="/manual/ui-home.svg"
-        alt="Schematic of the Semper Home screen with analysis list and add button"
+        src="/manual/screenshots/home.png"
+        alt="Semper Home screen listing analyses with upload badges and add button"
         caption="Home lists your analyses. Tap to open, long-press to select, + to start a new one."
         phone
       />
       <p>
         <span class="lead-label">If it fails:</span> offline use is fine if this device was approved
-        before. Import and solve work without a network; uploads wait until you are online.
+        before. Import and solve work without a network. Uploads wait until you are online.
       </p>
 
       <h3>Images it accepts</h3>
@@ -111,9 +119,11 @@ import { withBase } from '../../lib/github';
         </tbody>
       </table>
       <p>
-        Prefer <strong>PNG</strong> or <strong>TIFF</strong>. JPEG works but Semper warns: compression
-        damages the intensity gradients correlation needs. RAW and DNG import only through
-        <strong>Files</strong>, not Photos.
+        Prefer <strong>PNG</strong> or <strong>TIFF</strong>. JPEG works but Semper warns:
+        compression damages the intensity gradients correlation needs.
+      </p>
+      <p>
+        RAW and DNG import only through <strong>Files</strong>, not Photos.
       </p>
       <p>
         On import, Semper measures your speckle. A weak pattern shows a low-texture warning and
@@ -121,9 +131,6 @@ import { withBase } from '../../lib/github';
       </p>
     </div>
 
-    <div class="cta-row" style="margin-top: 1.5rem">
-      <a class="btn btn-primary" href={withBase('/manual/analysis')}>Open Running an analysis</a>
-      <a class="btn btn-ghost" href={withBase('/manual/faq')}>Open FAQ</a>
-    </div>
+    <ManualPager next={{ href: '/manual/analysis', label: 'Running an analysis' }} />
   </section>
 </BaseLayout>
