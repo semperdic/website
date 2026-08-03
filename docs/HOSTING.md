@@ -12,6 +12,8 @@ Marketing site hosting is **separate** from the Android auth App Links project (
    npx firebase projects:create semperdic-web --display-name "Semper DIC website"
    ```
 
+   If the project id is already taken, create another id and update [`.firebaserc`](../.firebaserc) plus the `projectId` in [`.github/workflows/deploy-hosting.yml`](../.github/workflows/deploy-hosting.yml).
+
 3. Wire this directory:
 
    ```bash
@@ -27,6 +29,10 @@ Marketing site hosting is **separate** from the Android auth App Links project (
    npm run build
    npx firebase deploy --only hosting
    ```
+
+6. For GitHub Actions deploy: create a Firebase service account JSON secret named
+   `FIREBASE_SERVICE_ACCOUNT_SEMPERDIC_WEB` (see Firebase Hosting GitHub Action docs).
+   Until that secret exists, prefer local `firebase deploy`.
 
 ## Custom domain (semperdic.com + www)
 
