@@ -16,9 +16,9 @@ The Android app and correlation engine live in a separate private repository.
 |---|---|
 | Download / Play | https://semperdic.com/download |
 | Community | https://semperdic.com/community |
-| Report a bug | [New bug report](https://github.com/damodar-datta/semperdic-website/issues/new?template=bug_report.yml) |
-| Request a feature | [New feature request](https://github.com/damodar-datta/semperdic-website/issues/new?template=feature_request.yml) |
-| Ask a question | [Discussions → Q&A](https://github.com/damodar-datta/semperdic-website/discussions/new?category=q-a) |
+| Report a bug | [New bug report](https://github.com/semperdic/website/issues/new?template=bug_report.yml) |
+| Request a feature | [New feature request](https://github.com/semperdic/website/issues/new?template=feature_request.yml) |
+| Ask a question | [Discussions → Q&A](https://github.com/semperdic/website/discussions/new?category=q-a) |
 
 ## Code of conduct
 
