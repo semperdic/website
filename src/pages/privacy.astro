@@ -12,9 +12,7 @@ const mail = `mailto:${SUPPORT_EMAIL}`;
 >
   <section class="section" style="padding-top: 3rem">
     <h2>Privacy</h2>
-    <p class="sub">
-      How you sign in, where data lives, what we collect, and how to erase it.
-    </p>
+    <p class="sub">Sign-in, where data lives, what we collect, and how you erase it.</p>
 
     <ul class="privacy-toc">
       <li><a href="#authentication">Authentication</a></li>
@@ -43,25 +41,30 @@ const mail = `mailto:${SUPPORT_EMAIL}`;
         Uploads wait until you are online.
       </p>
       <p>
-        Deleting your account (Settings → Your data) re-checks identity on the sign-in screen first.
-        Confirm and Semper erases cloud backup, this device&apos;s data, and the sign-in, then signs
-        you out. If the cloud is unreachable, nothing is deleted.
+        To delete your account, open Settings → Your data. Semper re-checks identity on the sign-in
+        screen first.
       </p>
       <p>
-        More steps: <a href={withBase('/manual/getting-started')}>Manual · Getting started</a>.
+        After you confirm, it erases cloud backup, this device&apos;s data, and the sign-in, then
+        signs you out. If the cloud is unreachable, nothing is deleted.
+      </p>
+      <p>
+        Step-by-step: <a href={withBase('/manual/getting-started')}>Manual · Getting started</a>.
       </p>
 
       <h3 id="data-storage">Data storage</h3>
       <p>DIC correlation runs only on the phone. The cloud never recomputes fields.</p>
-      <p>Analyses are stored locally on the device by default.</p>
+      <p>Analyses stay on the device by default.</p>
       <p>
-        <strong>Save to cloud</strong> (optional) queues backups when online. <strong>Wi-Fi only</strong>
-        holds uploads until Wi-Fi.
+        <strong>Save to cloud</strong> (optional) queues backups when online.
+        <strong>Wi-Fi only</strong> holds uploads until Wi-Fi.
       </p>
       <p>
-        A backup holds the analysis package (frames and results you already computed). Account and
-        device metadata live with the backend. Image bytes are not processed by the API — the client
-        uploads them to org storage.
+        A backup is the analysis package you already computed (frames and results). Account and
+        device metadata live with the backend.
+      </p>
+      <p>
+        Image bytes are not processed by the API. The client uploads them to org storage.
       </p>
       <p>
         Settings → Analyses data management lists local and cloud rows. You can back up, restore, or
@@ -73,11 +76,11 @@ const mail = `mailto:${SUPPORT_EMAIL}`;
       <ul>
         <li>Account identity from Firebase Auth (email; name when the provider supplies it).</li>
         <li>
-          A random device id (not IMEI, serial, or MAC), plus model and OS version used for device
+          A random device id (not IMEI, serial, or MAC), plus model and OS version for device
           binding.
         </li>
         <li>
-          Analysis backups when cloud backup is on (frames and computed results you choose to sync).
+          Analysis backups when cloud backup is on (frames and results you choose to sync).
         </li>
         <li>
           Support mail you send — the app can attach account, device id, app version, and phone
@@ -87,7 +90,7 @@ const mail = `mailto:${SUPPORT_EMAIL}`;
       <p><strong>Why</strong></p>
       <ul>
         <li>Sign-in, email verification, and admin approval.</li>
-        <li>Optional backup and restore across devices.</li>
+        <li>Optional backup and restore.</li>
         <li>Private account support.</li>
       </ul>
       <p><strong>Your controls</strong></p>
@@ -99,7 +102,7 @@ const mail = `mailto:${SUPPORT_EMAIL}`;
       </ul>
       <p>
         Community posts (Q&amp;A, bugs, features) go to GitHub. That content follows GitHub&apos;s
-        terms, not this app backup path.
+        terms, not this backup path.
       </p>
 
       <h3 id="privacy-policy">Privacy policy</h3>
@@ -109,16 +112,18 @@ const mail = `mailto:${SUPPORT_EMAIL}`;
       <p>We do not sell your account or analysis data.</p>
       <p>
         We keep account and backup data while your account exists, or until you delete a backup or
-        the account. After account erasure, sign-in and stored backups for that account are removed
-        as described above.
+        the account.
       </p>
       <p>
-        Analytics of correlating images happens on device. Optional cloud backup stores what you
-        sync so you can restore it — not so the cloud can re-run DIC.
+        After account erasure, sign-in and stored backups for that account are removed as described
+        under Authentication.
       </p>
       <p>
-        Material changes to this page will be posted here. Last updated: 3 Aug 2026.
+        Correlation runs on device. Optional cloud backup stores what you sync so you can restore
+        it — not so the cloud can re-run DIC.
       </p>
+      <p>Material changes to this page will be posted here.</p>
+      <p>Last updated: 3 Aug 2026.</p>
     </div>
   </section>
 </BaseLayout>

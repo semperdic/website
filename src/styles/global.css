@@ -338,6 +338,7 @@ img {
 /* Shared content primitives (Manual, Learn, hubs) */
 .prose {
   max-width: 42rem;
+  overflow-x: auto;
 }
 
 .prose h3 {
@@ -534,22 +535,21 @@ img {
 }
 
 .faq-item p {
-  margin: 0 0 0.65rem;
+  margin: 0;
   color: var(--text-primary);
 }
 
-.faq-item .practice {
-  margin: 0;
-  padding: 0.75rem 0.85rem;
-  border-radius: 0.45rem;
+.faq-note {
+  margin: 1.5rem 0 0;
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius);
   background: var(--sky-container);
   color: var(--sky-on-container);
   font-size: 0.92rem;
 }
 
-.faq-item .practice strong {
-  display: block;
-  margin-bottom: 0.25rem;
+.faq-note p {
+  margin: 0;
 }
 
 .crumb {
@@ -631,6 +631,7 @@ img {
 
 .figure--phone {
   max-width: 17rem;
+  margin-inline: auto;
 }
 
 .figure figcaption {
@@ -700,5 +701,92 @@ img {
   .hero-split {
     grid-template-columns: 1.15fr 0.85fr;
     align-items: center;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    font-size: 1rem;
+    background-attachment: scroll;
+  }
+
+  .shell {
+    width: min(100% - 1.25rem, var(--max));
+  }
+
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding-top: 1rem;
+  }
+
+  .nav {
+    width: 100%;
+    gap: 0.35rem 0.85rem;
+  }
+
+  .nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0.15rem 0;
+  }
+
+  .hero {
+    min-height: 0;
+    padding: 2rem 0 2.25rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.2rem, 12vw, 3.2rem);
+  }
+
+  .footer-cols {
+    grid-template-columns: 1fr;
+    gap: 1.35rem;
+  }
+
+  .manual-pager {
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .manual-pager a {
+    max-width: none;
+  }
+
+  .manual-pager__next {
+    margin-left: 0;
+    text-align: left;
+  }
+
+  .prose table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    font-size: 0.88rem;
+  }
+
+  .figure--phone {
+    max-width: min(17rem, 100%);
+  }
+
+  .hub-card {
+    grid-template-columns: auto 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .shell {
+    width: min(100% - 1rem, var(--max));
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .cta-row {
+    flex-direction: column;
   }
 }
