@@ -13,16 +13,11 @@ import { withBase } from '../lib/github';
       </p>
       <div class="cta-row">
         <a class="btn btn-primary" href={withBase('/download')}>Get Semper</a>
-        <a class="btn btn-ghost" href={withBase('/community')}>Community</a>
+        <a class="btn btn-ghost" href={withBase('/manual')}>Manual</a>
       </div>
     </div>
     <div class="logo-stage" aria-hidden="true">
-      <img
-        src={withBase('/brand/semper-mark.webp')}
-        width="512"
-        height="512"
-        alt=""
-      />
+      <img src={withBase('/brand/semper-mark.webp')} width="512" height="512" alt="" />
     </div>
   </section>
 
@@ -32,14 +27,19 @@ import { withBase } from '../lib/github';
       Paint a random speckle, photograph before and during loading, and read U, V, and strain fields
       as interactive heatmaps — offline-first, with optional cloud sync for testers.
     </p>
-    <div class="panel">
-      <p style="margin: 0; color: var(--muted)">
-        Questions, bugs, and feature ideas live on GitHub (login required to post). Browse here, or
-        jump straight into
-        <a href={withBase('/community')}>Discussions</a>
-        and
-        <a href={withBase('/bugs')}>Issues</a>.
-      </p>
+    <div class="hub-grid">
+      <a class="hub-card" href={withBase('/manual')}>
+        <h3>Manual</h3>
+        <p>Step-by-step analysis, exports, and FAQ with DIC good-practice notes.</p>
+      </a>
+      <a class="hub-card" href={withBase('/community')}>
+        <h3>Community</h3>
+        <p>Discussions, bug reports, and feature requests on GitHub.</p>
+      </a>
+      <a class="hub-card" href={withBase('/learn/dic')}>
+        <h3>How DIC works</h3>
+        <p>A five-minute primer for reading Semper results.</p>
+      </a>
     </div>
   </section>
 </BaseLayout>

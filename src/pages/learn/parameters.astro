@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { withBase } from '../../lib/github';
+
+const rows = [
+  ['Subset', '15–121, odd', 'Recommended', 'Speckle is weak; correlation fails', 'You need resolution across a sharp gradient'],
+  ['Step', '1–30', '5', 'Runtime matters', 'You need a denser field'],
+  ['Strain window', '5–101, odd', '15', 'Strain is noisy', 'Detail is being smoothed away'],
+  ['Kernel', '4×4 / 6×6', '4×4 Bicubic', 'Studying interpolation bias', '—'],
+  ['Max frames', '10–150', '50', 'Long sequences', 'Runs are killed for memory'],
+  ['Sweep subset range', '15–121, odd', 'Around recommended', '—', '—'],
+  ['Sweep strain window range', '5–101, odd', '5–101', 'Strain is noisy', 'Detail is being smoothed away'],
+  ['Step denominator', '2–9', '—', 'Denser correlation', 'Faster runs'],
+  ['Samples', '1–8 per axis', '3', 'Finer detail', 'Runtime is the product'],
+];
+---
+
+<BaseLayout
+  title="Parameters"
+  description="Semper analysis parameter ranges and defaults."
+  path="/learn/parameters"
+>
+  <section class="section" style="padding-top: 3rem">
+    <p class="crumb">
+      <a href={withBase('/learn/glossary')}>← Glossary</a>
+    </p>
+    <h2>Parameters</h2>
+    <p class="sub">
+      Ranges from the app. Quote
+      <code>VSG = (strain window − 1) × step + 1</code> with strain results.
+    </p>
+
+    <div class="prose">
+      <table>
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Range</th>
+            <th>Default</th>
+            <th>Raise when</th>
+            <th>Lower when</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            rows.map((r) => (
+              <tr>
+                {r.map((cell) => (
+                  <td>{cell}</td>
+                ))}
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+      <div class="callout">
+        The subset recommendation grows until SSSIG-based error estimates clear ~0.007 px accuracy
+        on your reference. Touching the slider stops auto-tracking; Reset brings it back.
+      </div>
+    </div>
+
+    <div class="cta-row" style="margin-top: 1.5rem">
+      <a class="btn btn-primary" href={withBase('/manual/analysis')}>Manual · analysis</a>
+      <a class="btn btn-ghost" href={withBase('/manual/faq')}>FAQ</a>
+    </div>
+  </section>
+</BaseLayout>

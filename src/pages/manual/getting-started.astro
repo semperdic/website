@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { withBase } from '../../lib/github';
+---
+
+<BaseLayout
+  title="Getting started"
+  description="What Semper does, signing in, and image requirements."
+  path="/manual/getting-started"
+>
+  <section class="section" style="padding-top: 3rem">
+    <p class="crumb">
+      <a href={withBase('/manual')}>← Manual</a>
+    </p>
+    <h2>Getting started</h2>
+    <p class="sub">What the app returns, how accounts work, and which frames you can load.</p>
+
+    <div class="prose">
+      <h3>What it does</h3>
+      <p>
+        Give Semper one <strong>reference</strong> frame and N <strong>deformed</strong> frames. It
+        matches subsets on a grid and returns five fields per frame:
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Unit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>U</strong>, <strong>V</strong> — displacement</td>
+            <td>px</td>
+          </tr>
+          <tr>
+            <td><strong>Exx</strong>, <strong>Eyy</strong>, <strong>Exy</strong> — strain</td>
+            <td>mε (millistrain)</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout">
+        Displacements are in <strong>pixels</strong> — there is no scale calibration. Convert to
+        physical units yourself. Everything runs on the phone; cloud backup stores results only.
+      </div>
+
+      <h3>Getting in</h3>
+      <ol>
+        <li>Sign in with Google or email.</li>
+        <li>
+          Email passwords need 8+ characters with upper and lower case, a digit, and a special
+          character. <strong>Generate secure password</strong> can fill one in.
+        </li>
+        <li>
+          Email sign-up sends a verification link. Open it, then sign in. Until you verify,
+          sign-in is refused.
+        </li>
+        <li>
+          New accounts land on <strong>Pending approval</strong>. Support is emailed automatically.
+        </li>
+        <li>Tap <strong>Request access</strong> if you want to add context.</li>
+        <li>
+          After approval, tap <strong>Check status</strong>. Nothing polls — the screen never
+          updates on its own.
+        </li>
+      </ol>
+      <p>
+        Offline works if you have been approved on this device before. Import, solve, and read
+        results work without a network; uploads wait.
+      </p>
+
+      <h3>Images it accepts</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Rule</th>
+            <th>If broken</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>All frames the same pixel size as the reference</td>
+            <td>Blocking error; you cannot run</td>
+          </tr>
+          <tr>
+            <td>At least one reference + one deformed frame</td>
+            <td><strong>Next</strong> stays off</td>
+          </tr>
+          <tr>
+            <td>At most <em>Max frames</em> (default 50)</td>
+            <td>Extras dropped, with a toast</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        <strong>Formats.</strong> PNG and TIFF are best. JPEG works but raises an accuracy warning —
+        compression damages the intensity gradients correlation needs. RAW and DNG import only
+        through <strong>Files</strong>, not Photos.
+      </p>
+      <p>
+        <strong>Texture check.</strong> On import the app measures your speckle. Weak pattern → a
+        warning naming a bigger subset size.
+      </p>
+      <p>
+        <strong>Video.</strong> Pick a video and a sampling sheet opens. Frame 0 becomes the
+        reference.
+      </p>
+    </div>
+
+    <div class="cta-row" style="margin-top: 1.5rem">
+      <a class="btn btn-primary" href={withBase('/manual/analysis')}>Next: Running an analysis</a>
+      <a class="btn btn-ghost" href={withBase('/manual/faq')}>FAQ</a>
+    </div>
+  </section>
+</BaseLayout>

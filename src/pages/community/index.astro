@@ -2,51 +2,80 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import {
   discussionNewUrl,
-  discussionsCategoryUrl,
-  fetchDiscussions,
-  formatDate,
   githubRepoUrl,
+  issueNewUrl,
   withBase,
 } from '../../lib/github';
 
-const categories = [
-  { slug: 'announcements', name: 'Announcements', blurb: 'Release notes and product news.' },
-  { slug: 'q-a', name: 'Q&A', blurb: 'How-to questions and troubleshooting.' },
-  { slug: 'ideas', name: 'Ideas', blurb: 'Feature brainstorming before a formal request.' },
-  { slug: 'general', name: 'General', blurb: 'Everything else about Semper.' },
+const hubs = [
+  {
+    title: 'Discussions · Q&A',
+    blurb: 'How-to questions and troubleshooting. GitHub login required to post.',
+    primary: { href: withBase('/community/q-a'), label: 'Browse Q&A' },
+    secondary: { href: discussionNewUrl('q-a'), label: 'New question', external: true },
+  },
+  {
+    title: 'Ideas',
+    blurb: 'Brainstorm improvements before filing a formal feature request.',
+    primary: { href: withBase('/community/ideas'), label: 'Browse ideas' },
+    secondary: { href: discussionNewUrl('ideas'), label: 'New idea', external: true },
+  },
+  {
+    title: 'Announcements',
+    blurb: 'Release notes and product news from the Semper team.',
+    primary: { href: withBase('/community/announcements'), label: 'Browse' },
+    secondary: { href: discussionNewUrl('announcements'), label: 'On GitHub', external: true },
+  },
+  {
+    title: 'General',
+    blurb: 'Everything else about Semper and DIC workflows.',
+    primary: { href: withBase('/community/general'), label: 'Browse' },
+    secondary: { href: discussionNewUrl('general'), label: 'New discussion', external: true },
+  },
+  {
+    title: 'Report a bug',
+    blurb: 'Something broke or produced wrong results — tracked as GitHub Issues.',
+    primary: { href: withBase('/bugs'), label: 'Open bugs' },
+    secondary: { href: issueNewUrl('bug_report.yml'), label: 'New bug', external: true },
+  },
+  {
+    title: 'Request a feature',
+    blurb: 'Suggest an improvement — tracked as Issues labeled enhancement.',
+    primary: { href: withBase('/features'), label: 'Open requests' },
+    secondary: { href: issueNewUrl('feature_request.yml'), label: 'New request', external: true },
+  },
 ];
-
-const recent = await fetchDiscussions({ limit: 10 });
 ---
 
 <BaseLayout
   title="Community"
-  description="Discussions for Semper — questions, ideas, and announcements."
+  description="Discussions, bugs, and feature requests for Semper."
   path="/community"
 >
   <section class="section" style="padding-top: 3rem">
     <h2>Community</h2>
     <p class="sub">
       Browse here; posting uses your GitHub account on
-      <a href={githubRepoUrl}>{githubRepoUrl.replace('https://', '')}</a>.
+      <a href={githubRepoUrl}>{githubRepoUrl.replace('https://', '')}</a>. For how-to guides, see
+      the <a href={withBase('/manual')}>Manual</a>.
     </p>
 
-    <div style="display: grid; gap: 0.75rem; margin-bottom: 2rem">
+    <div class="hub-grid">
       {
-        categories.map((c) => (
-          <div class="panel" style="display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: space-between; align-items: center">
-            <div>
-              <a href={withBase(`/community/${c.slug}`)} style="font-family: var(--font-display); font-size: 1.15rem; color: var(--ink); text-decoration: none">
-                {c.name}
+        hubs.map((h) => (
+          <div class="hub-card">
+            <h3>{h.title}</h3>
+            <p>{h.blurb}</p>
+            <div class="hub-actions">
+              <a class="btn btn-primary" href={h.primary.href}>
+                {h.primary.label}
               </a>
-              <p style="margin: 0.25rem 0 0; color: var(--muted); font-size: 0.92rem">{c.blurb}</p>
-            </div>
-            <div class="cta-row" style="margin: 0">
-              <a class="btn btn-ghost" href={withBase(`/community/${c.slug}`)}>
-                Browse
-              </a>
-              <a class="btn btn-primary" href={discussionNewUrl(c.slug)} rel="noopener noreferrer">
-                New
+              <a
+                class="btn btn-ghost"
+                href={h.secondary.href}
+                rel={h.secondary.external ? 'noopener noreferrer' : undefined}
+              >
+                {h.secondary.label}
               </a>
             </div>
           </div>
@@ -54,36 +83,10 @@ const recent = await fetchDiscussions({ limit: 10 });
       }
     </div>
 
-    <h2 style="font-size: 1.35rem">Recent</h2>
-    <p class="sub">Latest discussions from GitHub (requires a build-time token for live lists).</p>
-    {
-      recent.length === 0 ? (
-        <p class="empty">
-          No discussions loaded yet. Open{' '}
-          <a href={`${githubRepoUrl}/discussions`}>GitHub Discussions</a> directly, or set{' '}
-          <code>GITHUB_TOKEN</code> when building the site.
-        </p>
-      ) : (
-        <ul class="list">
-          {recent.map((d) => (
-            <li>
-              <a href={d.url} rel="noopener noreferrer">
-                <strong>
-                  #{d.number} {d.title}
-                </strong>
-                <span class="meta">
-                  {d.category?.name ?? 'Discussion'} · {formatDate(d.createdAt)}
-                  {d.author?.login ? ` · @${d.author.login}` : ''}
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      )
-    }
-
-    <p style="margin-top: 1.5rem">
-      <a href={discussionsCategoryUrl('q-a')}>All Q&A on GitHub →</a>
+    <p style="margin-top: 1.75rem">
+      <a href={`${githubRepoUrl}/issues`}>All open issues on GitHub →</a>
+      {' · '}
+      <a href={`${githubRepoUrl}/discussions`}>All discussions →</a>
     </p>
   </section>
 </BaseLayout>

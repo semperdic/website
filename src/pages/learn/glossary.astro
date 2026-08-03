@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { withBase } from '../../lib/github';
+
+const terms = [
+  ['Reference', 'The undeformed frame everything is matched against'],
+  ['Deformed frame', 'One load step'],
+  ['Subset', 'The pixel window matched at each point'],
+  ['Step', 'Spacing between grid points'],
+  ['Strain window', 'Points fitted to get strain from displacement'],
+  ['VSG', 'Virtual strain gauge — what one strain value covers, in px'],
+  ['ROI', 'Region of interest, optionally with erased holes'],
+  ['SSSIG', 'Sum of squared subset intensity gradients — drives the subset recommendation'],
+  ['ZNSSD', 'Correlation residual, one per point, in the CSV'],
+  ['mε', 'Millistrain'],
+  ['Sweep', 'One frame solved across a lattice of subset × strain-window settings'],
+];
+---
+
+<BaseLayout
+  title="Glossary"
+  description="Semper DIC terms used in the app and Manual."
+  path="/learn/glossary"
+>
+  <section class="section" style="padding-top: 3rem">
+    <p class="crumb">
+      <a href={withBase('/learn/dic')}>← How DIC works</a>
+    </p>
+    <h2>Glossary</h2>
+    <p class="sub">Meanings as used in Semper.</p>
+
+    <div class="prose">
+      <table>
+        <thead>
+          <tr>
+            <th>Term</th>
+            <th>Meaning here</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            terms.map(([term, meaning]) => (
+              <tr>
+                <td>
+                  <strong>{term}</strong>
+                </td>
+                <td>{meaning}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cta-row" style="margin-top: 1.5rem">
+      <a class="btn btn-primary" href={withBase('/learn/parameters')}>Parameters</a>
+      <a class="btn btn-ghost" href={withBase('/manual')}>Manual</a>
+    </div>
+  </section>
+</BaseLayout>

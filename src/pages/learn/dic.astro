@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { withBase } from '../../lib/github';
+---
+
+<BaseLayout
+  title="How DIC works"
+  description="Digital image correlation in five minutes — for Semper users."
+  path="/learn/dic"
+>
+  <section class="section" style="padding-top: 3rem">
+    <p class="crumb">
+      <a href={withBase('/')}>← Home</a>
+    </p>
+    <h2>How DIC works</h2>
+    <p class="sub">Enough theory to use Semper and read the Manual.</p>
+
+    <div class="prose">
+      <ol>
+        <li>A specimen is painted with a random <strong>speckle pattern</strong>.</li>
+        <li>A <strong>reference</strong> photo is taken, then more photos while it deforms.</li>
+        <li>
+          The image is divided into small windows called <strong>subsets</strong> (odd widths,
+          indexed around the centre pixel).
+        </li>
+        <li>
+          For each subset the engine finds where it moved in the deformed image, to about 1/100th of
+          a pixel, using <strong>ICGN</strong> and <strong>ZNSSD</strong> (a difference score immune
+          to lighting changes; lower is better).
+        </li>
+        <li>
+          Displacements (<strong>U</strong>, <strong>V</strong> in pixels) are differentiated into
+          strains (<strong>Exx</strong>, <strong>Eyy</strong>, <strong>Exy</strong> in millistrain).
+        </li>
+      </ol>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>U, V</td>
+            <td>Horizontal / vertical displacement (px)</td>
+          </tr>
+          <tr>
+            <td>Exx, Eyy, Exy</td>
+            <td>Normal and shear strain (mε)</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout">
+        Semper runs this pipeline on the phone. There is no scale calibration — convert pixels to
+        physical units yourself. For experiment design, see the
+        <a href="https://idics.org/guide/" rel="noopener noreferrer">iDICs Good Practices Guide</a>.
+      </div>
+    </div>
+
+    <div class="cta-row" style="margin-top: 1.5rem">
+      <a class="btn btn-primary" href={withBase('/manual')}>Manual</a>
+      <a class="btn btn-ghost" href={withBase('/learn/glossary')}>Glossary</a>
+    </div>
+  </section>
+</BaseLayout>

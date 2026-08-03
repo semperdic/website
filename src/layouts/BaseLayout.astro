@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { SITE_URL, githubRepoUrl, withBase } from '../lib/github';
+import { SITE_URL, SUPPORT_EMAIL, githubRepoUrl, withBase } from '../lib/github';
 
 interface Props {
   title?: string;
@@ -18,6 +18,7 @@ const pageTitle = title === 'Semper' ? 'Semper — Digital Image Correlation' : 
 const canonicalPath = path.endsWith('/') || path === '/' ? path : `${path}/`;
 const canonical = new URL(canonicalPath.replace(/^\//, ''), `${SITE_URL}/`).toString();
 const iconHref = withBase('/brand/semper-icon.webp');
+const mail = `mailto:${SUPPORT_EMAIL}`;
 ---
 
 <!doctype html>
@@ -55,12 +56,14 @@ const iconHref = withBase('/brand/semper-icon.webp');
             >Download</a
           >
           <a
-            href={withBase('/community')}
-            aria-current={path.startsWith('/community') ? 'page' : undefined}>Community</a
+            href={withBase('/manual')}
+            aria-current={path.startsWith('/manual') ? 'page' : undefined}>Manual</a
           >
-          <a href={withBase('/bugs')} aria-current={path === '/bugs' ? 'page' : undefined}>Bugs</a>
-          <a href={withBase('/features')} aria-current={path === '/features' ? 'page' : undefined}
-            >Features</a
+          <a
+            href={withBase('/community')}
+            aria-current={path.startsWith('/community') || path === '/bugs' || path === '/features'
+              ? 'page'
+              : undefined}>Community</a
           >
           <a href={withBase('/support')} aria-current={path === '/support' ? 'page' : undefined}
             >Support</a
@@ -73,12 +76,44 @@ const iconHref = withBase('/brand/semper-icon.webp');
       </main>
 
       <footer class="site-footer">
-        <span>Semper · Digital Image Correlation</span>
-        <span>
-          <a href={githubRepoUrl}>GitHub</a>
-          ·
-          <a href={withBase('/support')}>Support</a>
-        </span>
+        <div class="footer-cols">
+          <div>
+            <h3>Product</h3>
+            <ul>
+              <li><a href={withBase('/download')}>Download</a></li>
+              <li><a href={withBase('/manual')}>Manual</a></li>
+              <li><a href={withBase('/community')}>Community</a></li>
+              <li><a href={withBase('/support')}>Support</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Learn</h3>
+            <ul>
+              <li><a href={withBase('/learn/dic')}>How DIC works</a></li>
+              <li><a href={withBase('/learn/glossary')}>Glossary</a></li>
+              <li><a href={withBase('/learn/parameters')}>Parameters</a></li>
+              <li><a href={withBase('/manual/faq')}>FAQ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Community</h3>
+            <ul>
+              <li><a href={withBase('/bugs')}>Report a bug</a></li>
+              <li><a href={withBase('/features')}>Request a feature</a></li>
+              <li><a href={withBase('/community/q-a')}>Discussions · Q&amp;A</a></li>
+              <li><a href={`${githubRepoUrl}/issues`}>All issues on GitHub</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Project</h3>
+            <ul>
+              <li><a href={githubRepoUrl}>GitHub</a></li>
+              <li><a href={`${githubRepoUrl}/blob/main/CODE_OF_CONDUCT.md`}>Code of conduct</a></li>
+              <li><a href={mail}>{SUPPORT_EMAIL}</a></li>
+            </ul>
+          </div>
+        </div>
+        <p class="footer-note">Semper · Digital Image Correlation on Android</p>
       </footer>
     </div>
   </body>

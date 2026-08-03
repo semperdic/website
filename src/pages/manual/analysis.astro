@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { withBase } from '../../lib/github';
+---
+
+<BaseLayout
+  title="Running an analysis"
+  description="Load frames, parameters, ROI, and compute in Semper."
+  path="/manual/analysis"
+>
+  <section class="section" style="padding-top: 3rem">
+    <p class="crumb">
+      <a href={withBase('/manual')}>← Manual</a>
+    </p>
+    <h2>Running an analysis</h2>
+    <p class="sub">Wizard steps from loading frames through ROI and parameters.</p>
+
+    <div class="prose">
+      <h3>Step 1 — Load frames</h3>
+      <p>Tap each dropzone and pick images. <strong>Photos</strong> is the system picker; <strong>Files</strong> is the only route to RAW and DNG.</p>
+      <p>
+        The strip shows deformed frames with order badges. <strong>Badge order is analysis
+        order.</strong> Tap sort to reorder by name, date, or manually. You cannot restore the
+        picker&apos;s original order once sorted.
+      </p>
+
+      <h3>Step 2 — Settings</h3>
+      <ul>
+        <li>
+          <strong>Region of interest</strong> — defaults to the full image. Edit opens the ROI
+          editor.
+        </li>
+        <li>
+          <strong>Single</strong> or <strong>Sweep</strong> — Single solves every frame once. Sweep
+          solves one frame across a lattice of settings.
+        </li>
+        <li><strong>Advanced parameters</strong> — subset, step, strain window, kernel.</li>
+      </ul>
+      <p>Then tap <strong>Compute</strong>.</p>
+
+      <h3>While it runs</h3>
+      <p>
+        Points solved and convergence update live. <strong>Cancel</strong> stops immediately —
+        nothing is kept. Keep the app open; there is no resume if Android kills the process.
+      </p>
+      <p>
+        A run stops itself if images decorrelate: two consecutive frames below 50% convergence end
+        it. Frames solved before that are kept as a short (not failed) analysis.
+      </p>
+
+      <h3>Parameters (single mode)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Range</th>
+            <th>Default / reset</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Subset size</td>
+            <td>15–121, odd</td>
+            <td>Recommended from your image</td>
+          </tr>
+          <tr>
+            <td>Step size</td>
+            <td>1–30</td>
+            <td>5</td>
+          </tr>
+          <tr>
+            <td>Strain window</td>
+            <td>5–101, odd</td>
+            <td>15</td>
+          </tr>
+          <tr>
+            <td>Kernel</td>
+            <td>4×4 Bicubic / 6×6 Keys</td>
+            <td>4×4 Bicubic</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        Quote the <strong>VSG</strong> (virtual strain gauge), not only the window:
+        <code>VSG = (strain window − 1) × step + 1</code> [px]. Full table:
+        <a href={withBase('/learn/parameters')}>Parameters</a>.
+      </p>
+
+      <h3>Region of interest</h3>
+      <p>
+        Draw a rect or square, or type X, Y, W, H. <strong>Crop</strong> sets the area to
+        correlate; <strong>Erase</strong> punches holes (grips, fiducials). An ROI smaller than the
+        subset will not run.
+      </p>
+    </div>
+
+    <div class="cta-row" style="margin-top: 1.5rem">
+      <a class="btn btn-primary" href={withBase('/manual/sweeps-results')}>Next: Sweeps &amp; results</a>
+      <a class="btn btn-ghost" href={withBase('/manual/getting-started')}>Back</a>
+    </div>
+  </section>
+</BaseLayout>

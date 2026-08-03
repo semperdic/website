@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { withBase } from '../../lib/github';
+---
+
+<BaseLayout
+  title="Sweeps & results"
+  description="Parameter sweeps and reading Semper result fields."
+  path="/manual/sweeps-results"
+>
+  <section class="section" style="padding-top: 3rem">
+    <p class="crumb">
+      <a href={withBase('/manual')}>← Manual</a>
+    </p>
+    <h2>Sweeps &amp; results</h2>
+    <p class="sub">Why sweep VSG, how to read the lattice, and the result viewer.</p>
+
+    <div class="prose">
+      <h3>Why sweep</h3>
+      <p>
+        Strain is a derivative, so its size depends on smoothing. Small VSG: peak strain rises and
+        noise rises. Large VSG: peaks flatten. A sweep shows where the answer stops depending on
+        the setting — the convergence argument good DIC practice asks for. A sweep uses
+        <strong>one</strong> deformed frame.
+      </p>
+
+      <h3>Setting up a sweep</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Control</th>
+            <th>Range</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Subset range</td>
+            <td>15–121, odd</td>
+          </tr>
+          <tr>
+            <td>Strain window range</td>
+            <td>5–101, odd</td>
+          </tr>
+          <tr>
+            <td>Step denominator</td>
+            <td>2–9 (step = subset ÷ n, never below 1 px)</td>
+          </tr>
+          <tr>
+            <td>Samples</td>
+            <td>1–8 per axis (runtime is the product)</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Start at 3 × 3. Look for the VSG where the curves stop separating.</p>
+
+      <h3>Result lattice</h3>
+      <ul>
+        <li>Filled dot — solved</li>
+        <li>Hollow red ring — skipped; tap for the reason</li>
+        <li>Tap highlights a curve; double-tap or long-press opens that result</li>
+        <li>Exx / Eyy / Exy switches component</li>
+      </ul>
+
+      <h3>Reading results</h3>
+      <p>
+        Tabs switch field. Pinch to zoom, drag to pan. The strip under the image gives max, min,
+        and mean.
+      </p>
+      <p>
+        <strong>Colour scale</strong> is Auto by default — each frame rescales separately, so
+        frames are not comparable by eye. Tap the bar for fixed min/max. The summary animation puts
+        every frame on one scale for the sequence.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Tool</th>
+            <th>Does</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Inspect</td>
+            <td>Probe location and value</td>
+          </tr>
+          <tr>
+            <td>X, Y</td>
+            <td>Jump the probe to typed coordinates</td>
+          </tr>
+          <tr>
+            <td>Max/Min</td>
+            <td>Marks extrema with values and positions</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        The ⓘ <strong>Settings used</strong> sheet is provenance. Changing settings later never
+        changes an old result.
+      </p>
+    </div>
+
+    <div class="cta-row" style="margin-top: 1.5rem">
+      <a class="btn btn-primary" href={withBase('/manual/exports-manage')}>Next: Exports</a>
+      <a class="btn btn-ghost" href={withBase('/manual/analysis')}>Back</a>
+    </div>
+  </section>
+</BaseLayout>
