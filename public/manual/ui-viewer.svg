@@ -1,18 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 520" width="280" height="520" role="img" aria-label="Schematic of result viewer">
   <rect width="280" height="520" rx="28" fill="#152430"/>
   <rect x="10" y="10" width="260" height="500" rx="22" fill="#F4F9FC"/>
-  <text x="28" y="40" font-family="system-ui,Segoe UI,sans-serif" font-size="15" font-weight="700" fill="#152430">Results</text>
+  <text x="28" y="40" font-family="system-ui, 'Segoe UI', sans-serif" font-size="15" font-weight="700" fill="#152430">Results</text>
 
   <rect x="24" y="52" width="44" height="28" rx="6" fill="#0288D1"/>
-  <text x="46" y="70" text-anchor="middle" font-size="11" fill="#FFF" font-family="system-ui,Segoe UI,sans-serif">U</text>
+  <text x="46" y="70" text-anchor="middle" font-size="11" fill="#FFF" font-family="system-ui, 'Segoe UI', sans-serif">U</text>
   <rect x="72" y="52" width="44" height="28" rx="6" fill="#FFFFFF" stroke="#D6E4EC"/>
-  <text x="94" y="70" text-anchor="middle" font-size="11" fill="#152430" font-family="system-ui,Segoe UI,sans-serif">V</text>
+  <text x="94" y="70" text-anchor="middle" font-size="11" fill="#152430" font-family="system-ui, 'Segoe UI', sans-serif">V</text>
   <rect x="120" y="52" width="44" height="28" rx="6" fill="#FFFFFF" stroke="#D6E4EC"/>
-  <text x="142" y="70" text-anchor="middle" font-size="11" fill="#152430" font-family="system-ui,Segoe UI,sans-serif">Exx</text>
+  <text x="142" y="70" text-anchor="middle" font-size="11" fill="#152430" font-family="system-ui, 'Segoe UI', sans-serif">Exx</text>
   <rect x="168" y="52" width="44" height="28" rx="6" fill="#FFFFFF" stroke="#D6E4EC"/>
-  <text x="190" y="70" text-anchor="middle" font-size="11" fill="#152430" font-family="system-ui,Segoe UI,sans-serif">Eyy</text>
+  <text x="190" y="70" text-anchor="middle" font-size="11" fill="#152430" font-family="system-ui, 'Segoe UI', sans-serif">Eyy</text>
   <rect x="216" y="52" width="40" height="28" rx="6" fill="#FFFFFF" stroke="#D6E4EC"/>
-  <text x="236" y="70" text-anchor="middle" font-size="11" fill="#152430" font-family="system-ui,Segoe UI,sans-serif">Exy</text>
+  <text x="236" y="70" text-anchor="middle" font-size="11" fill="#152430" font-family="system-ui, 'Segoe UI', sans-serif">Exy</text>
 
   <defs>
     <linearGradient id="hm" x1="0" y1="0" x2="1" y2="1">
@@ -23,23 +23,23 @@
   </defs>
   <rect x="28" y="96" width="224" height="200" rx="10" fill="url(#hm)"/>
   <circle cx="150" cy="180" r="8" fill="#FFFFFF" stroke="#152430" stroke-width="2"/>
-  <text x="168" y="184" font-size="10" fill="#FFFFFF" font-family="system-ui,Segoe UI,sans-serif">Inspect</text>
-  <text x="48" y="280" font-size="10" fill="#FFFFFF" font-family="system-ui,Segoe UI,sans-serif">Max</text>
-  <text x="210" y="120" font-size="10" fill="#FFFFFF" font-family="system-ui,Segoe UI,sans-serif">Min</text>
+  <text x="168" y="184" font-size="10" fill="#FFFFFF" font-family="system-ui, 'Segoe UI', sans-serif">Inspect</text>
+  <text x="48" y="280" font-size="10" fill="#FFFFFF" font-family="system-ui, 'Segoe UI', sans-serif">Max</text>
+  <text x="210" y="120" font-size="10" fill="#FFFFFF" font-family="system-ui, 'Segoe UI', sans-serif">Min</text>
 
   <rect x="28" y="312" width="224" height="36" rx="8" fill="#FFFFFF" stroke="#D6E4EC"/>
-  <text x="40" y="334" font-size="11" fill="#5B6B7A" font-family="system-ui,Segoe UI,sans-serif">max / mean / min</text>
+  <text x="40" y="334" font-size="11" fill="#5B6B7A" font-family="system-ui, 'Segoe UI', sans-serif">max / mean / min</text>
 
   <rect x="28" y="364" width="70" height="36" rx="8" fill="#E1F5FE" stroke="#0288D1"/>
-  <text x="63" y="387" text-anchor="middle" font-size="11" fill="#014A72" font-family="system-ui,Segoe UI,sans-serif">Inspect</text>
+  <text x="63" y="387" text-anchor="middle" font-size="11" fill="#014A72" font-family="system-ui, 'Segoe UI', sans-serif">Inspect</text>
   <rect x="106" y="364" width="70" height="36" rx="8" fill="#FFFFFF" stroke="#D6E4EC"/>
-  <text x="141" y="387" text-anchor="middle" font-size="11" fill="#152430" font-family="system-ui,Segoe UI,sans-serif">X, Y</text>
+  <text x="141" y="387" text-anchor="middle" font-size="11" fill="#152430" font-family="system-ui, 'Segoe UI', sans-serif">X, Y</text>
   <rect x="184" y="364" width="68" height="36" rx="8" fill="#FFFFFF" stroke="#D6E4EC"/>
-  <text x="218" y="387" text-anchor="middle" font-size="11" fill="#152430" font-family="system-ui,Segoe UI,sans-serif">Max/Min</text>
+  <text x="218" y="387" text-anchor="middle" font-size="11" fill="#152430" font-family="system-ui, 'Segoe UI', sans-serif">Max/Min</text>
 
-  <text x="140" y="430" text-anchor="middle" font-size="11" fill="#5B6B7A" font-family="system-ui,Segoe UI,sans-serif">Frame 3 / 12 - fixed colour scale</text>
+  <text x="140" y="430" text-anchor="middle" font-size="11" fill="#5B6B7A" font-family="system-ui, 'Segoe UI', sans-serif">Frame 3 / 12 - fixed colour scale</text>
   <rect x="28" y="448" width="100" height="32" rx="8" fill="#FFFFFF" stroke="#D6E4EC"/>
-  <text x="78" y="468" text-anchor="middle" font-size="12" fill="#0277BD" font-family="system-ui,Segoe UI,sans-serif">Prev</text>
+  <text x="78" y="468" text-anchor="middle" font-size="12" fill="#0277BD" font-family="system-ui, 'Segoe UI', sans-serif">Prev</text>
   <rect x="152" y="448" width="100" height="32" rx="8" fill="#0288D1"/>
-  <text x="202" y="468" text-anchor="middle" font-size="12" fill="#FFF" font-family="system-ui,Segoe UI,sans-serif">Next</text>
+  <text x="202" y="468" text-anchor="middle" font-size="12" fill="#FFF" font-family="system-ui, 'Segoe UI', sans-serif">Next</text>
 </svg>

@@ -9,10 +9,13 @@ interface Props {
 }
 
 const { src, alt, caption, phone = false } = Astro.props;
-const href = src.startsWith('http') ? src : withBase(src.startsWith('/') ? src : `/${src}`);
+/** Bump when replacing Manual figures so CDNs/browsers drop stale SVG bodies. */
+const FIGURE_CACHE = '20260803b';
+const baseHref = src.startsWith('http') ? src : withBase(src.startsWith('/') ? src : `/${src}`);
+const href = `${baseHref}${baseHref.includes('?') ? '&' : '?'}v=${FIGURE_CACHE}`;
 ---
 
 <figure class:list={['figure', phone && 'figure--phone']}>
-  <img src={href} alt={alt} loading="lazy" />
+  <img src={href} alt={alt} loading="lazy" decoding="async" />
   <figcaption><strong>Figure.</strong> {caption}</figcaption>
 </figure>
