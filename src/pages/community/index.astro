@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import HubIcon from '../../components/HubIcon.astro';
 import {
   discussionNewUrl,
   githubRepoUrl,
@@ -9,40 +10,47 @@ import {
 
 const hubs = [
   {
+    icon: 'qa' as const,
     title: 'Discussions · Q&A',
-    blurb: 'How-to questions and troubleshooting. GitHub login required to post.',
-    primary: { href: withBase('/community/q-a'), label: 'Browse Q&A' },
-    secondary: { href: discussionNewUrl('q-a'), label: 'New question', external: true },
+    blurb: 'How-to questions and troubleshooting.',
+    openHref: withBase('/community/q-a'),
+    newHref: discussionNewUrl('q-a'),
   },
   {
+    icon: 'ideas' as const,
     title: 'Ideas',
-    blurb: 'Brainstorm improvements before filing a formal feature request.',
-    primary: { href: withBase('/community/ideas'), label: 'Browse ideas' },
-    secondary: { href: discussionNewUrl('ideas'), label: 'New idea', external: true },
+    blurb: 'Brainstorm before filing a formal feature request.',
+    openHref: withBase('/community/ideas'),
+    newHref: discussionNewUrl('ideas'),
   },
   {
+    icon: 'announce' as const,
     title: 'Announcements',
     blurb: 'Release notes and product news from the Semper team.',
-    primary: { href: withBase('/community/announcements'), label: 'Browse' },
-    secondary: { href: discussionNewUrl('announcements'), label: 'On GitHub', external: true },
+    openHref: withBase('/community/announcements'),
+    newHref: null as string | null,
+    viewHref: discussionNewUrl('announcements'),
   },
   {
+    icon: 'general' as const,
     title: 'General',
     blurb: 'Everything else about Semper and DIC workflows.',
-    primary: { href: withBase('/community/general'), label: 'Browse' },
-    secondary: { href: discussionNewUrl('general'), label: 'New discussion', external: true },
+    openHref: withBase('/community/general'),
+    newHref: discussionNewUrl('general'),
   },
   {
+    icon: 'bug' as const,
     title: 'Report a bug',
-    blurb: 'Something broke or produced wrong results — tracked as GitHub Issues.',
-    primary: { href: withBase('/bugs'), label: 'Open bugs' },
-    secondary: { href: issueNewUrl('bug_report.yml'), label: 'New bug', external: true },
+    blurb: 'Something broke or produced wrong results.',
+    openHref: withBase('/bugs'),
+    newHref: issueNewUrl('bug_report.yml'),
   },
   {
+    icon: 'feature' as const,
     title: 'Request a feature',
-    blurb: 'Suggest an improvement — tracked as Issues labeled enhancement.',
-    primary: { href: withBase('/features'), label: 'Open requests' },
-    secondary: { href: issueNewUrl('feature_request.yml'), label: 'New request', external: true },
+    blurb: 'Suggest an improvement (GitHub Issues).',
+    openHref: withBase('/features'),
+    newHref: issueNewUrl('feature_request.yml'),
   },
 ];
 ---
@@ -55,28 +63,33 @@ const hubs = [
   <section class="section" style="padding-top: 3rem">
     <h2>Community</h2>
     <p class="sub">
-      Browse here; posting uses your GitHub account on
-      <a href={githubRepoUrl}>{githubRepoUrl.replace('https://', '')}</a>. For how-to guides, see
-      the <a href={withBase('/manual')}>Manual</a>.
+      Browse on this site; posting uses your GitHub account on
+      <a href={githubRepoUrl}>{githubRepoUrl.replace('https://', '')}</a>. For how-to guides,
+      <a href={withBase('/manual')}>Open Manual</a>.
     </p>
 
     <div class="hub-grid">
       {
         hubs.map((h) => (
           <div class="hub-card">
-            <h3>{h.title}</h3>
-            <p>{h.blurb}</p>
-            <div class="hub-actions">
-              <a class="btn btn-primary" href={h.primary.href}>
-                {h.primary.label}
-              </a>
-              <a
-                class="btn btn-ghost"
-                href={h.secondary.href}
-                rel={h.secondary.external ? 'noopener noreferrer' : undefined}
-              >
-                {h.secondary.label}
-              </a>
+            <HubIcon name={h.icon} />
+            <div class="hub-body">
+              <h3>{h.title}</h3>
+              <p>{h.blurb}</p>
+              <div class="hub-actions">
+                <a class="btn btn-primary" href={h.openHref}>
+                  Open
+                </a>
+                {h.newHref ? (
+                  <a class="btn btn-ghost" href={h.newHref} rel="noopener noreferrer">
+                    Start new
+                  </a>
+                ) : (
+                  <a class="btn btn-ghost" href={h.viewHref!} rel="noopener noreferrer">
+                    View on GitHub
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         ))
@@ -84,9 +97,9 @@ const hubs = [
     </div>
 
     <p style="margin-top: 1.75rem">
-      <a href={`${githubRepoUrl}/issues`}>All open issues on GitHub →</a>
+      <a href={`${githubRepoUrl}/issues`}>View on GitHub · issues</a>
       {' · '}
-      <a href={`${githubRepoUrl}/discussions`}>All discussions →</a>
+      <a href={`${githubRepoUrl}/discussions`}>View on GitHub · discussions</a>
     </p>
   </section>
 </BaseLayout>

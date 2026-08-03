@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Figure from '../../components/Figure.astro';
 import { withBase } from '../../lib/github';
 ---
 
@@ -13,11 +14,21 @@ import { withBase } from '../../lib/github';
       <a href={withBase('/manual')}>← Manual</a>
     </p>
     <h2>Exports &amp; managing analyses</h2>
-    <p class="sub">Share targets, Home list actions, and Settings that affect runs.</p>
+    <p class="sub">Share results, keep the Home list tidy, and use Settings that affect runs.</p>
 
     <div class="prose">
+      <Figure
+        src="/manual/ui-home.svg"
+        alt="Schematic Home list of analyses"
+        caption="Home is where you open, rename, delete, and sync analyses."
+        phone
+      />
+
       <h3>Exports</h3>
-      <p><strong>Share</strong> offers several targets. Every chooser can <strong>Save to Files</strong>.</p>
+      <p>
+        <span class="lead-label">In the app:</span> open <strong>Share</strong>. Every chooser can
+        <strong>Save to Files</strong>.
+      </p>
       <table>
         <thead>
           <tr>
@@ -55,33 +66,34 @@ import { withBase } from '../../lib/github';
         </tbody>
       </table>
       <p>
-        Build on the CSV. Coordinates and displacements are image pixels; filter on
-        <code>znssd</code> to drop poorly correlated points.
+        <span class="lead-label">Why it matters:</span> build on the CSV. Coordinates and
+        displacements are image pixels. Filter on <code>znssd</code> (match residual) to drop poorly
+        correlated points.
       </p>
 
       <h3>Managing analyses</h3>
       <p>
-        Home lists analyses. Tap to open, long-press to select, rename, or delete. Pull down to
-        sync. <strong>+</strong> starts a new analysis.
+        Tap to open, long-press to select, rename, or delete. Pull down to sync.
+        <strong>+</strong> starts a new analysis.
       </p>
       <p>
-        <strong>Quota.</strong> The chip reads <code>Using N of M analyses</code>. At the cap, email
-        support or delete something and tap <strong>Re-check</strong>.
+        <span class="lead-label">If it fails:</span> at the quota chip limit, email support or delete
+        an analysis and tap <strong>Re-check</strong>.
       </p>
 
       <h3>Useful Settings</h3>
       <ul>
-        <li><strong>Max frames</strong> — 10–150, default 50; caps frames per analysis</li>
+        <li><strong>Max frames</strong> — 10–150, default 50</li>
         <li><strong>Save to cloud</strong> — queue uploads when online</li>
         <li>
-          <strong>Help &amp; support</strong> — Manual / community links and email for private
-          account issues
+          <strong>Help &amp; support</strong> — Manual, community, and email for private account
+          issues
         </li>
       </ul>
     </div>
 
     <div class="cta-row" style="margin-top: 1.5rem">
-      <a class="btn btn-primary" href={withBase('/manual/faq')}>FAQ</a>
+      <a class="btn btn-primary" href={withBase('/manual/faq')}>Open FAQ</a>
       <a class="btn btn-ghost" href={withBase('/manual/sweeps-results')}>Back</a>
     </div>
   </section>

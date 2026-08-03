@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Figure from '../../components/Figure.astro';
 import { withBase } from '../../lib/github';
 ---
 
@@ -18,55 +19,72 @@ import { withBase } from '../../lib/github';
     <div class="prose">
       <h3>What it does</h3>
       <p>
-        Give Semper one <strong>reference</strong> frame and N <strong>deformed</strong> frames. It
-        matches subsets on a grid and returns five fields per frame:
+        You give Semper one <strong>reference</strong> frame (undeformed) and several
+        <strong>deformed</strong> frames (one per load step). It matches small windows called
+        <strong>subsets</strong> on a grid and returns five maps per frame.
       </p>
+      <Figure
+        src="/manual/pipeline.svg"
+        alt="Pipeline from reference and deformed frames to displacement and strain fields"
+        caption="Inputs on the left, matching on the phone, five output fields on the right."
+      />
       <table>
         <thead>
           <tr>
             <th>Field</th>
+            <th>Meaning</th>
             <th>Unit</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong>U</strong>, <strong>V</strong> — displacement</td>
+            <td><strong>U</strong>, <strong>V</strong></td>
+            <td>Horizontal / vertical displacement</td>
             <td>px</td>
           </tr>
           <tr>
-            <td><strong>Exx</strong>, <strong>Eyy</strong>, <strong>Exy</strong> — strain</td>
+            <td><strong>Exx</strong>, <strong>Eyy</strong>, <strong>Exy</strong></td>
+            <td>Normal and shear strain</td>
             <td>mε (millistrain)</td>
           </tr>
         </tbody>
       </table>
       <div class="callout">
-        Displacements are in <strong>pixels</strong> — there is no scale calibration. Convert to
-        physical units yourself. Everything runs on the phone; cloud backup stores results only.
+        <span class="lead-label">Why it matters:</span> displacements are in
+        <strong>pixels</strong> — Semper does not apply a mm scale. Convert with your own factor.
+        Correlation runs on the phone; cloud backup only stores results.
       </div>
 
       <h3>Getting in</h3>
+      <p><span class="lead-label">In the app:</span></p>
       <ol>
         <li>Sign in with Google or email.</li>
         <li>
           Email passwords need 8+ characters with upper and lower case, a digit, and a special
-          character. <strong>Generate secure password</strong> can fill one in.
+          character. Use <strong>Generate secure password</strong> if you want one filled in.
         </li>
         <li>
-          Email sign-up sends a verification link. Open it, then sign in. Until you verify,
-          sign-in is refused.
+          After email sign-up, open the verification link, then sign in. Until you verify, sign-in
+          is refused.
         </li>
         <li>
-          New accounts land on <strong>Pending approval</strong>. Support is emailed automatically.
+          New accounts show <strong>Pending approval</strong>. Support is emailed automatically.
         </li>
-        <li>Tap <strong>Request access</strong> if you want to add context.</li>
+        <li>Optional: tap <strong>Request access</strong> to add context in email.</li>
         <li>
-          After approval, tap <strong>Check status</strong>. Nothing polls — the screen never
-          updates on its own.
+          After an admin approves you, tap <strong>Check status</strong>. The screen does not
+          refresh by itself.
         </li>
       </ol>
+      <Figure
+        src="/manual/ui-home.svg"
+        alt="Schematic of the Semper Home screen with analysis list and add button"
+        caption="Home lists your analyses. Tap to open, long-press to select, + to start a new one."
+        phone
+      />
       <p>
-        Offline works if you have been approved on this device before. Import, solve, and read
-        results work without a network; uploads wait.
+        <span class="lead-label">If it fails:</span> offline use is fine if this device was approved
+        before. Import and solve work without a network; uploads wait until you are online.
       </p>
 
       <h3>Images it accepts</h3>
@@ -74,42 +92,38 @@ import { withBase } from '../../lib/github';
         <thead>
           <tr>
             <th>Rule</th>
-            <th>If broken</th>
+            <th>If it fails</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>All frames the same pixel size as the reference</td>
-            <td>Blocking error; you cannot run</td>
+            <td>Every frame matches the reference pixel size</td>
+            <td>Blocking error — you cannot run</td>
           </tr>
           <tr>
-            <td>At least one reference + one deformed frame</td>
+            <td>At least one reference and one deformed frame</td>
             <td><strong>Next</strong> stays off</td>
           </tr>
           <tr>
             <td>At most <em>Max frames</em> (default 50)</td>
-            <td>Extras dropped, with a toast</td>
+            <td>Extras are dropped, with a toast</td>
           </tr>
         </tbody>
       </table>
       <p>
-        <strong>Formats.</strong> PNG and TIFF are best. JPEG works but raises an accuracy warning —
-        compression damages the intensity gradients correlation needs. RAW and DNG import only
-        through <strong>Files</strong>, not Photos.
+        Prefer <strong>PNG</strong> or <strong>TIFF</strong>. JPEG works but Semper warns: compression
+        damages the intensity gradients correlation needs. RAW and DNG import only through
+        <strong>Files</strong>, not Photos.
       </p>
       <p>
-        <strong>Texture check.</strong> On import the app measures your speckle. Weak pattern → a
-        warning naming a bigger subset size.
-      </p>
-      <p>
-        <strong>Video.</strong> Pick a video and a sampling sheet opens. Frame 0 becomes the
-        reference.
+        On import, Semper measures your speckle. A weak pattern shows a low-texture warning and
+        suggests a larger subset.
       </p>
     </div>
 
     <div class="cta-row" style="margin-top: 1.5rem">
-      <a class="btn btn-primary" href={withBase('/manual/analysis')}>Next: Running an analysis</a>
-      <a class="btn btn-ghost" href={withBase('/manual/faq')}>FAQ</a>
+      <a class="btn btn-primary" href={withBase('/manual/analysis')}>Open Running an analysis</a>
+      <a class="btn btn-ghost" href={withBase('/manual/faq')}>Open FAQ</a>
     </div>
   </section>
 </BaseLayout>

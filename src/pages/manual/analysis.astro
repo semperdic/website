@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Figure from '../../components/Figure.astro';
 import { withBase } from '../../lib/github';
 ---
 
@@ -13,42 +14,63 @@ import { withBase } from '../../lib/github';
       <a href={withBase('/manual')}>← Manual</a>
     </p>
     <h2>Running an analysis</h2>
-    <p class="sub">Wizard steps from loading frames through ROI and parameters.</p>
+    <p class="sub">From loading frames through ROI, parameters, and Compute.</p>
 
     <div class="prose">
+      <Figure
+        src="/manual/wizard.svg"
+        alt="Wizard steps: load frames, settings, optional sweep, then compute"
+        caption="Single mode goes straight to Compute; Sweep adds a setup step for ranges."
+      />
+
       <h3>Step 1 — Load frames</h3>
-      <p>Tap each dropzone and pick images. <strong>Photos</strong> is the system picker; <strong>Files</strong> is the only route to RAW and DNG.</p>
       <p>
-        The strip shows deformed frames with order badges. <strong>Badge order is analysis
-        order.</strong> Tap sort to reorder by name, date, or manually. You cannot restore the
-        picker&apos;s original order once sorted.
+        <span class="lead-label">In the app:</span> tap each dropzone and pick images.
+        <strong>Photos</strong> is the system picker; <strong>Files</strong> is the only path to RAW
+        and DNG.
+      </p>
+      <Figure
+        src="/manual/ui-step1.svg"
+        alt="Schematic of Step 1 with reference dropzone and numbered deformed frames"
+        caption="Number badges on deformed frames are the analysis order. Use Sort before you continue."
+        phone
+      />
+      <p>
+        <span class="lead-label">Why it matters:</span> badge order is the order everywhere
+        afterward. You cannot restore the picker&apos;s original order once you sort.
       </p>
 
       <h3>Step 2 — Settings</h3>
-      <ul>
+      <ol>
         <li>
           <strong>Region of interest</strong> — defaults to the full image. Edit opens the ROI
           editor.
         </li>
         <li>
           <strong>Single</strong> or <strong>Sweep</strong> — Single solves every frame once. Sweep
-          solves one frame across a lattice of settings.
+          solves one frame across many parameter combinations.
         </li>
         <li><strong>Advanced parameters</strong> — subset, step, strain window, kernel.</li>
-      </ul>
+      </ol>
       <p>Then tap <strong>Compute</strong>.</p>
 
       <h3>While it runs</h3>
       <p>
-        Points solved and convergence update live. <strong>Cancel</strong> stops immediately —
-        nothing is kept. Keep the app open; there is no resume if Android kills the process.
+        Points solved and convergence update live. <strong>Cancel</strong> stops at once — nothing
+        is kept. Keep the app open; there is no resume if Android kills the process.
       </p>
       <p>
-        A run stops itself if images decorrelate: two consecutive frames below 50% convergence end
-        it. Frames solved before that are kept as a short (not failed) analysis.
+        <span class="lead-label">If it fails:</span> two frames in a row below 50% convergence end
+        the run (decorrelation). Frames already solved are kept as a short analysis with the stop
+        reason on Home.
       </p>
 
       <h3>Parameters (single mode)</h3>
+      <Figure
+        src="/manual/subset-step.svg"
+        alt="Diagram of subset window size versus step spacing on a grid"
+        caption="Subset is the match window; step is how far apart grid points are."
+      />
       <table>
         <thead>
           <tr>
@@ -80,22 +102,30 @@ import { withBase } from '../../lib/github';
           </tr>
         </tbody>
       </table>
+      <Figure
+        src="/manual/vsg.svg"
+        alt="Virtual strain gauge related to strain window and step"
+        caption="Quote VSG with strain results: VSG = (strain window − 1) × step + 1, in pixels."
+      />
       <p>
-        Quote the <strong>VSG</strong> (virtual strain gauge), not only the window:
-        <code>VSG = (strain window − 1) × step + 1</code> [px]. Full table:
-        <a href={withBase('/learn/parameters')}>Parameters</a>.
+        Full table: <a href={withBase('/learn/parameters')}>Parameters</a>.
       </p>
 
       <h3>Region of interest</h3>
+      <Figure
+        src="/manual/ui-roi.svg"
+        alt="Schematic ROI editor with crop rectangle and erase hole"
+        caption="Crop sets the area to correlate. Erase punches out grips or markers that would decorrelate."
+        phone
+      />
       <p>
-        Draw a rect or square, or type X, Y, W, H. <strong>Crop</strong> sets the area to
-        correlate; <strong>Erase</strong> punches holes (grips, fiducials). An ROI smaller than the
-        subset will not run.
+        <span class="lead-label">If it fails:</span> an ROI smaller than the subset will not run —
+        enlarge the ROI or shrink the subset.
       </p>
     </div>
 
     <div class="cta-row" style="margin-top: 1.5rem">
-      <a class="btn btn-primary" href={withBase('/manual/sweeps-results')}>Next: Sweeps &amp; results</a>
+      <a class="btn btn-primary" href={withBase('/manual/sweeps-results')}>Open Sweeps &amp; results</a>
       <a class="btn btn-ghost" href={withBase('/manual/getting-started')}>Back</a>
     </div>
   </section>

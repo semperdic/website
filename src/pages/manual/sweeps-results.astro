@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Figure from '../../components/Figure.astro';
 import { withBase } from '../../lib/github';
 ---
 
@@ -13,18 +14,23 @@ import { withBase } from '../../lib/github';
       <a href={withBase('/manual')}>← Manual</a>
     </p>
     <h2>Sweeps &amp; results</h2>
-    <p class="sub">Why sweep VSG, how to read the lattice, and the result viewer.</p>
+    <p class="sub">Why to sweep, how to read the lattice, and how to inspect field maps.</p>
 
     <div class="prose">
       <h3>Why sweep</h3>
       <p>
-        Strain is a derivative, so its size depends on smoothing. Small VSG: peak strain rises and
-        noise rises. Large VSG: peaks flatten. A sweep shows where the answer stops depending on
-        the setting — the convergence argument good DIC practice asks for. A sweep uses
-        <strong>one</strong> deformed frame.
+        Strain is computed from displacement, so it depends on how much you smooth. A small virtual
+        strain gauge (VSG) keeps peaks but adds noise; a large VSG smooths peaks. A
+        <strong>sweep</strong> solves one deformed frame across many subset × window combinations so
+        you can see where the answer stops changing.
+      </p>
+      <p>
+        <span class="lead-label">Why it matters:</span> good DIC practice asks you to show that
+        reported strain is not an accident of one VSG choice.
       </p>
 
       <h3>Setting up a sweep</h3>
+      <p><span class="lead-label">In the app:</span> on step 3, set ranges and sample counts.</p>
       <table>
         <thead>
           <tr>
@@ -46,30 +52,44 @@ import { withBase } from '../../lib/github';
             <td>2–9 (step = subset ÷ n, never below 1 px)</td>
           </tr>
           <tr>
-            <td>Samples</td>
-            <td>1–8 per axis (runtime is the product)</td>
+            <td>Samples per axis</td>
+            <td>1–8 (runtime is the product)</td>
           </tr>
         </tbody>
       </table>
       <p>Start at 3 × 3. Look for the VSG where the curves stop separating.</p>
+      <Figure
+        src="/manual/vsg.svg"
+        alt="VSG formula diagram"
+        caption="Each lattice node reports its VSG. Quote that number with your strain maps."
+      />
 
       <h3>Result lattice</h3>
+      <Figure
+        src="/manual/lattice.svg"
+        alt="Lattice of filled and hollow result nodes"
+        caption="Filled dots solved; hollow rings were skipped — tap a hollow node for the reason."
+      />
       <ul>
-        <li>Filled dot — solved</li>
-        <li>Hollow red ring — skipped; tap for the reason</li>
-        <li>Tap highlights a curve; double-tap or long-press opens that result</li>
-        <li>Exx / Eyy / Exy switches component</li>
+        <li>Tap — highlight that curve</li>
+        <li>Double-tap or long-press — open that result</li>
+        <li>Exx / Eyy / Exy — switch strain component</li>
       </ul>
 
       <h3>Reading results</h3>
+      <Figure
+        src="/manual/ui-viewer.svg"
+        alt="Schematic result viewer with field tabs and Inspect tools"
+        caption="Field tabs along the top; Inspect, X/Y, and Max/Min below the map."
+        phone
+      />
       <p>
-        Tabs switch field. Pinch to zoom, drag to pan. The strip under the image gives max, min,
-        and mean.
+        Pinch to zoom, drag to pan. The strip under the image shows max, mean, and min.
       </p>
       <p>
-        <strong>Colour scale</strong> is Auto by default — each frame rescales separately, so
-        frames are not comparable by eye. Tap the bar for fixed min/max. The summary animation puts
-        every frame on one scale for the sequence.
+        <span class="lead-label">In the app:</span> colour scale defaults to Auto — each frame
+        rescales alone, so frames are not comparable by eye. Set fixed min/max, or use the summary
+        animation (one scale for the whole sequence).
       </p>
       <table>
         <thead>
@@ -81,7 +101,7 @@ import { withBase } from '../../lib/github';
         <tbody>
           <tr>
             <td>Inspect</td>
-            <td>Probe location and value</td>
+            <td>Probe location and value under your finger</td>
           </tr>
           <tr>
             <td>X, Y</td>
@@ -89,18 +109,18 @@ import { withBase } from '../../lib/github';
           </tr>
           <tr>
             <td>Max/Min</td>
-            <td>Marks extrema with values and positions</td>
+            <td>Mark extrema with values and positions</td>
           </tr>
         </tbody>
       </table>
       <p>
         The ⓘ <strong>Settings used</strong> sheet is provenance. Changing settings later never
-        changes an old result.
+        rewrites an old result.
       </p>
     </div>
 
     <div class="cta-row" style="margin-top: 1.5rem">
-      <a class="btn btn-primary" href={withBase('/manual/exports-manage')}>Next: Exports</a>
+      <a class="btn btn-primary" href={withBase('/manual/exports-manage')}>Open Exports</a>
       <a class="btn btn-ghost" href={withBase('/manual/analysis')}>Back</a>
     </div>
   </section>

@@ -18,29 +18,31 @@ const mail = `mailto:${SUPPORT_EMAIL}`;
 >
   <section class="section" style="padding-top: 3rem">
     <h2>Support</h2>
-    <p class="sub">Start with the Manual; use Community for open questions; email for private matters.</p>
+    <p class="sub">
+      Start with the Manual. Use Community for open questions. Email for private or account matters.
+    </p>
 
     <div style="display: grid; gap: 0.85rem">
       <div class="panel">
-        <h3 style="margin: 0 0 0.35rem; font-family: var(--font-display)">Read the Manual</h3>
+        <h3 style="margin: 0 0 0.35rem; font-family: var(--font-display)">Manual</h3>
         <p style="margin: 0 0 0.85rem; color: var(--muted)">
-          Step-by-step analysis, exports, and an FAQ with DIC good-practice notes.
+          Step-by-step analysis, exports, and FAQ with DIC good-practice notes.
         </p>
         <div class="cta-row" style="margin: 0">
           <a class="btn btn-primary" href={withBase('/manual')}>Open Manual</a>
-          <a class="btn btn-ghost" href={withBase('/manual/faq')}>FAQ</a>
+          <a class="btn btn-ghost" href={withBase('/manual/faq')}>Open FAQ</a>
         </div>
       </div>
 
       <div class="panel">
-        <h3 style="margin: 0 0 0.35rem; font-family: var(--font-display)">Ask the community</h3>
+        <h3 style="margin: 0 0 0.35rem; font-family: var(--font-display)">Community</h3>
         <p style="margin: 0 0 0.85rem; color: var(--muted)">
           Discussions, bugs, and feature requests — GitHub login required to post.
         </p>
         <div class="cta-row" style="margin: 0">
-          <a class="btn btn-primary" href={withBase('/community')}>Community hub</a>
+          <a class="btn btn-primary" href={withBase('/community')}>Open Community</a>
           <a class="btn btn-ghost" href={discussionNewUrl('q-a')} rel="noopener noreferrer">
-            New Q&amp;A
+            Start new Q&amp;A
           </a>
         </div>
       </div>

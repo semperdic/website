@@ -442,13 +442,14 @@ img {
 .hub-grid {
   display: grid;
   gap: 0.85rem;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(16.5rem, 1fr));
 }
 
 .hub-card {
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
+  display: grid;
+  grid-template-columns: 2.75rem 1fr;
+  gap: 0.75rem 1rem;
+  align-items: start;
   padding: 1.15rem 1.2rem;
   border-radius: var(--radius);
   border: 1px solid var(--line);
@@ -464,6 +465,34 @@ img {
   transform: translateY(-2px);
 }
 
+.hub-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.65rem;
+  background: var(--sky-container);
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  color: var(--sky-primary-dark);
+}
+
+.hub-icon svg {
+  width: 1.35rem;
+  height: 1.35rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hub-body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
 .hub-card h3 {
   margin: 0;
   font-family: var(--font-display);
@@ -475,14 +504,13 @@ img {
   margin: 0;
   color: var(--muted);
   font-size: 0.92rem;
-  flex: 1;
 }
 
 .hub-card .hub-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
 }
 
 .faq {
@@ -536,6 +564,42 @@ img {
 
 .crumb a:hover {
   color: var(--sky-primary-dark);
+}
+
+.figure {
+  margin: 0 0 1.5rem;
+  padding: 0;
+  max-width: 42rem;
+}
+
+.figure img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.figure--phone {
+  max-width: 17rem;
+}
+
+.figure figcaption {
+  margin-top: 0.55rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.figure figcaption strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.prose .lead-label {
+  font-weight: 600;
+  color: var(--sky-on-container);
 }
 
 /* Hero logo plane — speckled S as the visual anchor */

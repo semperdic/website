@@ -7,51 +7,51 @@ const idics = 'https://idics.org/guide/';
 const faqs = [
   {
     q: 'Why did I get a low-texture / weak speckle warning?',
-    a: 'On import Semper measures intensity gradients in your reference. Weak pattern triggers a warning and suggests a larger subset. Treat it as a comment on the pattern, not only a slider setting.',
+    a: 'In the app: on import Semper measures intensity gradients in your reference. A weak pattern triggers a warning and suggests a larger subset. Treat that as feedback on the pattern, not only a slider tip.',
     practice:
-      'Good practice (iDICs): aim for a high-contrast, random, well-resolved speckle with enough features inside each subset. Improve paint/lighting before forcing tiny subsets.',
+      'Aim for high-contrast, random, well-resolved speckle with enough features inside each subset. Improve paint and lighting before forcing very small subsets.',
   },
   {
     q: 'Frames are different sizes, or JPEG looks soft — what breaks?',
-    a: 'All frames must match the reference pixel size or the run is blocked. JPEG works but Semper warns: compression damages gradients correlation needs. Prefer PNG or TIFF; use Files for RAW/DNG.',
+    a: 'In the app: all frames must match the reference pixel size or the run is blocked. JPEG works but Semper warns because compression damages gradients. Prefer PNG or TIFF; use Files for RAW/DNG.',
     practice:
-      'Good practice (iDICs): keep acquisition settings fixed across the sequence, avoid aggressive compression, and maintain stable lighting so intensity changes are from deformation, not the camera pipeline.',
+      'Keep acquisition settings fixed across the sequence, avoid aggressive compression, and keep lighting stable so intensity changes come from deformation, not the camera pipeline.',
   },
   {
-    q: 'ROI too small, or correlation fails in grips / fiducials?',
-    a: 'An ROI smaller than the subset will not run — enlarge the ROI or shrink the subset. Use Erase in the ROI editor to punch out grips and markers that will decorrelate.',
+    q: 'ROI too small, or correlation fails on grips / fiducials?',
+    a: 'In the app: an ROI smaller than the subset will not run — enlarge the ROI or shrink the subset. Use Erase to punch out grips and markers that will decorrelate.',
     practice:
-      'Good practice (iDICs): correlate only on well-speckled material; exclude regions that rotate out of plane, lose focus, or leave the camera’s field.',
+      'Correlate only on well-speckled material. Exclude regions that leave the field of view, lose focus, or leave the plane of the camera.',
   },
   {
     q: 'The run stopped mid-sequence (“decorrelated”). Is the data lost?',
-    a: 'Two consecutive frames below 50% convergence stop the run. Frames solved before that are kept as a short analysis with the stop reason on Home and in Settings used. Re-run after fixing the pair if you need later frames.',
+    a: 'In the app: two consecutive frames below 50% convergence stop the run. Frames solved before that are kept, with the stop reason on Home and in Settings used.',
     practice:
-      'Good practice (iDICs): large strain, specular glare, or pattern damage between frames causes decorrelation. Reduce step size between loads, improve lighting, or split the test into stages with intermediate references when appropriate.',
+      'Large strain, glare, or pattern damage between frames causes decorrelation. Reduce the load step, improve lighting, or split the test with intermediate references when appropriate.',
   },
   {
     q: 'Strain looks noisy — or peaks look washed out?',
-    a: 'Strain comes from differentiating displacement. Raise the strain window (and quote VSG) to smooth noise; lower it to keep local peaks. Use a Sweep to see where curves stop separating.',
+    a: 'In the app: raise the strain window (and quote VSG) to smooth noise; lower it to keep local peaks. Use a Sweep to see where curves stop separating.',
     practice:
-      'Good practice (iDICs): report the virtual strain gauge size with your strain maps, and show that results are insensitive to reasonable VSG choices (a convergence / sensitivity check).',
+      'Report the virtual strain gauge size with strain maps, and show that results are stable across reasonable VSG choices (a sensitivity check).',
   },
   {
     q: 'Are U and V in millimetres?',
-    a: 'No. Displacements are in pixels. Semper has no spatial calibration — convert using your own scale factor.',
+    a: 'In the app: no. Displacements are in pixels. Semper has no spatial calibration — convert with your own scale factor.',
     practice:
-      'Good practice (iDICs): document how you convert pixels to physical units, and keep that scale consistent across the study.',
+      'Document how you convert pixels to physical units, and keep that scale consistent across the study.',
   },
   {
     q: 'Frames look incomparable in the viewer, or order is wrong?',
-    a: 'Auto colour scale rescales each frame alone — set fixed min/max, or use the summary animation (one scale for the sequence). Fix frame order with Sort on step 1 before computing.',
+    a: 'In the app: Auto colour scale rescales each frame alone — set fixed min/max, or use the summary animation (one scale for the sequence). Fix order with Sort on step 1 before Compute.',
     practice:
-      'Good practice (iDICs): compare load steps on a common colour scale when reporting sequences.',
+      'When reporting a sequence, compare load steps on a common colour scale.',
   },
   {
     q: 'Where do I ask for help?',
-    a: 'Use the Manual for how-to. For open questions, bugs, and features, go to Community (GitHub login required to post). For account or private data, email support from the app or the Support page.',
+    a: 'In the app / site: use the Manual for how-to. For open questions, bugs, and features, open Community (GitHub login required to post). For account or private data, use Support email.',
     practice:
-      'When reporting a DIC issue, include app version, device, image format/resolution, and whether results look wrong (PDF/CSV help triage).',
+      'When reporting a problem, include app version, device, image format/resolution, and exports (PDF/CSV) if results look wrong.',
   },
 ];
 ---
@@ -67,9 +67,11 @@ const faqs = [
     </p>
     <h2>FAQ</h2>
     <p class="sub">
-      Semper-oriented answers first; each item adds a DIC good-practice note. Experiment design is
-      covered in depth by the iDICs
-      <a href={idics} rel="noopener noreferrer"><em>Good Practices Guide for Digital Image Correlation</em></a>.
+      Each answer starts with what Semper does, then a DIC good-practice note. Experiment design is
+      covered in the iDICs
+      <a href={idics} rel="noopener noreferrer"
+        ><em>Good Practices Guide for Digital Image Correlation</em></a
+      >.
     </p>
 
     <div class="faq">
@@ -91,8 +93,8 @@ const faqs = [
     </div>
 
     <div class="cta-row" style="margin-top: 1.5rem">
-      <a class="btn btn-primary" href={withBase('/community')}>Community</a>
-      <a class="btn btn-ghost" href={withBase('/support')}>Support</a>
+      <a class="btn btn-primary" href={withBase('/community')}>Open Community</a>
+      <a class="btn btn-ghost" href={withBase('/support')}>Open Support</a>
     </div>
   </section>
 </BaseLayout>

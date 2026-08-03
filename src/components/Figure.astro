@@ -1,0 +1,18 @@
+---
+import { withBase } from '../lib/github';
+
+interface Props {
+  src: string;
+  alt: string;
+  caption: string;
+  phone?: boolean;
+}
+
+const { src, alt, caption, phone = false } = Astro.props;
+const href = src.startsWith('http') ? src : withBase(src.startsWith('/') ? src : `/${src}`);
+---
+
+<figure class:list={['figure', phone && 'figure--phone']}>
+  <img src={href} alt={alt} loading="lazy" />
+  <figcaption><strong>Figure.</strong> {caption}</figcaption>
+</figure>

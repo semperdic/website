@@ -13,7 +13,7 @@ import { withBase } from '../lib/github';
       </p>
       <div class="cta-row">
         <a class="btn btn-primary" href={withBase('/download')}>Get Semper</a>
-        <a class="btn btn-ghost" href={withBase('/manual')}>Manual</a>
+        <a class="btn btn-ghost" href={withBase('/manual')}>Open Manual</a>
       </div>
     </div>
     <div class="logo-stage" aria-hidden="true">
@@ -29,16 +29,31 @@ import { withBase } from '../lib/github';
     </p>
     <div class="hub-grid">
       <a class="hub-card" href={withBase('/manual')}>
-        <h3>Manual</h3>
-        <p>Step-by-step analysis, exports, and FAQ with DIC good-practice notes.</p>
+        <span class="hub-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </span>
+        <div class="hub-body">
+          <h3>Manual</h3>
+          <p>Step-by-step analysis, exports, and FAQ with DIC good-practice notes.</p>
+        </div>
       </a>
       <a class="hub-card" href={withBase('/community')}>
-        <h3>Community</h3>
-        <p>Discussions, bug reports, and feature requests on GitHub.</p>
+        <span class="hub-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M21 15a3 3 0 0 1-3 3H8l-4 3V6a3 3 0 0 1 3-3h11a3 3 0 0 1 3 3z"/></svg>
+        </span>
+        <div class="hub-body">
+          <h3>Community</h3>
+          <p>Discussions, bug reports, and feature requests on GitHub.</p>
+        </div>
       </a>
       <a class="hub-card" href={withBase('/learn/dic')}>
-        <h3>How DIC works</h3>
-        <p>A five-minute primer for reading Semper results.</p>
+        <span class="hub-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>
+        </span>
+        <div class="hub-body">
+          <h3>How DIC works</h3>
+          <p>A five-minute primer for reading Semper results.</p>
+        </div>
       </a>
     </div>
   </section>

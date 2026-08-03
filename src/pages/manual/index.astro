@@ -6,27 +6,27 @@ const chapters = [
   {
     href: '/manual/getting-started',
     title: 'Getting started',
-    blurb: 'What Semper computes, signing in, and which images work.',
+    blurb: 'What Semper computes, how you sign in, and which images it accepts.',
   },
   {
     href: '/manual/analysis',
     title: 'Running an analysis',
-    blurb: 'Load frames, set parameters, draw an ROI, and compute.',
+    blurb: 'Load frames, set parameters, draw an ROI, then compute.',
   },
   {
     href: '/manual/sweeps-results',
     title: 'Sweeps & results',
-    blurb: 'Parameter sweeps, reading fields, and the result viewer.',
+    blurb: 'Parameter sweeps, the result lattice, and reading field maps.',
   },
   {
     href: '/manual/exports-manage',
     title: 'Exports & managing analyses',
-    blurb: 'PDF, CSV, images, cloud backup, and Settings.',
+    blurb: 'Share PDF, CSV, and images; manage the Home list and Settings.',
   },
   {
     href: '/manual/faq',
     title: 'FAQ',
-    blurb: 'Common DIC issues — Semper answers plus good-practice notes.',
+    blurb: 'Common DIC problems — what Semper does, plus good-practice notes.',
   },
 ];
 ---
@@ -39,14 +39,12 @@ const chapters = [
   <section class="section" style="padding-top: 3rem">
     <h2>Manual</h2>
     <p class="sub">
-      Step-by-step use of the app once you have images. For experiment design
-      (speckle, lighting, cameras), see the iDICs
+      How to use Semper once you already have images. For how to design the
+      experiment (speckle, lighting, cameras), use the iDICs
       <em>Good Practices Guide for Digital Image Correlation</em>
-      —
-      <a
-        href="https://idics.org/guide/"
-        rel="noopener noreferrer">idics.org/guide</a
-      >.
+      (
+      <a href="https://idics.org/guide/" rel="noopener noreferrer">idics.org/guide</a
+      >).
     </p>
 
     <ul class="toc">
@@ -63,8 +61,8 @@ const chapters = [
     </ul>
 
     <div class="cta-row">
-      <a class="btn btn-primary" href={withBase('/manual/getting-started')}>Start here</a>
-      <a class="btn btn-ghost" href={withBase('/learn/dic')}>How DIC works</a>
+      <a class="btn btn-primary" href={withBase('/manual/getting-started')}>Open Getting started</a>
+      <a class="btn btn-ghost" href={withBase('/learn/dic')}>Open How DIC works</a>
     </div>
   </section>
 </BaseLayout>
