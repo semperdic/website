@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  discussionNewUrl,
+  githubRepoUrl,
+  issueNewUrl,
+  SUPPORT_EMAIL,
+} from '../lib/github';
+
+const mail = `mailto:${SUPPORT_EMAIL}`;
+---
+
+<BaseLayout
+  title="Support"
+  description="Get help with Semper — community and email."
+  path="/support"
+>
+  <section class="section" style="padding-top: 3rem">
+    <h2>Support</h2>
+    <p class="sub">Use the community for product questions. Email for account or private matters.</p>
+
+    <div style="display: grid; gap: 0.85rem">
+      <div class="panel">
+        <h3 style="margin: 0 0 0.35rem; font-family: var(--font-display)">Ask the community</h3>
+        <p style="margin: 0 0 0.85rem; color: var(--muted)">
+          How-to, troubleshooting, and shared tips — GitHub login required to post.
+        </p>
+        <a class="btn btn-primary" href={discussionNewUrl('q-a')} rel="noopener noreferrer">
+          New Q&A discussion
+        </a>
+      </div>
+
+      <div class="panel">
+        <h3 style="margin: 0 0 0.35rem; font-family: var(--font-display)">Bugs & features</h3>
+        <p style="margin: 0 0 0.85rem; color: var(--muted)">Tracked as Issues on GitHub.</p>
+        <div class="cta-row" style="margin: 0">
+          <a class="btn btn-ghost" href={issueNewUrl('bug_report.yml')} rel="noopener noreferrer">
+            Report a bug
+          </a>
+          <a
+            class="btn btn-ghost"
+            href={issueNewUrl('feature_request.yml')}
+            rel="noopener noreferrer"
+          >
+            Request a feature
+          </a>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3 style="margin: 0 0 0.35rem; font-family: var(--font-display)">Email support</h3>
+        <p style="margin: 0 0 0.85rem; color: var(--muted)">
+          Account approval, session limits, or anything you should not post publicly.
+        </p>
+        <a class="btn btn-primary" href={mail}>{SUPPORT_EMAIL}</a>
+      </div>
+
+      <p style="color: var(--muted); font-size: 0.9rem">
+        Repository: <a href={githubRepoUrl}>{githubRepoUrl}</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>

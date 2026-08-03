@@ -1,0 +1,15 @@
+name: Ideas
+description: Suggest an improvement before filing a formal feature issue
+title: "[Idea]: "
+labels: []
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: The idea
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it matters

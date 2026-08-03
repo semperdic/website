@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ask a question
+    url: https://github.com/semperdic/website/discussions/new?category=q-a
+    about: How-to questions and troubleshooting — use Discussions Q&A
+  - name: Product site & downloads
+    url: https://semperdic.com
+    about: Landing page, downloads, and community hub
+  - name: Private / account support
+    url: mailto:support@indicvision.com
+    about: Account access, billing, or private data — email support

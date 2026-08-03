@@ -1,0 +1,20 @@
+name: Q&A
+description: Ask how to use Semper or troubleshoot a result
+title: "[Q]: "
+labels: []
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: App version (if relevant)
+      placeholder: e.g. 1.0
+  - type: textarea
+    id: tried
+    attributes:
+      label: What have you already tried?

@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout path="/">
+  <section class="hero hero-split">
+    <div>
+      <h1>Semper</h1>
+      <p class="lede">
+        Full-field digital image correlation on Android — displacement and strain from speckled
+        photographs, computed on the device.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="/download">Get Semper</a>
+        <a class="btn btn-ghost" href="/community">Community</a>
+      </div>
+    </div>
+    <div class="mesh-mark" aria-hidden="true"></div>
+  </section>
+
+  <section class="section">
+    <h2>Built for the lab floor</h2>
+    <p class="sub">
+      Paint a random speckle, photograph before and during loading, and read U, V, and strain fields
+      as interactive heatmaps — offline-first, with optional cloud sync for testers.
+    </p>
+    <div class="panel">
+      <p style="margin: 0; color: var(--muted)">
+        Questions, bugs, and feature ideas live on GitHub (login required to post). Browse here, or
+        jump straight into
+        <a href="/community">Discussions</a>
+        and
+        <a href="/bugs">Issues</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

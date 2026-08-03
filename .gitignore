@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+.firebase/
+*.log
+.DS_Store
+.env
+.env.*
+!.env.example
+public/downloads/*.apk

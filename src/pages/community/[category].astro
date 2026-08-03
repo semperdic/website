@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import {
+  discussionNewUrl,
+  discussionsCategoryUrl,
+  fetchDiscussions,
+  formatDate,
+} from '../../lib/github';
+
+export function getStaticPaths() {
+  return [
+    { params: { category: 'announcements' }, props: { name: 'Announcements' } },
+    { params: { category: 'q-a' }, props: { name: 'Q&A' } },
+    { params: { category: 'ideas' }, props: { name: 'Ideas' } },
+    { params: { category: 'general' }, props: { name: 'General' } },
+  ];
+}
+
+const { category } = Astro.params;
+const { name } = Astro.props;
+const slug = category!;
+const items = await fetchDiscussions({ categorySlug: slug, limit: 20 });
+---
+
+<BaseLayout
+  title={name}
+  description={`Semper community — ${name}`}
+  path={`/community/${slug}`}
+>
+  <section class="section" style="padding-top: 3rem">
+    <p style="margin: 0 0 0.5rem">
+      <a href="/community" style="color: var(--muted); text-decoration: none">← Community</a>
+    </p>
+    <h2>{name}</h2>
+    <p class="sub">GitHub login required to start a new discussion.</p>
+    <div class="cta-row" style="margin-bottom: 1.5rem">
+      <a class="btn btn-primary" href={discussionNewUrl(slug)} rel="noopener noreferrer">
+        New discussion
+      </a>
+      <a class="btn btn-ghost" href={discussionsCategoryUrl(slug)} rel="noopener noreferrer">
+        Open on GitHub
+      </a>
+    </div>
+
+    {
+      items.length === 0 ? (
+        <p class="empty">
+          Nothing listed yet — or the build could not read Discussions. Use “Open on GitHub” above.
+        </p>
+      ) : (
+        <ul class="list">
+          {items.map((d) => (
+            <li>
+              <a href={d.url} rel="noopener noreferrer">
+                <strong>
+                  #{d.number} {d.title}
+                </strong>
+                <span class="meta">
+                  {formatDate(d.createdAt)}
+                  {d.author?.login ? ` · @${d.author.login}` : ''}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+</BaseLayout>

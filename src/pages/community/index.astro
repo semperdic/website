@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import {
+  discussionNewUrl,
+  discussionsCategoryUrl,
+  fetchDiscussions,
+  formatDate,
+  githubRepoUrl,
+} from '../../lib/github';
+
+const categories = [
+  { slug: 'announcements', name: 'Announcements', blurb: 'Release notes and product news.' },
+  { slug: 'q-a', name: 'Q&A', blurb: 'How-to questions and troubleshooting.' },
+  { slug: 'ideas', name: 'Ideas', blurb: 'Feature brainstorming before a formal request.' },
+  { slug: 'general', name: 'General', blurb: 'Everything else about Semper.' },
+];
+
+const recent = await fetchDiscussions({ limit: 10 });
+---
+
+<BaseLayout
+  title="Community"
+  description="Discussions for Semper — questions, ideas, and announcements."
+  path="/community"
+>
+  <section class="section" style="padding-top: 3rem">
+    <h2>Community</h2>
+    <p class="sub">
+      Browse here; posting uses your GitHub account on
+      <a href={githubRepoUrl}>{githubRepoUrl.replace('https://', '')}</a>.
+    </p>
+
+    <div style="display: grid; gap: 0.75rem; margin-bottom: 2rem">
+      {
+        categories.map((c) => (
+          <div class="panel" style="display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: space-between; align-items: center">
+            <div>
+              <a href={`/community/${c.slug}`} style="font-family: var(--font-display); font-size: 1.15rem; color: var(--ink); text-decoration: none">
+                {c.name}
+              </a>
+              <p style="margin: 0.25rem 0 0; color: var(--muted); font-size: 0.92rem">{c.blurb}</p>
+            </div>
+            <div class="cta-row" style="margin: 0">
+              <a class="btn btn-ghost" href={`/community/${c.slug}`}>
+                Browse
+              </a>
+              <a class="btn btn-primary" href={discussionNewUrl(c.slug)} rel="noopener noreferrer">
+                New
+              </a>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <h2 style="font-size: 1.35rem">Recent</h2>
+    <p class="sub">Latest discussions from GitHub (requires a build-time token for live lists).</p>
+    {
+      recent.length === 0 ? (
+        <p class="empty">
+          No discussions loaded yet. Open{' '}
+          <a href={`${githubRepoUrl}/discussions`}>GitHub Discussions</a> directly, or set{' '}
+          <code>GITHUB_TOKEN</code> when building the site.
+        </p>
+      ) : (
+        <ul class="list">
+          {recent.map((d) => (
+            <li>
+              <a href={d.url} rel="noopener noreferrer">
+                <strong>
+                  #{d.number} {d.title}
+                </strong>
+                <span class="meta">
+                  {d.category?.name ?? 'Discussion'} · {formatDate(d.createdAt)}
+                  {d.author?.login ? ` · @${d.author.login}` : ''}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    <p style="margin-top: 1.5rem">
+      <a href={discussionsCategoryUrl('q-a')}>All Q&A on GitHub →</a>
+    </p>
+  </section>
+</BaseLayout>

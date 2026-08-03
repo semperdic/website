@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  fetchOpenIssues,
+  formatDate,
+  issueNewUrl,
+  issuesLabelUrl,
+} from '../lib/github';
+
+const issues = await fetchOpenIssues('enhancement', 20);
+---
+
+<BaseLayout
+  title="Features"
+  description="Feature requests for Semper."
+  path="/features"
+>
+  <section class="section" style="padding-top: 3rem">
+    <h2>Feature requests</h2>
+    <p class="sub">
+      Tracked as GitHub Issues labeled <code>enhancement</code>. Prefer Ideas Discussions for early
+      brainstorming.
+    </p>
+    <div class="cta-row" style="margin-bottom: 1.5rem">
+      <a class="btn btn-primary" href={issueNewUrl('feature_request.yml')} rel="noopener noreferrer">
+        Request a feature
+      </a>
+      <a class="btn btn-ghost" href="/community/ideas">Browse ideas</a>
+      <a class="btn btn-ghost" href={issuesLabelUrl('enhancement')} rel="noopener noreferrer">
+        All on GitHub
+      </a>
+    </div>
+    {
+      issues.length === 0 ? (
+        <p class="empty">No open feature requests loaded — file one, or browse on GitHub.</p>
+      ) : (
+        <ul class="list">
+          {issues.map((i) => (
+            <li>
+              <a href={i.html_url} rel="noopener noreferrer">
+                <strong>
+                  #{i.number} {i.title}
+                </strong>
+                <span class="meta">
+                  {formatDate(i.created_at)}
+                  {i.user?.login ? ` · @${i.user.login}` : ''}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+</BaseLayout>

@@ -1,0 +1,3 @@
+# Place versioned APKs here only if you intentionally serve them from Hosting.
+# Prefer Cloud Storage for large files; keep manifest.json in git.
+# Example: semper-1.0.apk

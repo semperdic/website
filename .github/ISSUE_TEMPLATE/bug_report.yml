@@ -1,0 +1,58 @@
+name: Bug report
+description: Something broke or produced wrong results
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve Semper. Attach a PDF report or CSV if results look wrong.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you see?
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Numbered steps if you can
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: input
+    id: app-version
+    attributes:
+      label: App version
+      description: See Settings → About, or the PDF report "App Build" line
+      placeholder: e.g. 1.0 (42)
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device + Android version
+      placeholder: e.g. Pixel 7 — Android 15
+    validations:
+      required: true
+  - type: textarea
+    id: images
+    attributes:
+      label: Images (if relevant)
+      description: Format (PNG/TIFF/JPEG), resolution, and anything unusual about the capture
+  - type: textarea
+    id: extras
+    attributes:
+      label: Anything else?
+      description: Screenshots, exports, or links to a Discussion

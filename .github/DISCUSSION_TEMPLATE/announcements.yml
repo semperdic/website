@@ -1,0 +1,11 @@
+name: 📢 Announcements
+description: Release notes and product news from the Semper team
+title: "[Announcement]: "
+labels: []
+body:
+  - type: textarea
+    id: body
+    attributes:
+      label: Announcement
+    validations:
+      required: true
