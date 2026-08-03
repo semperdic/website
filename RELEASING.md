@@ -5,16 +5,16 @@ The private app repository builds the signed APK. **This repo does not auto-publ
 ## Checklist
 
 1. **Build** a signed release APK from the private IndicVisionDIC Release workflow (or local release assemble).
-2. **Upload the APK** to Firebase Hosting / Cloud Storage under a stable URL, for example:
-   - `https://semperdic.com/downloads/semper-<version>.apk`
-   - Prefer uploading via Firebase Console or `gsutil` / Storage — avoid committing large APKs to git.
+2. **Host the APK** (pick one):
+   - **Preferred:** create a GitHub Release on this repo and attach the APK; copy the asset URL.
+   - Or place a small APK under `public/downloads/` (avoid committing large binaries long-term).
 3. **Update** [`public/downloads/manifest.json`](public/downloads/manifest.json):
 
    ```json
    {
      "version": "1.0",
      "versionCode": 42,
-     "apkUrl": "/downloads/semper-1.0.apk",
+     "apkUrl": "https://github.com/semperdic/website/releases/download/v1.0/semper-1.0.apk",
      "apkSha256": "optional-hex-digest",
      "notes": "Short changelog for testers.",
      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.indicvision.semper",
@@ -22,27 +22,28 @@ The private app repository builds the signed APK. **This repo does not auto-publ
    }
    ```
 
-4. **Deploy the site** (so the manifest and any static files go live):
+4. **Deploy the site** — push to `main` (GitHub Actions → Pages), or:
 
    ```bash
    npm run build
-   firebase deploy --only hosting
    ```
 
+   and let the workflow publish `dist/`.
+
 5. **Publish** the same build on Google Play (internal / closed / production as appropriate).
-6. **Announce** (optional): pin a Discussion under **Announcements** on this repository.
+6. **Announce** (optional): pin a Discussion under **Announcements**.
 
 ## Verify
 
-- Open https://semperdic.com/download — version and links match the manifest.
-- Direct APK URL returns `application/vnd.android.package-archive` (or a Storage redirect).
-- Play Store listing opens for the package `com.indicvision.semper`.
+- Open https://semperdic.github.io/website/download/ — version and links match the manifest.
+- Direct APK URL downloads the package.
+- Play Store listing opens for `com.indicvision.semper` when live.
 
 ## Private vs public
 
 | Step | Where |
 |------|--------|
 | Sign APK | Private IndicVisionDIC `release.yml` |
-| Host APK + site | This repo → Firebase Hosting |
+| Host APK + site | This repo → GitHub Releases + GitHub Pages |
 | Store listing | Google Play Console |
 | Customer Q&A / bugs | This repo Discussions / Issues |

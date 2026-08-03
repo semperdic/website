@@ -5,6 +5,7 @@ import {
   formatDate,
   issueNewUrl,
   issuesLabelUrl,
+  withBase,
 } from '../lib/github';
 
 const issues = await fetchOpenIssues('enhancement', 20);
@@ -25,7 +26,7 @@ const issues = await fetchOpenIssues('enhancement', 20);
       <a class="btn btn-primary" href={issueNewUrl('feature_request.yml')} rel="noopener noreferrer">
         Request a feature
       </a>
-      <a class="btn btn-ghost" href="/community/ideas">Browse ideas</a>
+      <a class="btn btn-ghost" href={withBase('/community/ideas')}>Browse ideas</a>
       <a class="btn btn-ghost" href={issuesLabelUrl('enhancement')} rel="noopener noreferrer">
         All on GitHub
       </a>

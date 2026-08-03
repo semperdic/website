@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { SITE_URL } from '../lib/github';
+import { SITE_URL, githubRepoUrl, withBase } from '../lib/github';
 
 interface Props {
   title?: string;
@@ -15,7 +15,8 @@ const {
 } = Astro.props;
 
 const pageTitle = title === 'Semper' ? 'Semper — Digital Image Correlation' : `${title} · Semper`;
-const canonical = new URL(path, SITE_URL).toString();
+const canonicalPath = path.endsWith('/') || path === '/' ? path : `${path}/`;
+const canonical = new URL(canonicalPath.replace(/^\//, ''), `${SITE_URL}/`).toString();
 ---
 
 <!doctype html>
@@ -35,15 +36,22 @@ const canonical = new URL(path, SITE_URL).toString();
   <body>
     <div class="shell">
       <header class="site-header">
-        <a class="brand" href="/">Semper<span>.</span></a>
+        <a class="brand" href={withBase('/')}>Semper<span>.</span></a>
         <nav class="nav" aria-label="Primary">
-          <a href="/download" aria-current={path === '/download' ? 'page' : undefined}>Download</a>
-          <a href="/community" aria-current={path.startsWith('/community') ? 'page' : undefined}
-            >Community</a
+          <a href={withBase('/download')} aria-current={path === '/download' ? 'page' : undefined}
+            >Download</a
           >
-          <a href="/bugs" aria-current={path === '/bugs' ? 'page' : undefined}>Bugs</a>
-          <a href="/features" aria-current={path === '/features' ? 'page' : undefined}>Features</a>
-          <a href="/support" aria-current={path === '/support' ? 'page' : undefined}>Support</a>
+          <a
+            href={withBase('/community')}
+            aria-current={path.startsWith('/community') ? 'page' : undefined}>Community</a
+          >
+          <a href={withBase('/bugs')} aria-current={path === '/bugs' ? 'page' : undefined}>Bugs</a>
+          <a href={withBase('/features')} aria-current={path === '/features' ? 'page' : undefined}
+            >Features</a
+          >
+          <a href={withBase('/support')} aria-current={path === '/support' ? 'page' : undefined}
+            >Support</a
+          >
         </nav>
       </header>
 
@@ -52,11 +60,11 @@ const canonical = new URL(path, SITE_URL).toString();
       </main>
 
       <footer class="site-footer">
-        <span>Semper DIC · semperdic.com</span>
+        <span>Semper DIC · GitHub Pages</span>
         <span>
-          <a href="https://github.com/damodar-datta/semperdic-website">GitHub</a>
+          <a href={githubRepoUrl}>GitHub</a>
           ·
-          <a href="/support">Support</a>
+          <a href={withBase('/support')}>Support</a>
         </span>
       </footer>
     </div>

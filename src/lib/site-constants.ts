@@ -8,6 +8,15 @@ export const PLAY_PACKAGE_ID = site.playPackageId;
 
 export const githubRepoUrl = `https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}`;
 
+/** Join the Astro `base` with a site path (`/download` → `/website/download/`). */
+export function withBase(path = '/'): string {
+  const base = import.meta.env.BASE_URL || '/';
+  const normalized = path.startsWith('/') ? path.slice(1) : path;
+  if (!normalized) return base.endsWith('/') ? base : `${base}/`;
+  const prefix = base.endsWith('/') ? base : `${base}/`;
+  return `${prefix}${normalized}${normalized.endsWith('/') ? '' : '/'}`;
+}
+
 export function discussionNewUrl(categorySlug: string): string {
   return `${githubRepoUrl}/discussions/new?category=${encodeURIComponent(categorySlug)}`;
 }

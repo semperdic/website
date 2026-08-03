@@ -7,6 +7,7 @@ export {
   SITE_URL,
   PLAY_PACKAGE_ID,
   githubRepoUrl,
+  withBase,
   discussionNewUrl,
   issueNewUrl,
   discussionsCategoryUrl,

@@ -1,53 +1,49 @@
-# Firebase Hosting + semperdic.com
+# Hosting — GitHub Pages (v1)
 
-Marketing site hosting is **separate** from the Android auth App Links project (`indicvision-dic-app-auth`). Do not point email-link continue URLs at semperdic.com unless you also update Digital Asset Links and the app.
+v1 ships on **GitHub Pages** at:
 
-## One-time setup
+**https://semperdic.github.io/website/**
 
-1. Install Firebase CLI (`npm i -g firebase-tools` or use the local `firebase-tools` from this repo).
-2. Log in and create (or select) a Firebase project for the product site, e.g. `semperdic-web`:
+No custom domain is required yet. When you outgrow Pages, point `semperdic.com` at Pages (or migrate to Firebase/Cloudflare) using the section below.
 
-   ```bash
-   npx firebase login
-   npx firebase projects:create semperdic-web --display-name "Semper DIC website"
-   ```
+## How deploy works
 
-   If the project id is already taken, create another id and update [`.firebaserc`](../.firebaserc) plus the `projectId` in [`.github/workflows/deploy-hosting.yml`](../.github/workflows/deploy-hosting.yml).
+Push to `main` runs [`.github/workflows/deploy-pages.yml`](../.github/workflows/deploy-pages.yml):
 
-3. Wire this directory:
+1. `npm ci` + `npm run build` (Astro static output in `dist/`)
+2. Upload Pages artifact
+3. Deploy to the `github-pages` environment
 
-   ```bash
-   npx firebase use semperdic-web
-   # or: firebase use --add
-   ```
+One-time repo setup (Actions → Pages):
 
-4. Confirm [`.firebaserc`](../.firebaserc) and [`firebase.json`](../firebase.json) point at that project and `dist/` (Astro output).
+```bash
+gh api -X POST repos/semperdic/website/pages -f build_type=workflow
+# or: Settings → Pages → Build and deployment → GitHub Actions
+```
 
-5. Deploy:
-
-   ```bash
-   npm run build
-   npx firebase deploy --only hosting
-   ```
-
-6. For GitHub Actions deploy: create a Firebase service account JSON secret named
-   `FIREBASE_SERVICE_ACCOUNT_SEMPERDIC_WEB` (see Firebase Hosting GitHub Action docs).
-   Until that secret exists, prefer local `firebase deploy`.
-
-## Custom domain (semperdic.com + www)
-
-1. Firebase Console → Hosting → **Add custom domain** → `semperdic.com`.
-2. Add the DNS records Firebase shows (A/AAAA or CNAME) at your registrar.
-3. Add `www.semperdic.com` and redirect www → apex (or the reverse) as Firebase suggests.
-4. Wait for SSL provisioning.
-5. Set the GitHub repo homepage to `https://semperdic.com`.
+Astro is configured with `site: https://semperdic.github.io` and `base: '/website'` so asset and nav URLs work under the project path.
 
 ## Manual APK files
 
-- Put versioned APKs in Firebase Storage or upload into Hosting under `public/downloads/` before build (large binaries: prefer Storage + public URL in the manifest).
-- Keep [`public/downloads/manifest.json`](../public/downloads/manifest.json) in git; update it each release (see [RELEASING.md](../RELEASING.md)).
-- Hosting `ignore` should not block `downloads/*` unless you intentionally serve APKs only from Storage.
+Prefer **GitHub Releases** on this repo for APK binaries (avoids large git blobs), then put the full asset URL in [`public/downloads/manifest.json`](../public/downloads/manifest.json):
 
-## CI (optional)
+```json
+{
+  "apkUrl": "https://github.com/semperdic/website/releases/download/v1.0/semper-1.0.apk"
+}
+```
 
-A workflow can run `npm ci && npm run build && firebase deploy --only hosting` on push to `main` using a Firebase CI token (`firebase login:ci`). Not required for v1.
+Small files can also live under `public/downloads/` and use a site-relative path like `/downloads/semper-1.0.apk` (resolved with the `/website` base at build time).
+
+See [RELEASING.md](../RELEASING.md).
+
+## Later: custom domain (semperdic.com)
+
+1. Register `semperdic.com`.
+2. Repo Settings → Pages → Custom domain → `semperdic.com` (and `www` if desired).
+3. Add the DNS records GitHub shows.
+4. Update [`astro.config.mjs`](../astro.config.mjs): `site: 'https://semperdic.com'`, `base: '/'`.
+5. Update [`src/site.config.json`](../src/site.config.json) `siteUrl` and app Help & support URLs.
+6. Redeploy.
+
+Firebase Hosting is **not** used for v1 (auth App Links stay on the existing IndicVision Firebase project).

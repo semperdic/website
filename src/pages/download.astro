@@ -1,11 +1,18 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/github';
 import manifest from '../../public/downloads/manifest.json';
 
 const playUrl =
   manifest.playStoreUrl ||
   'https://play.google.com/store/apps/details?id=com.indicvision.semper';
 const hasApk = Boolean(manifest.apkUrl);
+const apkHref =
+  hasApk && manifest.apkUrl
+    ? manifest.apkUrl.startsWith('http')
+      ? manifest.apkUrl
+      : withBase(manifest.apkUrl.startsWith('/') ? manifest.apkUrl : `/${manifest.apkUrl}`)
+    : null;
 ---
 
 <BaseLayout
@@ -16,7 +23,8 @@ const hasApk = Boolean(manifest.apkUrl);
   <section class="section" style="padding-top: 3rem">
     <h2>Download</h2>
     <p class="sub">
-      Prefer Play for automatic updates. Direct APK is for early testers when a build is posted here.
+      Prefer Play for automatic updates. Direct APK is for early testers when a build is posted (GitHub
+      Release asset or <code>public/downloads/</code>).
     </p>
 
     <div class="panel" style="display: grid; gap: 1.25rem">
@@ -32,11 +40,13 @@ const hasApk = Boolean(manifest.apkUrl);
             )
           }
         </p>
-        {manifest.publishedAt && (
-          <p style="margin: 0.35rem 0 0; color: var(--muted); font-size: 0.9rem">
-            Published {manifest.publishedAt}
-          </p>
-        )}
+        {
+          manifest.publishedAt && (
+            <p style="margin: 0.35rem 0 0; color: var(--muted); font-size: 0.9rem">
+              Published {manifest.publishedAt}
+            </p>
+          )
+        }
       </div>
 
       {manifest.notes && <p style="margin: 0; color: var(--muted)">{manifest.notes}</p>}
@@ -44,8 +54,8 @@ const hasApk = Boolean(manifest.apkUrl);
       <div class="cta-row">
         <a class="btn btn-primary" href={playUrl} rel="noopener noreferrer">Get on Google Play</a>
         {
-          hasApk ? (
-            <a class="btn btn-ghost" href={manifest.apkUrl!}>
+          apkHref ? (
+            <a class="btn btn-ghost" href={apkHref}>
               Download APK
             </a>
           ) : (

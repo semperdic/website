@@ -5,6 +5,7 @@ import {
   discussionsCategoryUrl,
   fetchDiscussions,
   formatDate,
+  withBase,
 } from '../../lib/github';
 
 export function getStaticPaths() {
@@ -29,7 +30,7 @@ const items = await fetchDiscussions({ categorySlug: slug, limit: 20 });
 >
   <section class="section" style="padding-top: 3rem">
     <p style="margin: 0 0 0.5rem">
-      <a href="/community" style="color: var(--muted); text-decoration: none">← Community</a>
+      <a href={withBase('/community')} style="color: var(--muted); text-decoration: none">← Community</a>
     </p>
     <h2>{name}</h2>
     <p class="sub">GitHub login required to start a new discussion.</p>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/github';
 ---
 
 <BaseLayout path="/">
@@ -11,8 +12,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         photographs, computed on the device.
       </p>
       <div class="cta-row">
-        <a class="btn btn-primary" href="/download">Get Semper</a>
-        <a class="btn btn-ghost" href="/community">Community</a>
+        <a class="btn btn-primary" href={withBase('/download')}>Get Semper</a>
+        <a class="btn btn-ghost" href={withBase('/community')}>Community</a>
       </div>
     </div>
     <div class="mesh-mark" aria-hidden="true"></div>
@@ -28,9 +29,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <p style="margin: 0; color: var(--muted)">
         Questions, bugs, and feature ideas live on GitHub (login required to post). Browse here, or
         jump straight into
-        <a href="/community">Discussions</a>
+        <a href={withBase('/community')}>Discussions</a>
         and
-        <a href="/bugs">Issues</a>.
+        <a href={withBase('/bugs')}>Issues</a>.
       </p>
     </div>
   </section>

@@ -6,6 +6,7 @@ import {
   fetchDiscussions,
   formatDate,
   githubRepoUrl,
+  withBase,
 } from '../../lib/github';
 
 const categories = [
@@ -35,13 +36,13 @@ const recent = await fetchDiscussions({ limit: 10 });
         categories.map((c) => (
           <div class="panel" style="display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: space-between; align-items: center">
             <div>
-              <a href={`/community/${c.slug}`} style="font-family: var(--font-display); font-size: 1.15rem; color: var(--ink); text-decoration: none">
+              <a href={withBase(`/community/${c.slug}`)} style="font-family: var(--font-display); font-size: 1.15rem; color: var(--ink); text-decoration: none">
                 {c.name}
               </a>
               <p style="margin: 0.25rem 0 0; color: var(--muted); font-size: 0.92rem">{c.blurb}</p>
             </div>
             <div class="cta-row" style="margin: 0">
-              <a class="btn btn-ghost" href={`/community/${c.slug}`}>
+              <a class="btn btn-ghost" href={withBase(`/community/${c.slug}`)}>
                 Browse
               </a>
               <a class="btn btn-primary" href={discussionNewUrl(c.slug)} rel="noopener noreferrer">
