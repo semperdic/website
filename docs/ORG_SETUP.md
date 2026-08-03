@@ -1,45 +1,39 @@
 # GitHub org + repo setup
 
-GitHub does not allow creating organizations via the API for personal accounts. Do this once in the browser, then push this codebase.
+## Current state
 
-## 1. Create the organization
+The public site + community repo is live at:
 
-1. Sign in as the owner account: https://github.com/account/organizations/new
-2. Organization name: **`semperdic`**
-3. Complete the free plan flow.
+**https://github.com/damodar-datta/semperdic-website**
 
-## 2. Create the repository
+Discussions should be enabled (Settings → Features). Issue templates and labels (`bug`, `enhancement`, `needs-triage`) ship in `.github/`. Site config (`src/site.config.json`) points at this repo so deep links work today.
 
-From this directory (after the org exists):
+## Create org `semperdic` and transfer (when ready)
 
-```bash
-gh repo create semperdic/website --public --source=. --remote=origin --push --homepage "https://semperdic.com" --description "Semper product site and community (Discussions + Issues)"
-```
+GitHub does not allow creating organizations via the API for personal accounts.
 
-Or create an empty `website` repo in the org UI, then:
+1. Create the org: https://github.com/account/organizations/new — name **`semperdic`**.
+2. Transfer the repo: Settings → General → Danger Zone → **Transfer ownership** → `semperdic`.
+3. Rename the repo to **`website`** (Settings → General → Repository name) so the canonical path is `semperdic/website`.
+4. Update [`src/site.config.json`](../src/site.config.json):
 
-```bash
-git remote add origin https://github.com/semperdic/website.git
-git push -u origin main
-```
+   ```json
+   "github": { "owner": "semperdic", "repo": "website" }
+   ```
 
-## 3. Enable Discussions and categories
+5. Update hard-coded GitHub URLs in [`README.md`](../README.md) and [`.github/ISSUE_TEMPLATE/config.yml`](../.github/ISSUE_TEMPLATE/config.yml).
+6. Confirm Discussion categories exist: **Announcements**, **Q&A**, **Ideas**, **General**.
+7. Redeploy the site after changing `site.config.json`.
 
-```bash
-gh api -X PATCH repos/semperdic/website -f has_discussions=true
-```
+## Discussion categories
 
-In the repo → **Settings → General → Features → Discussions**, then create categories:
+| Name | Format |
+|------|--------|
+| Announcements | Announcement |
+| Q&A | Q&A |
+| Ideas | Open discussion |
+| General | Open discussion |
 
-| Name | Format | Slug (typical) |
-|------|--------|----------------|
-| Announcements | Announcement | announcements |
-| Q&A | Q&A | q-a |
-| Ideas | Discussion | ideas |
-| General | Discussion | general |
+## Firebase Hosting + domain
 
-Labels used by issue templates: `bug`, `enhancement`, `needs-triage` (create under Issues → Labels if missing).
-
-## 4. Firebase Hosting + domain
-
-See [docs/HOSTING.md](docs/HOSTING.md).
+See [HOSTING.md](HOSTING.md).

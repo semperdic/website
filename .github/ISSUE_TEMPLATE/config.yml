@@ -1,7 +1,7 @@
 blank_issues_enabled: false
 contact_links:
   - name: Ask a question
-    url: https://github.com/semperdic/website/discussions/new?category=q-a
+    url: https://github.com/damodar-datta/semperdic-website/discussions/new?category=q-a
     about: How-to questions and troubleshooting — use Discussions Q&A
   - name: Product site & downloads
     url: https://semperdic.com
