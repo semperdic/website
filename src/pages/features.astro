@@ -33,7 +33,10 @@ const issues = await fetchOpenIssues('enhancement', 20);
     </div>
     {
       issues.length === 0 ? (
-        <p class="empty">No open feature requests loaded — file one, or browse on GitHub.</p>
+        <p class="empty">
+          No feature requests to show right now — the list may be quiet, or the build could not read
+          GitHub. Browse them on GitHub, or add your idea.
+        </p>
       ) : (
         <ul class="list">
           {issues.map((i) => (

@@ -60,12 +60,18 @@ const mail = `mailto:${SUPPORT_EMAIL}`;
             aria-current={path.startsWith('/manual') ? 'page' : undefined}>Manual</a
           >
           <a
+            href={withBase('/learn')}
+            aria-current={path.startsWith('/learn') ? 'page' : undefined}>Learn</a
+          >
+          <a
             href={withBase('/community')}
             aria-current={path.startsWith('/community') || path === '/bugs' || path === '/features'
               ? 'page'
               : undefined}>Community</a
           >
-          <a href={withBase('/support')} aria-current={path === '/support' ? 'page' : undefined}
+          <a
+            href={withBase('/support')}
+            aria-current={path === '/support' || path.startsWith('/support/') ? 'page' : undefined}
             >Support</a
           >
         </nav>
@@ -82,6 +88,7 @@ const mail = `mailto:${SUPPORT_EMAIL}`;
             <ul>
               <li><a href={withBase('/download')}>Download</a></li>
               <li><a href={withBase('/manual')}>Manual</a></li>
+              <li><a href={withBase('/support/troubleshooting')}>Troubleshooting</a></li>
               <li><a href={withBase('/community')}>Community</a></li>
               <li><a href={withBase('/support')}>Support</a></li>
             </ul>

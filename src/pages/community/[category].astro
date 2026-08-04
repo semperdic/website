@@ -46,7 +46,8 @@ const items = await fetchDiscussions({ categorySlug: slug, limit: 20 });
     {
       items.length === 0 ? (
         <p class="empty">
-          Nothing listed yet — or the build could not read Discussions. Use “Open on GitHub” above.
+          Nothing to show here yet — this category may be quiet, or the build could not read
+          Discussions. Use “Open on GitHub” above to see everything and join in.
         </p>
       ) : (
         <ul class="list">
