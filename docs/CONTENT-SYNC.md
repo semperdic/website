@@ -1,0 +1,77 @@
+# Content sync — website ↔ app
+
+This site documents the Semper Android app, whose source lives in the separate
+`IndicVisionDIC` repo. The site duplicates app behaviour by hand, so facts drift.
+This page is the map: which website page mirrors which part of the app, and the
+exact facts that must stay identical. Check it whenever you touch app-behaviour
+copy, and re-check it when the app changes.
+
+The app's source of truth is **`IndicVisionDIC/docs/OPERATING_MANUAL.md`** (the
+operating manual, "OM" below), backed by **`docs/app/WORKFLOWS.md`** for
+per-screen behaviour. Where the two disagree, verify against **code**, not docs.
+
+## Page map
+
+| Website page | Mirrors (app) |
+|---|---|
+| `src/pages/manual/getting-started.astro` | OM §1 What it does, §2 Getting in, §3 Images it accepts (incl. video) |
+| `src/pages/manual/analysis.astro` | OM §4 Running an analysis, §5 Parameters, §6 Region of interest |
+| `src/pages/manual/sweeps-results.astro` | OM §7 Sweeps, §8 Reading results |
+| `src/pages/manual/exports-manage.astro` | OM §9 Exports, §10 Managing analyses |
+| `src/pages/manual/faq.astro` | Conceptual questions — no single OM section |
+| `src/pages/support/troubleshooting.astro` | OM §11 Troubleshooting table + `res/values/strings.xml` messages |
+| `src/pages/learn/dic.astro` | OM §1 + Appendix B glossary |
+| `src/pages/learn/glossary.astro` | OM Appendix B |
+| `src/pages/learn/parameters.astro` | OM §5 + Appendix A |
+| `src/pages/download.astro` | `app/build.gradle.kts` (minSdk/ABI/version), OM §2 |
+| `src/pages/privacy.astro` | OM §2, §10 + `backend/` auth/data behaviour |
+
+## Facts that must match — and where they are enforced in code
+
+Do **not** trust the app's own `README.md` for these — it has gone stale before
+(it lists subset 15–101; the real range is 15–121). Verify against the file
+named.
+
+| Fact | Value | Enforced in (app repo) |
+|---|---|---|
+| Subset size range | 15–121, odd | `app/src/main/res/layout/activity_static_analysis.xml` (`subsetSlider` valueFrom/To) |
+| Step size range | 1–30 | same layout (`stepSlider`) |
+| Strain window range | 5–101, odd | same layout (`strainWindowSlider`) |
+| Step default | 5 | OM §5 / Appendix A |
+| Strain window default | 15 | OM §5 / Appendix A |
+| Kernel | 4×4 Bicubic / 6×6 Keys | OM §5 |
+| Max frames | 10–150, default 50 | `app/src/main/java/com/indicvision/semper/data/DicSettings.kt` (`MIN_MAX_FRAMES`, `DEFAULT_MAX_FRAMES`, `MAX_MAX_FRAMES`) |
+| VSG formula | `(strain window − 1) × step + 1` | OM §5 |
+| Decorrelation rule | 2 consecutive frames < 50% convergence | OM §4; `strings.xml` `error_low_convergence` |
+| CSV columns | `x_px,y_px,u_px,v_px,exx,eyy,exy,znssd` (sweeps add subset, step, window) | OM §9 |
+| minSdk / OS floor | 24 → Android 7.0 | `app/build.gradle.kts` (`minSdk = 24`) |
+| Release ABI | arm64-v8a only (debug adds x86_64) | `app/build.gradle.kts` (`abiFilters` default `listOf("arm64-v8a")`) |
+| Package ID | `com.indicvision.semper` | `app/build.gradle.kts` (`applicationId`) |
+| Support email | `support@indicvision.com` | `src/site.config.json` here; `strings.xml` there |
+| Animation playback floor | Android 9+ | OM §8 |
+
+### Exact on-screen messages (Troubleshooting page)
+
+The Troubleshooting page quotes app strings **verbatim** so phone-find matches
+what the user sees. Sources in `app/src/main/res/values/strings.xml`:
+`error_low_convergence`, `limit_title`, `limit_body`, `failed_decode_raw`,
+`failed_load_reference`, `error_network_retry`, `error_startup_failed`,
+`error_verify_failed`, `video_read_failed`, `video_extract_insufficient`,
+`session_data_gone_title` / `_body`. If a string changes in the app, update the
+verbatim quote here to match.
+
+Note: `error_low_convergence` contains the app-side typo "spackle pattern". It is
+quoted verbatim in the message block (for searchability) but **our own prose must
+spell it "speckle"** — do not propagate the typo.
+
+## Do NOT document (built but unreachable)
+
+Per `IndicVisionDIC/docs/app/WORKFLOWS.md §11`, these exist in code but are not
+reachable by users. Keep them off the site so they don't creep back in:
+
+- Circle / ellipse / freeform ROI — only **Rect** and **Square** are exposed.
+- A convergence-view plot — never built; only line-cut plots exist.
+- Replayable coach marks — they show once and cannot be replayed.
+- A dedicated restore screen — the empty-state "Restore" just opens Settings.
+- Email sign-in link is code-complete but blocked on Digital Asset Links
+  verification; treat email/password + Google as the live sign-in paths.

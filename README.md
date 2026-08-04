@@ -37,6 +37,7 @@ A custom domain (`semperdic.com`) can be added later when traffic justifies it �
 | `/website/help/` | Support |
 | `/website/docs/` | Manual |
 | `/website/faq/` | Manual · FAQ |
+| `/website/troubleshooting/` | Support · Troubleshooting |
 
 ## Code of conduct
 
