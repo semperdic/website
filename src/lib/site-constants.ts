@@ -8,17 +8,20 @@ export const PLAY_PACKAGE_ID = site.playPackageId;
 
 export const githubRepoUrl = `https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}`;
 
-/** Join the Astro `base` with a site path (`/download` → `/website/download/`). */
+/** Join the Astro `base` with a site path (`/download` → `/website/download/`).
+ *  Any `#hash` or `?query` is split off first so the trailing slash lands on the
+ *  path, not the fragment (`/manual#roi` → `/website/manual/#roi`). */
 export function withBase(path = '/'): string {
   const base = import.meta.env.BASE_URL || '/';
-  const normalized = path.startsWith('/') ? path.slice(1) : path;
-  if (!normalized) return base.endsWith('/') ? base : `${base}/`;
   const prefix = base.endsWith('/') ? base : `${base}/`;
+  const suffixIdx = path.search(/[?#]/);
+  const suffix = suffixIdx >= 0 ? path.slice(suffixIdx) : '';
+  const bare = suffixIdx >= 0 ? path.slice(0, suffixIdx) : path;
+  const normalized = bare.startsWith('/') ? bare.slice(1) : bare;
+  if (!normalized) return `${prefix}${suffix}`;
   const isFile = /\.[a-z0-9]+$/i.test(normalized);
-  if (isFile || normalized.endsWith('/')) {
-    return `${prefix}${normalized}`;
-  }
-  return `${prefix}${normalized}/`;
+  const withSlash = isFile || normalized.endsWith('/') ? normalized : `${normalized}/`;
+  return `${prefix}${withSlash}${suffix}`;
 }
 
 export function discussionNewUrl(categorySlug: string): string {

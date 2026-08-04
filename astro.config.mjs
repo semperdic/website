@@ -20,5 +20,6 @@ export default defineConfig({
     '/help': '/website/support/',
     '/docs': '/website/manual/',
     '/faq': '/website/manual/faq/',
+    '/troubleshooting': '/website/support/troubleshooting/',
   },
 });

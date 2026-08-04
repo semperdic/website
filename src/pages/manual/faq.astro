@@ -5,38 +5,48 @@ import { withBase } from '../../lib/github';
 
 const idics = 'https://idics.org/guide/';
 
+// Conceptual "what / why" questions only. Anything of the form "X broke, what do
+// I do" lives on /support/troubleshooting, keyed by the on-screen message.
 const faqs = [
   {
-    q: 'Why did I get a low-texture / weak speckle warning?',
-    a: 'On import, Semper measures intensity gradients in your reference. A weak pattern triggers a warning and suggests a larger subset. Treat that as feedback on the pattern, not only a slider tip.',
+    q: 'What is Semper for?',
+    a: 'It measures how a surface deforms from photographs — full-field displacement and strain maps, computed on your Android phone. It is aimed at mechanical testing and materials work.',
   },
   {
-    q: 'Frames are different sizes, or JPEG looks soft — what breaks?',
-    a: 'All frames must match the reference pixel size or the run is blocked. JPEG works but Semper warns because compression damages gradients. Prefer PNG or TIFF. Use Files for RAW and DNG.',
+    q: 'Is it free, and do I need an account?',
+    a: 'You sign in (Google or email), and a new account needs a one-time admin approval before you can use the app. That gate is about managing access, not payment.',
   },
   {
-    q: 'ROI too small, or correlation fails on grips / fiducials?',
-    a: 'An ROI smaller than the subset will not run — enlarge the ROI or shrink the subset. Use Erase to punch out grips and markers that will decorrelate.',
+    q: 'Why does my account need approval?',
+    a: 'Semper is an allow-list app while it is in early release. Support is emailed automatically when you sign up; tap Check status in the app after you are approved — it does not update on its own.',
   },
   {
-    q: 'The run stopped mid-sequence (“decorrelated”). Is the data lost?',
-    a: 'Two consecutive frames below 50% convergence stop the run. Frames solved before that are kept, with the stop reason on Home and in Settings used.',
+    q: 'Does it work offline?',
+    a: 'Yes, once your device has been approved. Importing frames and running the correlation need no network. Only sign-in, approval checks, and cloud uploads do.',
   },
   {
-    q: 'Strain looks noisy — or peaks look washed out?',
-    a: 'Raise the strain window (and quote VSG) to smooth noise. Lower it to keep local peaks. Use a Sweep to see where curves stop separating.',
+    q: 'Can I use my phone camera, or a video?',
+    a: 'You load photos you have already taken, or pick a video and Semper samples it into frames (the first frame becomes the reference). For how to shoot a good speckle and lighting, see the iDICs guide below.',
   },
   {
-    q: 'Are U and V in millimetres?',
-    a: 'No. Displacements are in pixels. Semper has no spatial calibration — convert with your own scale factor.',
+    q: 'Are results in millimetres?',
+    a: 'No. Displacements are in pixels — Semper has no spatial calibration. Convert with your own scale factor (pixels per mm from your setup).',
   },
   {
-    q: 'Frames look incomparable in the viewer, or order is wrong?',
-    a: 'Auto colour scale rescales each frame alone. Set fixed min/max, or use the summary animation (one scale for the sequence). Fix order with Sort on step 1 before Compute.',
+    q: 'How accurate is it?',
+    a: 'The engine locates each subset to roughly 1/100 of a pixel, and recommends a subset size that targets about 0.007 px displacement accuracy on your image. Real accuracy depends on your speckle, lighting, and camera — the parameters and a sweep let you check it.',
   },
   {
-    q: 'Where do I ask for help?',
-    a: 'Use the Manual for how-to. Open Community for questions, bugs, and features (GitHub login to post). Use Support email for account or private data. Open Privacy for auth and storage.',
+    q: 'Is my data uploaded to the cloud?',
+    a: 'Only if you turn on Save to cloud. The correlation always runs on the phone; cloud backup just stores the results you choose to sync, so you can restore them. See Privacy for the full picture.',
+  },
+  {
+    q: 'Can I use Semper results in a paper?',
+    a: 'Yes. Export “Everything”, quote the VSG with any strain value, and keep the archive with your raw images — inputs, fields, and parameters together are what make the result reproducible.',
+  },
+  {
+    q: 'Something went wrong — where do I look?',
+    a: 'Troubleshooting is indexed by the exact message the app showed you. For how-to, use the Manual; for account or private matters, email support.',
   },
 ];
 ---
@@ -51,7 +61,10 @@ const faqs = [
       <a href={withBase('/manual')}>← Manual</a>
     </p>
     <h2>FAQ</h2>
-    <p class="sub">Short answers for common Semper issues.</p>
+    <p class="sub">
+      Short answers to the questions people arrive with. Hit an actual error or a “why did it do
+      that”? That lives in <a href={withBase('/support/troubleshooting')}>Troubleshooting</a>.
+    </p>
 
     <div class="faq">
       {
@@ -76,6 +89,8 @@ const faqs = [
     </div>
 
     <p class="sub" style="margin-top: 1.25rem">
+      <a href={withBase('/support/troubleshooting')}>Troubleshooting</a>
+      ·
       <a href={withBase('/privacy')}>Privacy</a>
       ·
       <a href={withBase('/community')}>Community</a>

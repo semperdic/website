@@ -19,18 +19,27 @@ import { withBase } from '../../lib/github';
 
     <div class="prose">
       <h3>What it does</h3>
-      <p>
-        You give Semper one <strong>reference</strong> frame (undeformed) and several
-        <strong>deformed</strong> frames (one per load step).
+      <p class="plain">
+        You give Semper photos of a speckled surface before and during loading; it gives you back maps
+        of how far every point moved and how much it stretched.
       </p>
-      <p>
-        It matches small windows called <strong>subsets</strong> on a grid and returns five maps per
-        frame.
+      <p class="detail">
+        In DIC terms: one
+        <strong><a class="term" href={withBase('/learn/glossary#reference')}>reference</a></strong>
+        frame (undeformed) and several
+        <strong><a class="term" href={withBase('/learn/glossary#deformed-frame')}>deformed</a></strong>
+        frames (one per load step). It matches small windows called
+        <strong><a class="term" href={withBase('/learn/glossary#subset')}>subsets</a></strong> on a
+        grid and returns five maps per frame. New to this? Start with
+        <a href={withBase('/learn/dic')}>How DIC works</a>.
       </p>
       <Figure
         src="/manual/pipeline.svg"
         alt="Pipeline from reference and deformed frames to displacement and strain fields"
         caption="Inputs on the left, matching on the phone, five output fields on the right."
+        wide
+        width={760}
+        height={250}
       />
       <table>
         <thead>
@@ -54,12 +63,16 @@ import { withBase } from '../../lib/github';
         </tbody>
       </table>
       <div class="callout">
-        <span class="lead-label">Why it matters:</span> displacements are in
-        <strong>pixels</strong>. Semper does not apply a mm scale — convert with your own factor.
-        Correlation runs on the phone. Cloud backup only stores results.
+        <span class="lead-label">Two things to know up front:</span> displacements are in
+        <strong>pixels</strong> — Semper does not apply a mm scale, so convert with your own factor.
+        And everything runs <strong>on the phone</strong>; optional cloud backup only stores the
+        results you already computed, it never re-runs the analysis.
       </div>
 
       <h3>Getting in</h3>
+      <p class="plain">
+        Signing up is not enough — an admin has to approve your account before you can use the app.
+      </p>
       <p><span class="lead-label">In the app:</span></p>
       <ol>
         <li>Sign in with Google or email.</li>
@@ -85,17 +98,24 @@ import { withBase } from '../../lib/github';
         <a href={withBase('/privacy')}>Privacy</a>.
       </p>
       <Figure
-        src="/manual/screenshots/home.png"
+        src="/manual/screenshots/home.webp"
         alt="Semper Home screen listing analyses with upload badges and add button"
         caption="Home lists your analyses. Tap to open, long-press to select, + to start a new one."
         phone
+        width={460}
+        height={1022}
       />
       <p>
         <span class="lead-label">If it fails:</span> offline use is fine if this device was approved
-        before. Import and solve work without a network. Uploads wait until you are online.
+        before — import and solve work without a network, and uploads wait until you are online. Still
+        stuck on sign-in or approval? See
+        <a href={withBase('/support/troubleshooting#signing-in')}>Troubleshooting · signing in</a>.
       </p>
 
       <h3>Images it accepts</h3>
+      <p class="plain">
+        Load a set of still photos, or a single video that Semper samples into frames for you.
+      </p>
       <table>
         <thead>
           <tr>
@@ -128,6 +148,23 @@ import { withBase } from '../../lib/github';
       <p>
         On import, Semper measures your speckle. A weak pattern shows a low-texture warning and
         suggests a larger subset.
+      </p>
+
+      <h3>Starting from a video</h3>
+      <p class="plain">
+        Pick a video instead of photos and Semper pulls the frames out for you — no need to export
+        stills first.
+      </p>
+      <p class="detail">
+        When you choose a video, a sampling sheet opens: set the <strong>frame rate</strong> to sample
+        at and the <strong>time segment</strong> to cover, and it shows a live estimate of how many
+        frames you will get. The <strong>first frame becomes the reference</strong>, the rest become
+        deformed frames in capture order.
+      </p>
+      <p>
+        The same <strong>Max frames</strong> cap applies (default 50) — if a segment would exceed it,
+        the count is capped and the app notes it. Raise the limit in
+        <strong>Settings → Analysis preferences</strong> if you need more.
       </p>
     </div>
 

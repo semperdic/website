@@ -24,7 +24,10 @@ const issues = await fetchOpenIssues('bug', 20);
     </div>
     {
       issues.length === 0 ? (
-        <p class="empty">No open bugs loaded — file one, or browse on GitHub.</p>
+        <p class="empty">
+          No open bugs to show right now — that may just mean the list is quiet, or the build could
+          not read GitHub. Browse the full list on GitHub, or file the one you hit.
+        </p>
       ) : (
         <ul class="list">
           {issues.map((i) => (
