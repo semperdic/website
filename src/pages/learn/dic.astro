@@ -10,27 +10,39 @@ import { withBase } from '../../lib/github';
 >
   <section class="section" style="padding-top: 3rem">
     <p class="crumb">
-      <a href={withBase('/')}>← Home</a>
+      <a href={withBase('/learn')}>← Learn</a>
     </p>
     <h2>How DIC works</h2>
-    <p class="sub">Enough theory to use Semper and read the Manual.</p>
+    <p class="sub">Enough theory to use Semper and read the Manual — no prior DIC experience needed.</p>
 
     <div class="prose">
+      <p class="plain">
+        Digital image correlation watches a speckle pattern move between photos and turns that motion
+        into full-field maps of how the surface stretched.
+      </p>
+      <p class="detail">Five steps, start to finish:</p>
       <ol>
-        <li>A specimen is painted with a random <strong>speckle pattern</strong>.</li>
-        <li>A <strong>reference</strong> photo is taken, then more photos while it deforms.</li>
+        <li>A specimen is painted with a random <strong>speckle pattern</strong> — a spray of dots.</li>
         <li>
-          The image is divided into small windows called <strong>subsets</strong> (odd widths,
-          indexed around the centre pixel).
+          A <strong><a class="term" href={withBase('/learn/glossary#reference')}>reference</a></strong>
+          photo is taken, then more photos while it deforms.
+        </li>
+        <li>
+          The image is divided into small windows called
+          <strong><a class="term" href={withBase('/learn/glossary#subset')}>subsets</a></strong>
+          (a subset is the patch of pattern tracked at each point).
         </li>
         <li>
           For each subset the engine finds where it moved in the deformed image, to about 1/100th of
-          a pixel, using <strong>ICGN</strong> and <strong>ZNSSD</strong> (a difference score immune
-          to lighting changes; lower is better).
+          a pixel. It uses
+          <a class="term" href={withBase('/learn/glossary#icgn')}>ICGN</a> to home in and
+          <a class="term" href={withBase('/learn/glossary#znssd')}>ZNSSD</a>
+          (a match-quality score that ignores lighting changes; lower is better) to judge the fit.
         </li>
         <li>
           Displacements (<strong>U</strong>, <strong>V</strong> in pixels) are differentiated into
-          strains (<strong>Exx</strong>, <strong>Eyy</strong>, <strong>Exy</strong> in millistrain).
+          strains (<strong>Exx</strong>, <strong>Eyy</strong>, <strong>Exy</strong> in
+          <a class="term" href={withBase('/learn/glossary#millistrain')}>millistrain</a>).
         </li>
       </ol>
       <table>
@@ -61,6 +73,7 @@ import { withBase } from '../../lib/github';
     <div class="cta-row" style="margin-top: 1.5rem">
       <a class="btn btn-primary" href={withBase('/manual')}>Manual</a>
       <a class="btn btn-ghost" href={withBase('/learn/glossary')}>Glossary</a>
+      <a class="btn btn-ghost" href={withBase('/learn/parameters')}>Parameters</a>
     </div>
   </section>
 </BaseLayout>

@@ -18,10 +18,17 @@ import { withBase } from '../../lib/github';
     <p class="sub">From loading frames through ROI, parameters, and Compute.</p>
 
     <div class="prose">
+      <p class="plain">
+        Three steps: load your frames, choose an area and settings, then Compute. Everything else is
+        detail on those three.
+      </p>
       <Figure
         src="/manual/wizard.svg"
         alt="Wizard steps: load frames, settings, optional sweep, then compute"
         caption="Single mode goes straight to Compute. Sweep adds a setup step for ranges."
+        wide
+        width={760}
+        height={240}
       />
 
       <h3>Step 1 — Load frames</h3>
@@ -30,18 +37,50 @@ import { withBase } from '../../lib/github';
       </p>
       <p>
         <strong>Photos</strong> is the system picker. <strong>Files</strong> is the only path to RAW
-        and DNG.
+        and DNG (and to picking a video — see
+        <a href={withBase('/manual/getting-started')}>Getting started</a>).
       </p>
       <Figure
-        src="/manual/screenshots/step1-frames.png"
+        src="/manual/screenshots/step1-frames.webp"
         alt="Step 1 with reference frame and three numbered deformed frames"
         caption="Number badges on deformed frames are the analysis order. Use Sort before you continue."
         phone
+        width={460}
+        height={1022}
       />
       <p>
-        <span class="lead-label">Why it matters:</span> badge order is the order everywhere
-        afterward. You cannot restore the picker&apos;s original order once you sort.
+        <span class="lead-label">Why it matters:</span> the number badge on each deformed frame is its
+        order, and that order is used everywhere afterward — frame 1 here is frame 1 in every result
+        and export.
       </p>
+
+      <h4 class="minor">Getting the order right</h4>
+      <p class="detail">
+        Tap the sort icon to reorder. There is no way back to the picker&apos;s original order once you
+        sort, so set it before you Compute. (With a single deformed frame the control is hidden.)
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Sort</th>
+            <th>Use when</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Name · A–Z / Z–A</td>
+            <td>Filenames carry the sequence</td>
+          </tr>
+          <tr>
+            <td>Date · oldest / newest</td>
+            <td>Filenames don&apos;t — uses capture time, then EXIF</td>
+          </tr>
+          <tr>
+            <td>Manual</td>
+            <td>Neither works — drag the thumbnails into order</td>
+          </tr>
+        </tbody>
+      </table>
 
       <h3>Step 2 — Settings</h3>
       <ol>
@@ -61,19 +100,35 @@ import { withBase } from '../../lib/github';
       <p>Points solved and convergence update live.</p>
       <p>
         <strong>Cancel</strong> stops at once — nothing is kept. Keep the app open; there is no
-        resume if Android kills the process.
+        resume if Android kills the process while it works.
       </p>
+      <div class="callout">
+        <span class="lead-label">A short run is not a failed run.</span> If two frames in a row fall
+        below 50% convergence the images have
+        <a class="term" href={withBase('/learn/glossary#decorrelation')}>decorrelated</a>
+        and Semper stops rather than grind on. The frames it solved before that point are real data —
+        they are saved as a shorter analysis, and its Home row records why it stopped. A 50-frame test
+        that stopped at frame 40 still gives you frames 1–39.
+      </div>
       <p>
-        <span class="lead-label">If it fails:</span> two frames in a row below 50% convergence end
-        the run (decorrelation). Frames already solved are kept as a short analysis with the stop
-        reason on Home.
+        <span class="lead-label">If it fails outright:</span> see
+        <a href={withBase('/support/troubleshooting#during-a-run')}>Troubleshooting · during a run</a>
+        for the exact messages and what each means.
       </p>
 
       <h3>Parameters (single mode)</h3>
+      <p class="plain">
+        The two you actually tune: <strong>subset</strong> (how big a patch each point matches) and
+        <strong>strain window</strong> (how much the strain is smoothed). The defaults are sensible —
+        the app even recommends a subset from your image.
+      </p>
       <Figure
         src="/manual/subset-step.svg"
         alt="Diagram of subset window size versus step spacing on a grid"
         caption="Subset is the match window. Step is how far apart grid points are."
+        wide
+        width={760}
+        height={320}
       />
       <table>
         <thead>
@@ -110,21 +165,39 @@ import { withBase } from '../../lib/github';
         src="/manual/vsg.svg"
         alt="Virtual strain gauge related to strain window and step"
         caption="Quote VSG with strain results: VSG = (strain window − 1) × step + 1, in pixels."
+        wide
+        width={760}
+        height={270}
       />
       <p>
-        Full table: <a href={withBase('/learn/parameters')}>Parameters</a>.
+        Full table with when-to-raise / when-to-lower: <a href={withBase('/learn/parameters')}
+          >Parameters</a
+        >.
       </p>
 
       <h3>Region of interest</h3>
+      <p class="plain">
+        Draw a box over the part of the image you want measured; erase holes over anything that would
+        spoil the match, like grips or markers.
+      </p>
       <Figure
-        src="/manual/screenshots/roi-editor.png"
+        src="/manual/screenshots/roi-editor.webp"
         alt="ROI editor with crop rectangle on a speckle image"
         caption="Crop sets the area to correlate. Erase punches out grips or markers that would decorrelate."
         phone
+        width={460}
+        height={1022}
       />
+      <p class="detail">
+        <strong>Draw</strong> — pick Rect or Square and drag on the image; drag inside to move, corners
+        to resize, with size and position shown live. <strong>Manual</strong> — type X, Y, W and H
+        exactly and Apply. <strong>Crop</strong> sets the area to correlate; <strong>Erase</strong>
+        punches holes in it.
+      </p>
       <p>
-        <span class="lead-label">If it fails:</span> an ROI smaller than the subset will not run.
-        Enlarge the ROI or shrink the subset.
+        <span class="lead-label">If it fails:</span> an
+        <a class="term" href={withBase('/learn/glossary#roi')}>ROI</a> smaller than the subset will not
+        run — enlarge the ROI or shrink the subset.
       </p>
     </div>
 

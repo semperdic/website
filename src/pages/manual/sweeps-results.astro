@@ -19,15 +19,17 @@ import { withBase } from '../../lib/github';
 
     <div class="prose">
       <h3>Why sweep</h3>
-      <p>
-        Strain is computed from displacement, so it depends on how much you smooth.
+      <p class="plain">
+        A sweep re-solves one frame at many smoothing settings, so you can pick a strain value that
+        holds steady instead of one that just happens to fall out of a single setting.
       </p>
-      <p>
-        A small virtual strain gauge (VSG) keeps peaks but adds noise. A large VSG smooths peaks.
-      </p>
-      <p>
-        A <strong>sweep</strong> solves one deformed frame across many subset × window combinations
-        so you can see where the answer stops changing.
+      <p class="detail">
+        Strain is computed from displacement, so it depends on how much you smooth. A small
+        <a class="term" href={withBase('/learn/glossary#vsg')}>virtual strain gauge (VSG)</a>
+        keeps peaks but adds noise; a large VSG smooths peaks away. A
+        <strong><a class="term" href={withBase('/learn/glossary#sweep')}>sweep</a></strong> solves one
+        deformed frame across many subset × window combinations so you can see where the answer stops
+        changing.
       </p>
       <p>
         <span class="lead-label">Why it matters:</span> good DIC practice asks you to show that
@@ -67,14 +69,19 @@ import { withBase } from '../../lib/github';
         src="/manual/vsg.svg"
         alt="VSG formula diagram"
         caption="Each lattice node reports its VSG. Quote that number with your strain maps."
+        wide
+        width={760}
+        height={270}
       />
 
       <h3>Result lattice</h3>
       <Figure
-        src="/manual/screenshots/result-lattice.png"
+        src="/manual/screenshots/result-lattice.webp"
         alt="Sweep result lattice with filled and hollow nodes"
         caption="Filled dots solved. Hollow rings were skipped — tap a hollow node for the reason."
         phone
+        width={460}
+        height={1022}
       />
       <ul>
         <li>Tap — highlight that curve</li>
@@ -83,19 +90,36 @@ import { withBase } from '../../lib/github';
       </ul>
 
       <h3>Reading results</h3>
+      <p class="plain">
+        The viewer opens on a looping animation of the whole sequence, then lets you step through
+        frame by frame and probe individual points.
+      </p>
       <Figure
-        src="/manual/screenshots/result-viewer.png"
+        src="/manual/screenshots/result-viewer.webp"
         alt="Results viewer with U field map, Inspect tools, and max mean min strip"
         caption="Field tabs along the top. Inspect, X/Y, and Max/Min below the map."
         phone
+        width={460}
+        height={1022}
       />
-      <p>Pinch to zoom, drag to pan. The strip under the image shows max, mean, and min.</p>
+      <p class="detail">
+        Tabs switch the field. Pinch to zoom, drag to pan; both survive a field change. The strip under
+        the image shows max, mean, and min. <strong>Next</strong> enters the individual frames;
+        <strong>Prev</strong> on frame 1 returns to the animation. Type a number in the small field and
+        press <strong>Go</strong> to jump straight to a frame — useful at 150 frames. On a sweep each
+        frame is a parameter combination, labelled like <code>S15 · St5 · W13 · VSG 61</code>.
+      </p>
+
+      <h4 class="minor">Why it opens on an animation</h4>
       <p>
-        <span class="lead-label">In the app:</span> colour scale defaults to Auto — each frame
-        rescales alone, so frames are not comparable by eye.
+        <span class="lead-label">In the app:</span> the colour scale defaults to <strong>Auto</strong>,
+        which rescales every frame on its own — so a late frame can look exactly like an early one, and
+        frames are <em>not</em> comparable by eye when you scrub.
       </p>
       <p>
-        Set fixed min/max, or use the summary animation (one scale for the whole sequence).
+        The summary animation fixes this: it puts <strong>every frame on one colour scale</strong> —
+        the range covering the whole sequence — which is the honest way to watch strain grow. To
+        compare frames yourself, tap the scale bar and set a fixed min/max instead.
       </p>
       <table>
         <thead>

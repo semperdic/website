@@ -22,15 +22,21 @@ const rows = [
 >
   <section class="section" style="padding-top: 3rem">
     <p class="crumb">
-      <a href={withBase('/learn/glossary')}>← Glossary</a>
+      <a href={withBase('/learn')}>← Learn</a>
     </p>
     <h2>Parameters</h2>
     <p class="sub">
-      Ranges from the app. Quote
-      <code>VSG = (strain window − 1) × step + 1</code> with strain results.
+      Every analysis setting, its range, and when to move it. The defaults are good starting points —
+      you rarely need to change more than the subset and strain window.
     </p>
 
     <div class="prose">
+      <p class="detail">
+        Quote <code>VSG = (strain window − 1) × step + 1</code> with any strain result — it is the
+        distance one strain value covers. See
+        <a href={withBase('/learn/glossary#vsg')}>VSG</a> in the glossary.
+      </p>
+      <div class="table-scroll">
       <table>
         <thead>
           <tr>
@@ -53,14 +59,24 @@ const rows = [
           }
         </tbody>
       </table>
+      </div>
       <div class="callout">
-        The subset recommendation grows until SSSIG-based error estimates clear ~0.007 px accuracy
-        on your reference. Touching the slider stops auto-tracking; Reset brings it back.
+        <span class="lead-label">Where the recommended subset comes from:</span> the app looks at your
+        reference image and picks a subset size big enough to match reliably — larger where the speckle
+        is weak. Once you drag the slider yourself it stops tracking the image; <strong>Reset</strong>
+        brings the recommendation back.
+        <br /><br />
+        <span class="detail"
+          >Under the hood: it grows the subset until
+          <a href={withBase('/learn/glossary#sssig')}>SSSIG</a>-based error estimates clear ~0.007 px
+          accuracy on your reference, sampled on a 4×4 grid and taken as the median.</span
+        >
       </div>
     </div>
 
     <div class="cta-row" style="margin-top: 1.5rem">
       <a class="btn btn-primary" href={withBase('/manual/analysis')}>Manual · analysis</a>
+      <a class="btn btn-ghost" href={withBase('/learn/glossary')}>Glossary</a>
       <a class="btn btn-ghost" href={withBase('/manual/faq')}>FAQ</a>
     </div>
   </section>

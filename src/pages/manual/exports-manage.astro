@@ -19,13 +19,19 @@ import { withBase } from '../../lib/github';
 
     <div class="prose">
       <Figure
-        src="/manual/screenshots/home.png"
+        src="/manual/screenshots/home.webp"
         alt="Semper Home screen listing analyses"
         caption="Home is where you open, rename, delete, and sync analyses."
         phone
+        width={460}
+        height={1022}
       />
 
       <h3>Exports</h3>
+      <p class="plain">
+        Share gives you six formats — a single annotated image, all fields, animations, a PDF report,
+        the raw CSV, or everything zipped together.
+      </p>
       <p>
         <span class="lead-label">In the app:</span> open <strong>Share</strong>. Every chooser can
         <strong>Save to Files</strong>.
@@ -68,20 +74,38 @@ import { withBase } from '../../lib/github';
       </table>
       <p>
         <span class="lead-label">Why it matters:</span> build on the CSV. Coordinates and
-        displacements are image pixels.
-      </p>
-      <p>
-        Filter on <code>znssd</code> (match residual) to drop poorly correlated points.
+        displacements are image pixels; filter on <code
+          ><a class="term" href={withBase('/learn/glossary#znssd')}>znssd</a></code
+        >
+        (match quality) to drop poorly correlated points. For a paper, export
+        <strong>Everything</strong> and keep it with your raw images — inputs, fields and parameters in
+        one archive is what makes the result reproducible.
       </p>
 
       <h3>Managing analyses</h3>
-      <p>
-        Tap to open, long-press to select, rename, or delete. Pull down to sync.
-        <strong>+</strong> starts a new analysis.
+      <p class="plain">
+        Home is your library: tap to open, long-press to select, rename or delete, and pull down to
+        sync. <strong>+</strong> starts a new analysis.
       </p>
+
+      <h4 class="minor">Deleting — read the dialog</h4>
       <p>
-        <span class="lead-label">If it fails:</span> at the quota chip limit, email support or delete
-        an analysis and tap <strong>Re-check</strong>.
+        With no cloud copy, delete removes the analysis from the phone and that is that. If a
+        <strong>backup exists</strong>, the dialog instead asks <em>where</em>: <strong>on this device
+        only</strong> (keeping the backup) or <strong>everywhere</strong>. A deleted backup has a
+        <strong>5-second Undo</strong>.
+      </p>
+      <div class="callout">
+        <span class="lead-label">No notifications, anywhere.</span> Background uploads, restores and
+        deletes report nothing until you come back to the app — a quiet screen does not mean nothing is
+        happening.
+      </div>
+      <p>
+        <span class="lead-label">If it fails:</span> hit the analysis limit? It is not a paywall —
+        email support or delete an analysis and tap <strong>Re-check</strong>. Full list of messages in
+        <a href={withBase('/support/troubleshooting#sync-backup-quota')}
+          >Troubleshooting · sync, backup &amp; quota</a
+        >.
       </p>
 
       <h3>Useful Settings</h3>

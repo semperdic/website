@@ -2,49 +2,54 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { withBase } from '../../lib/github';
 
-const terms = [
-  ['Reference', 'The undeformed frame everything is matched against'],
-  ['Deformed frame', 'One load step'],
-  ['Subset', 'The pixel window matched at each point'],
-  ['Step', 'Spacing between grid points'],
-  ['Strain window', 'Points fitted to get strain from displacement'],
-  ['VSG', 'Virtual strain gauge — what one strain value covers, in px'],
-  ['ROI', 'Region of interest, optionally with erased holes'],
-  ['SSSIG', 'Sum of squared subset intensity gradients — drives the subset recommendation'],
-  ['ZNSSD', 'Correlation residual, one per point, in the CSV'],
-  ['mε', 'Millistrain'],
-  ['Sweep', 'One frame solved across a lattice of subset × strain-window settings'],
+// id lets other pages deep-link a term, e.g. /learn/glossary#subset
+const terms: Array<{ id: string; term: string; meaning: string }> = [
+  { id: 'reference', term: 'Reference', meaning: 'The undeformed frame everything is matched against.' },
+  { id: 'deformed-frame', term: 'Deformed frame', meaning: 'One load step — a photo taken while the object is being deformed.' },
+  { id: 'subset', term: 'Subset', meaning: 'The small pixel window matched at each point. The unit the correlation actually tracks.' },
+  { id: 'step', term: 'Step', meaning: 'Spacing between grid points. Smaller step = denser field, longer run.' },
+  { id: 'strain-window', term: 'Strain window', meaning: 'How many neighbouring points are fitted together to get strain from displacement.' },
+  { id: 'vsg', term: 'VSG', meaning: 'Virtual strain gauge — the distance one strain value actually covers, in pixels. VSG = (strain window − 1) × step + 1.' },
+  { id: 'roi', term: 'ROI', meaning: 'Region of interest — the area you correlate, optionally with erased holes over grips or markers.' },
+  { id: 'sssig', term: 'SSSIG', meaning: 'Sum of squared subset intensity gradients — a measure of how much pattern a subset contains. Drives the subset-size recommendation.' },
+  { id: 'znssd', term: 'ZNSSD', meaning: 'A match-quality score for each point (lower is better), unaffected by overall lighting changes. Appears in the CSV so you can filter out weak points.' },
+  { id: 'icgn', term: 'ICGN', meaning: 'Inverse-compositional Gauss–Newton — the sub-pixel matching method the engine uses to locate each subset to ~1/100 of a pixel.' },
+  { id: 'millistrain', term: 'mε (millistrain)', meaning: 'The unit strain is reported in. 1 mε = 0.001 strain = 1000 microstrain.' },
+  { id: 'decorrelation', term: 'Decorrelation', meaning: 'When the deformed image no longer resembles the reference well enough to match — from too much deformation, motion out of view, or pattern damage. A run stops itself when it happens.' },
+  { id: 'sweep', term: 'Sweep', meaning: 'One frame solved across a lattice of subset × strain-window settings, to show where the answer stops changing.' },
 ];
 ---
 
 <BaseLayout
   title="Glossary"
-  description="Semper DIC terms used in the app and Manual."
+  description="Plain-language meanings for the DIC terms used in Semper and the Manual."
   path="/learn/glossary"
 >
   <section class="section" style="padding-top: 3rem">
     <p class="crumb">
-      <a href={withBase('/learn/dic')}>← How DIC works</a>
+      <a href={withBase('/learn')}>← Learn</a>
     </p>
     <h2>Glossary</h2>
-    <p class="sub">Meanings as used in Semper.</p>
+    <p class="sub">
+      Every term Semper and this site use, in one place — in plain language, as they mean it here.
+    </p>
 
     <div class="prose">
       <table>
         <thead>
           <tr>
             <th>Term</th>
-            <th>Meaning here</th>
+            <th>What it means here</th>
           </tr>
         </thead>
         <tbody>
           {
-            terms.map(([term, meaning]) => (
-              <tr>
+            terms.map((t) => (
+              <tr id={t.id}>
                 <td>
-                  <strong>{term}</strong>
+                  <strong>{t.term}</strong>
                 </td>
-                <td>{meaning}</td>
+                <td>{t.meaning}</td>
               </tr>
             ))
           }

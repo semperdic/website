@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { withBase } from '../../lib/github';
+
+const pages = [
+  {
+    href: '/learn/dic',
+    title: 'How DIC works',
+    blurb: 'A five-minute primer — speckle, subsets, and how photos become strain maps. Start here if the terms are new.',
+  },
+  {
+    href: '/learn/glossary',
+    title: 'Glossary',
+    blurb: 'Plain-language meanings for every term the app and Manual use: subset, VSG, ROI, ZNSSD, and the rest.',
+  },
+  {
+    href: '/learn/parameters',
+    title: 'Parameters',
+    blurb: 'Every analysis setting with its range, default, and when to raise or lower it.',
+  },
+];
+---
+
+<BaseLayout
+  title="Learn"
+  description="Background for reading Semper results — how DIC works, a glossary, and the parameter reference."
+  path="/learn"
+>
+  <section class="section" style="padding-top: 3rem">
+    <h2>Learn</h2>
+    <p class="sub">
+      The background the Manual assumes. If a term or setting is unfamiliar, it is explained here — no
+      prior DIC experience needed for “How DIC works”.
+    </p>
+
+    <ul class="toc">
+      {
+        pages.map((p) => (
+          <li>
+            <a href={withBase(p.href)}>
+              {p.title}
+              <span>{p.blurb}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href={withBase('/learn/dic')}>Start with How DIC works</a>
+      <a class="btn btn-ghost" href={withBase('/manual')}>Open the Manual</a>
+    </div>
+  </section>
+</BaseLayout>
