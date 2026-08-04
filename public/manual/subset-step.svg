@@ -1,48 +1,49 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
-  <rect x="0" y="0" width="760" height="300" rx="10" fill="#ffffff" stroke="#d8dee4"/>
-  <text x="24" y="30" font-size="13" font-weight="600" fill="#1f2328">Subset is what gets matched. Step is how far apart the matches sit.</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 320" width="760" height="320" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+  <rect x="0" y="0" width="760" height="320" rx="10" fill="#ffffff" stroke="#d8dee4"/>
+  <text x="24" y="34" font-size="16" font-weight="600" fill="#1f2328">Subset is what gets matched. Step is how far apart the matches sit.</text>
 
   <!-- speckle field -->
-  <rect x="24" y="46" width="330" height="220" rx="6" fill="#f3f4f6" stroke="#d8dee4"/>
+  <rect x="24" y="52" width="330" height="236" rx="6" fill="#f3f4f6" stroke="#d8dee4"/>
   <g fill="#8b96a0">
-    <circle cx="52" cy="74" r="4"/><circle cx="96" cy="62" r="3"/><circle cx="140" cy="86" r="5"/>
-    <circle cx="188" cy="68" r="3.5"/><circle cx="236" cy="90" r="4.5"/><circle cx="286" cy="70" r="3"/>
-    <circle cx="66" cy="122" r="3.5"/><circle cx="118" cy="140" r="4.5"/><circle cx="164" cy="118" r="3"/>
-    <circle cx="214" cy="146" r="4"/><circle cx="262" cy="124" r="3.5"/><circle cx="312" cy="142" r="4.5"/>
-    <circle cx="48" cy="182" r="4"/><circle cx="100" cy="200" r="3"/><circle cx="150" cy="176" r="4.5"/>
-    <circle cx="200" cy="206" r="3.5"/><circle cx="252" cy="184" r="4"/><circle cx="300" cy="204" r="3"/>
-    <circle cx="74" cy="240" r="3.5"/><circle cx="130" cy="248" r="4"/><circle cx="182" cy="234" r="3"/>
-    <circle cx="238" cy="250" r="4.5"/><circle cx="292" cy="238" r="3.5"/>
+    <circle cx="52" cy="82" r="4"/><circle cx="96" cy="70" r="3"/><circle cx="140" cy="94" r="5"/>
+    <circle cx="188" cy="76" r="3.5"/><circle cx="236" cy="98" r="4.5"/><circle cx="286" cy="78" r="3"/>
+    <circle cx="66" cy="132" r="3.5"/><circle cx="118" cy="150" r="4.5"/><circle cx="164" cy="128" r="3"/>
+    <circle cx="214" cy="156" r="4"/><circle cx="262" cy="134" r="3.5"/><circle cx="312" cy="152" r="4.5"/>
+    <circle cx="48" cy="196" r="4"/><circle cx="100" cy="214" r="3"/><circle cx="150" cy="190" r="4.5"/>
+    <circle cx="200" cy="220" r="3.5"/><circle cx="252" cy="198" r="4"/><circle cx="300" cy="218" r="3"/>
+    <circle cx="74" cy="256" r="3.5"/><circle cx="130" cy="264" r="4"/><circle cx="182" cy="250" r="3"/>
+    <circle cx="238" cy="266" r="4.5"/><circle cx="292" cy="254" r="3.5"/>
   </g>
 
   <!-- grid points -->
   <g fill="#0288d1">
-    <circle cx="80" cy="100" r="3"/><circle cx="140" cy="100" r="3"/><circle cx="200" cy="100" r="3"/>
-    <circle cx="260" cy="100" r="3"/><circle cx="320" cy="100" r="3"/>
-    <circle cx="80" cy="160" r="3"/><circle cx="140" cy="160" r="3"/><circle cx="200" cy="160" r="3"/>
-    <circle cx="260" cy="160" r="3"/><circle cx="320" cy="160" r="3"/>
-    <circle cx="80" cy="220" r="3"/><circle cx="140" cy="220" r="3"/><circle cx="200" cy="220" r="3"/>
-    <circle cx="260" cy="220" r="3"/><circle cx="320" cy="220" r="3"/>
+    <circle cx="82" cy="110" r="3.2"/><circle cx="142" cy="110" r="3.2"/><circle cx="202" cy="110" r="3.2"/>
+    <circle cx="262" cy="110" r="3.2"/><circle cx="322" cy="110" r="3.2"/>
+    <circle cx="82" cy="170" r="3.2"/><circle cx="142" cy="170" r="3.2"/><circle cx="202" cy="170" r="3.2"/>
+    <circle cx="262" cy="170" r="3.2"/><circle cx="322" cy="170" r="3.2"/>
+    <circle cx="82" cy="230" r="3.2"/><circle cx="142" cy="230" r="3.2"/><circle cx="202" cy="230" r="3.2"/>
+    <circle cx="262" cy="230" r="3.2"/><circle cx="322" cy="230" r="3.2"/>
   </g>
 
   <!-- one subset -->
-  <rect x="112" y="132" width="56" height="56" fill="none" stroke="#d64545" stroke-width="2"/>
-  <text x="176" y="150" font-size="11" fill="#d64545" font-weight="600">subset</text>
-  <text x="176" y="165" font-size="10" fill="#656d76">one match</text>
+  <rect x="114" y="142" width="56" height="56" fill="none" stroke="#d64545" stroke-width="2.5"/>
+  <text x="180" y="162" font-size="15" fill="#d64545" font-weight="600">subset</text>
+  <text x="180" y="180" font-size="13" fill="#5b6b7a">one match</text>
 
   <!-- step bracket -->
-  <path d="M200 244 h60" stroke="#0288d1" stroke-width="1.5"/>
-  <path d="M200 240 v8 M260 240 v8" stroke="#0288d1" stroke-width="1.5"/>
-  <text x="230" y="262" text-anchor="middle" font-size="11" fill="#0288d1" font-weight="600">step</text>
+  <path d="M202 254 h60" stroke="#0288d1" stroke-width="1.8"/>
+  <path d="M202 249 v10 M262 249 v10" stroke="#0288d1" stroke-width="1.8"/>
+  <text x="232" y="274" text-anchor="middle" font-size="15" fill="#0277bd" font-weight="600">step</text>
 
   <!-- right column notes -->
-  <rect x="386" y="60" width="350" height="86" rx="8" fill="#f6f8fa" stroke="#d8dee4"/>
-  <text x="404" y="84" font-size="12" font-weight="600" fill="#1f2328">Bigger subset</text>
-  <text x="404" y="104" font-size="11" fill="#656d76">More pattern in each match. Survives weak speckle.</text>
-  <text x="404" y="122" font-size="11" fill="#656d76">Smooths sharp strain gradients.</text>
+  <rect x="386" y="66" width="350" height="98" rx="8" fill="#f6f8fa" stroke="#d8dee4"/>
+  <text x="404" y="94" font-size="16" font-weight="600" fill="#1f2328">Bigger subset</text>
+  <text x="404" y="118" font-size="14" fill="#5b6b7a">More pattern in each match; survives</text>
+  <text x="404" y="138" font-size="14" fill="#5b6b7a">weak speckle, but smooths sharp</text>
+  <text x="404" y="158" font-size="14" fill="#5b6b7a">strain gradients.</text>
 
-  <rect x="386" y="162" width="350" height="86" rx="8" fill="#f6f8fa" stroke="#d8dee4"/>
-  <text x="404" y="186" font-size="12" font-weight="600" fill="#1f2328">Smaller step</text>
-  <text x="404" y="206" font-size="11" fill="#656d76">More points, denser field.</text>
-  <text x="404" y="224" font-size="11" fill="#656d76">Halving it roughly quadruples the run time.</text>
+  <rect x="386" y="180" width="350" height="98" rx="8" fill="#f6f8fa" stroke="#d8dee4"/>
+  <text x="404" y="208" font-size="16" font-weight="600" fill="#1f2328">Smaller step</text>
+  <text x="404" y="232" font-size="14" fill="#5b6b7a">More points, denser field. Halving</text>
+  <text x="404" y="252" font-size="14" fill="#5b6b7a">it roughly quadruples the run time.</text>
 </svg>

@@ -1,13 +1,16 @@
 # Manual screenshots
 
-Real Semper device captures from `IndicVisionDIC/docs/images/`.
+Real Semper device captures from `IndicVisionDIC/docs/images/`, exported to WebP
+(source captures are 460×1022 phone frames).
 
 | File | OM source | Used on |
 |---|---|---|
-| `home.png` | `home.png` | Getting started, Exports |
-| `step1-frames.png` | `step1-frames.png` | Analysis · Step 1 |
-| `roi-editor.png` | `roi-editor.png` | Analysis · ROI |
-| `result-viewer.png` | `result-viewer.png` | Sweeps & results · Reading |
-| `result-lattice.png` | `result-lattice.png` | Sweeps & results · Lattice |
+| `home.webp` | `home.png` | Getting started, Exports |
+| `step1-frames.webp` | `step1-frames.png` | Analysis · Step 1 |
+| `roi-editor.webp` | `roi-editor.png` | Analysis · ROI |
+| `result-viewer.webp` | `result-viewer.png` | Sweeps & results · Reading |
+| `result-lattice.webp` | `result-lattice.png` | Sweeps & results · Lattice |
 
-Prefer ~1080px-wide PNG. Keep filenames stable; bump `FIGURE_CACHE` in `Figure.astro` after replacing files.
+Keep filenames stable. After replacing a file, re-export to WebP (quality ~82)
+and bump `FIGURE_CACHE` in `src/components/Figure.astro`. `Figure` references use
+the `.webp` name and pass intrinsic `width`/`height` to reserve layout space.
