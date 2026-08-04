@@ -1,0 +1,185 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import {
+  discussionNewUrl,
+  githubRepoUrl,
+  issueNewUrl,
+  SUPPORT_EMAIL,
+  withBase,
+} from '../../lib/github';
+
+const mail = `mailto:${SUPPORT_EMAIL}`;
+
+// Prefilled email templates by topic. The body lists exactly what we need, so a
+// first message rarely needs a follow-up. mirrors the app's own "Email support",
+// which attaches account, device ID, app version and phone model automatically.
+function mailto(subject: string, bodyLines: string[]): string {
+  const body = bodyLines.join('\n');
+  return `${mail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+const detailBlock = [
+  '',
+  '— Please leave the details below —',
+  'App version (Settings → About):',
+  'Device + Android version:',
+];
+
+const contacts = [
+  {
+    title: 'Account approval',
+    blurb: 'New account still showing Pending, or you need access.',
+    href: mailto('Semper — account approval', [
+      'My account is pending approval and I would like access.',
+      'Account email:',
+      ...detailBlock,
+    ]),
+  },
+  {
+    title: 'Higher analysis limit',
+    blurb: 'You hit the saved-analysis quota and need it raised.',
+    href: mailto('Semper — request higher analysis limit', [
+      'Please raise the analysis limit on my account.',
+      'Account email:',
+      'Roughly how many analyses I need:',
+      ...detailBlock,
+    ]),
+  },
+  {
+    title: 'Data or account deletion',
+    blurb: 'Questions about erasing backups or your account.',
+    href: mailto('Semper — data / account deletion', [
+      'I have a question about deleting my data / account.',
+      'Account email:',
+      'What I would like to delete:',
+      ...detailBlock,
+    ]),
+  },
+  {
+    title: 'A result looks wrong',
+    blurb: 'Private data you should not post publicly.',
+    href: mailto('Semper — result looks wrong', [
+      'A result does not look right. Details:',
+      'What I expected vs. what I saw:',
+      '(Attach the PDF report or CSV, and the Settings used sheet if you can.)',
+      ...detailBlock,
+    ]),
+  },
+];
+---
+
+<BaseLayout
+  title="Support"
+  description="Get help with Semper — troubleshooting, manual, community, and email."
+  path="/support"
+>
+  <section class="section" style="padding-top: 3rem">
+    <h2>Support</h2>
+    <p class="sub">Start with the fastest route for what you need.</p>
+
+    <div class="callout" style="max-width: 42rem">
+      <strong>Something broke</strong> → Troubleshooting &nbsp;·&nbsp;
+      <strong>How do I…</strong> → Manual &nbsp;·&nbsp;
+      <strong>Is it just me?</strong> → Community &nbsp;·&nbsp;
+      <strong>It’s about my account</strong> → Email
+    </div>
+
+    <div style="display: grid; gap: 0.85rem">
+      <div class="panel">
+        <h3 style="margin: 0 0 0.35rem; font-family: var(--font-display)">Troubleshooting</h3>
+        <p style="margin: 0 0 0.85rem; color: var(--muted)">
+          Look up the exact message the app showed you — from install to export — and what to do about
+          it.
+        </p>
+        <div class="cta-row" style="margin: 0">
+          <a class="btn btn-primary" href={withBase('/support/troubleshooting')}>Open Troubleshooting</a>
+          <a class="btn btn-ghost" href={withBase('/manual/faq')}>Common questions (FAQ)</a>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3 style="margin: 0 0 0.35rem; font-family: var(--font-display)">Manual</h3>
+        <p style="margin: 0 0 0.85rem; color: var(--muted)">
+          Step-by-step: loading frames, parameters, sweeps, reading results, and exports.
+        </p>
+        <div class="cta-row" style="margin: 0">
+          <a class="btn btn-primary" href={withBase('/manual')}>Open Manual</a>
+          <a class="btn btn-ghost" href={withBase('/learn')}>Learn the basics</a>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3 style="margin: 0 0 0.35rem; font-family: var(--font-display)">Community</h3>
+        <p style="margin: 0 0 0.85rem; color: var(--muted)">
+          Ask a question, browse discussions, and report bugs or feature requests — GitHub login
+          required to post.
+        </p>
+        <div class="cta-row" style="margin: 0">
+          <a class="btn btn-primary" href={withBase('/community')}>Open Community</a>
+          <a class="btn btn-ghost" href={discussionNewUrl('q-a')} rel="noopener noreferrer">
+            Ask a question
+          </a>
+          <a class="btn btn-ghost" href={issueNewUrl('bug_report.yml')} rel="noopener noreferrer">
+            Report a bug
+          </a>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3 style="margin: 0 0 0.35rem; font-family: var(--font-display)">Email support</h3>
+        <p style="margin: 0 0 0.85rem; color: var(--muted)">
+          For account, quota, or private data — anything you should not post publicly. Pick a topic and
+          the email opens prefilled with what we need, so we can help on the first reply. We aim to
+          respond within a few working days.
+        </p>
+        <div class="hub-grid" style="margin-bottom: 0.85rem">
+          {
+            contacts.map((c) => (
+              <a class="hub-card" href={c.href}>
+                <span class="hub-icon" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    width="22"
+                    height="22"
+                  >
+                    <rect x="3" y="5" width="18" height="14" rx="2" />
+                    <path d="m3 7 9 6 9-6" />
+                  </svg>
+                </span>
+                <div class="hub-body">
+                  <h3>{c.title}</h3>
+                  <p>{c.blurb}</p>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+        <p style="margin: 0; color: var(--muted); font-size: 0.9rem">
+          Or write to <a href={mail}>{SUPPORT_EMAIL}</a> directly. In the app,
+          <strong>Settings → Help &amp; support → Email support</strong> attaches your account, device
+          ID, app version and phone model for you — prefer that when you can.
+        </p>
+      </div>
+
+      <div class="panel">
+        <h3 style="margin: 0 0 0.35rem; font-family: var(--font-display)">Privacy &amp; your data</h3>
+        <p style="margin: 0 0 0.85rem; color: var(--muted)">
+          How sign-in, on-device storage, cloud backup, and account erasure work.
+        </p>
+        <div class="cta-row" style="margin: 0">
+          <a class="btn btn-primary" href={withBase('/privacy')}>Open Privacy</a>
+          <a class="btn btn-ghost" href={withBase('/privacy/#authentication')}>Authentication</a>
+        </div>
+      </div>
+
+      <p style="color: var(--muted); font-size: 0.9rem">
+        Project repository: <a href={githubRepoUrl}>{githubRepoUrl.replace('https://', '')}</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>

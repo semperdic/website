@@ -7,6 +7,7 @@ const playUrl =
   manifest.playStoreUrl ||
   'https://play.google.com/store/apps/details?id=com.indicvision.semper';
 const hasApk = Boolean(manifest.apkUrl);
+const hasBuild = hasApk || (manifest.version && manifest.version !== '—');
 const apkHref =
   hasApk && manifest.apkUrl
     ? manifest.apkUrl.startsWith('http')
@@ -17,17 +18,28 @@ const apkHref =
 
 <BaseLayout
   title="Download"
-  description="Get Semper from Google Play or download the APK."
+  description="Get Semper for Android — requirements, install steps, and first run."
   path="/download"
 >
   <section class="section" style="padding-top: 3rem">
     <h2>Download</h2>
     <p class="sub">
-      Prefer Play for automatic updates. Direct APK is for early testers when a build is posted (GitHub
-      Release asset or <code>public/downloads/</code>).
+      Semper is an <strong>Android</strong> app. Google Play is the easiest route and updates
+      automatically; a direct APK is offered for early testers when a build is posted.
     </p>
 
-    <div class="panel" style="display: grid; gap: 1.25rem">
+    {
+      !hasBuild && (
+        <div class="callout" style="max-width: 42rem">
+          <span class="lead-label">Not released publicly yet.</span> No public build is posted at the
+          moment. When the first release lands it will appear here and on Google Play — follow
+          <a href={withBase('/community/announcements')}> Announcements</a> to hear when, or
+          <a href={withBase('/support')}> email us</a> to ask about early access.
+        </div>
+      )
+    }
+
+    <div class="panel" style="display: grid; gap: 1.25rem; max-width: 42rem">
       <div>
         <p style="margin: 0 0 0.35rem; color: var(--muted); font-size: 0.85rem">Current version</p>
         <p style="margin: 0; font-family: var(--font-display); font-size: 1.6rem">
@@ -73,10 +85,77 @@ const apkHref =
           </p>
         )
       }
+    </div>
 
-      <p style="margin: 0; font-size: 0.9rem; color: var(--muted)">
-        Sideloading requires allowing installs from this source. Package ID:
-        <code>com.indicvision.semper</code>
+    <div class="prose" style="margin-top: 2.25rem">
+      <h3>Will it run on my phone?</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Requirement</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Operating system</td>
+            <td>Android <strong>7.0 or newer</strong> (check Settings → About phone)</td>
+          </tr>
+          <tr>
+            <td>Processor</td>
+            <td>
+              <strong>64-bit ARM (arm64-v8a)</strong> — most phones from the last several years.
+              Older 32-bit and Intel/x86 devices are not supported
+            </td>
+          </tr>
+          <tr>
+            <td>Storage</td>
+            <td>A few hundred MB free — frames and results are kept on the device</td>
+          </tr>
+          <tr>
+            <td>iPhone / iPad</td>
+            <td>Not available — Semper is Android only</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="detail">
+        If Play says the app is not compatible, your phone likely misses one of the first two rows.
+        See <a href={withBase('/support/troubleshooting#installing')}>Troubleshooting · installing</a>.
+      </p>
+
+      <h3>Before you install: accounts need approval</h3>
+      <div class="callout">
+        <span class="lead-label">Signing up is not the same as getting in.</span> A new account has to
+        be <strong>approved by an admin</strong> before you can use the app. You will land on a
+        <strong>Pending approval</strong> screen first — this is expected, not a bug. If you need
+        access, <a href={withBase('/support')}>email us</a> so we can approve you.
+      </div>
+
+      <h3>Installing</h3>
+      <p><strong>From Google Play</strong> — tap <em>Get on Google Play</em> above and install as
+        usual. Updates arrive automatically.</p>
+      <p class="detail">
+        <strong>Sideloading an APK</strong> (early testers): download the APK, then allow installs
+        from this source when Android prompts. To confirm the file is intact, check its SHA-256 matches
+        the value shown above before installing. The package ID is
+        <code>com.indicvision.semper</code>.
+      </p>
+
+      <h3>First run</h3>
+      <ol>
+        <li>Open the app and <strong>sign in</strong> with Google or email.</li>
+        <li>
+          Signing up with email? Open the <strong>verification link</strong> we send, then sign in.
+        </li>
+        <li>You will see <strong>Pending approval</strong>. Once an admin approves you, tap
+          <strong>Check status</strong> — the screen does not refresh on its own.</li>
+        <li>You are in. Head to <a href={withBase('/manual/getting-started')}>Getting started</a> to
+          run your first analysis.</li>
+      </ol>
+      <p>
+        Trouble at any step? <a href={withBase('/support/troubleshooting#signing-in')}>Troubleshooting
+        · signing in &amp; approval</a> has the exact messages and fixes. For how sign-in and data
+        work, see <a href={withBase('/privacy')}>Privacy</a>.
       </p>
     </div>
   </section>
