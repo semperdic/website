@@ -1,12 +1,13 @@
 # Content sync — website ↔ app
 
 This site documents the Semper Android app, whose source lives in the separate
-`IndicVisionDIC` repo. The site duplicates app behaviour by hand, so facts drift.
-This page is the map: which website page mirrors which part of the app, and the
-exact facts that must stay identical. Check it whenever you touch app-behaviour
-copy, and re-check it when the app changes.
+[`semperdic/semperdic-app`](https://github.com/semperdic/semperdic-app) repository.
+The site duplicates app behaviour by hand, so facts drift. This page is the map:
+which website page mirrors which part of the app, and the exact facts that must
+stay identical. Check it whenever you touch app-behaviour copy, and re-check it
+when the app changes.
 
-The app's source of truth is **`IndicVisionDIC/docs/OPERATING_MANUAL.md`** (the
+The app's source of truth is **`semperdic-app/docs/OPERATING_MANUAL.md`** (the
 operating manual, "OM" below), backed by **`docs/app/WORKFLOWS.md`** for
 per-screen behaviour. Where the two disagree, verify against **code**, not docs.
 
@@ -14,17 +15,17 @@ per-screen behaviour. Where the two disagree, verify against **code**, not docs.
 
 | Website page | Mirrors (app) |
 |---|---|
-| `src/pages/manual/getting-started.astro` | OM §1 What it does, §2 Getting in, §3 Images it accepts (incl. video) |
-| `src/pages/manual/analysis.astro` | OM §4 Running an analysis, §5 Parameters, §6 Region of interest |
-| `src/pages/manual/sweeps-results.astro` | OM §7 Sweeps, §8 Reading results |
-| `src/pages/manual/exports-manage.astro` | OM §9 Exports, §10 Managing analyses |
+| `src/pages/manual/getting-started.astro` | OM §1 What it does, §2 Getting in (incl. Forgot password App Link, email-link sign-in, crash-report opt-in), §3 Images (incl. video) |
+| `src/pages/manual/analysis.astro` | OM §4 Running an analysis (incl. **Paste params** / Reset), §5 Parameters, §6 Region of interest |
+| `src/pages/manual/sweeps-results.astro` | OM §7 Sweeps (lattice scroll, View / Save graph, Isolate/Highlight, scrub slider, pinch/pan, copy params), §8 Reading results |
+| `src/pages/manual/exports-manage.astro` | OM §9 Exports, §10 Managing analyses (Only in cloud, storage tools, transfer progress, Your data exports) |
 | `src/pages/manual/faq.astro` | Conceptual questions — no single OM section |
 | `src/pages/support/troubleshooting.astro` | OM §11 Troubleshooting table + `res/values/strings.xml` messages |
 | `src/pages/learn/dic.astro` | OM §1 + Appendix B glossary |
 | `src/pages/learn/glossary.astro` | OM Appendix B |
 | `src/pages/learn/parameters.astro` | OM §5 + Appendix A |
 | `src/pages/download.astro` | `app/build.gradle.kts` (minSdk/ABI/version), OM §2 |
-| `src/pages/privacy.astro` | OM §2, §10 + `backend/` auth/data behaviour |
+| `src/pages/privacy.astro` | OM §2, §10 + app `docs/legal/*` + live Firebase Hosting `/privacy/` and `/terms/` |
 
 ## Facts that must match — and where they are enforced in code
 
@@ -49,6 +50,7 @@ named.
 | Package ID | `com.indicvision.semper` | `app/build.gradle.kts` (`applicationId`) |
 | Support email | `support@indicvision.com` | `src/site.config.json` here; `strings.xml` there |
 | Animation playback floor | Android 9+ | OM §8 |
+| Full privacy / terms (canonical) | Firebase Hosting on `indicvision-dic-app-auth` | app `docs/legal/*.md` → `firebase-hosting/public/{privacy,terms}/` |
 
 ### Exact on-screen messages (Troubleshooting page)
 
@@ -66,12 +68,15 @@ spell it "speckle"** — do not propagate the typo.
 
 ## Do NOT document (built but unreachable)
 
-Per `IndicVisionDIC/docs/app/WORKFLOWS.md §11`, these exist in code but are not
+Per `semperdic-app/docs/app/WORKFLOWS.md` §11, these exist in code but are not
 reachable by users. Keep them off the site so they don't creep back in:
 
 - Circle / ellipse / freeform ROI — only **Rect** and **Square** are exposed.
 - A convergence-view plot — never built; only line-cut plots exist.
 - Replayable coach marks — they show once and cannot be replayed.
 - A dedicated restore screen — the empty-state "Restore" just opens Settings.
-- Email sign-in link is code-complete but blocked on Digital Asset Links
-  verification; treat email/password + Google as the live sign-in paths.
+
+**Live (do document):** Google sign-in, email/password, **email sign-in links**,
+and **Forgot password** App Links — Digital Asset Links for
+`com.indicvision.semper` are deployed on the auth Hosting site. Treat all of
+those as supported paths.

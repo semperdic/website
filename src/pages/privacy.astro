@@ -3,6 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { SUPPORT_EMAIL, withBase } from '../lib/github';
 
 const mail = `mailto:${SUPPORT_EMAIL}`;
+const fullPrivacy = 'https://indicvision-dic-app-auth.firebaseapp.com/privacy/';
+const fullTerms = 'https://indicvision-dic-app-auth.firebaseapp.com/terms/';
 ---
 
 <BaseLayout
@@ -22,8 +24,21 @@ const mail = `mailto:${SUPPORT_EMAIL}`;
     </ul>
 
     <div class="prose">
+      <div class="callout">
+        <span class="lead-label">Full policies live with the app.</span> The complete Privacy Policy
+        and Terms of Service (last updated 5 Aug 2026) are published on the auth host the app links
+        from About:
+        <a href={fullPrivacy} rel="noopener noreferrer">Privacy Policy</a>
+        ·
+        <a href={fullTerms} rel="noopener noreferrer">Terms of Service</a>.
+        This page is a plain-language summary for the website.
+      </div>
+
       <h3 id="authentication">Authentication</h3>
-      <p>Sign in with Google or email and password.</p>
+      <p>
+        Sign in with Google, email and password, or an emailed sign-in link.
+        <strong>Forgot password</strong> mails a link that reopens the app on a set-new-password form.
+      </p>
       <p>
         Email passwords need 8+ characters with upper and lower case, a digit, and a special
         character. <strong>Generate secure password</strong> can fill one in.
@@ -42,7 +57,7 @@ const mail = `mailto:${SUPPORT_EMAIL}`;
       </p>
       <p>
         To delete your account, open Settings → Your data. Semper re-checks identity on the sign-in
-        screen first.
+        screen first (password, Google, or emailed link).
       </p>
       <p>
         After you confirm, it erases cloud backup, this device&apos;s data, and the sign-in, then
@@ -61,14 +76,17 @@ const mail = `mailto:${SUPPORT_EMAIL}`;
       </p>
       <p>
         A backup is the analysis package you already computed (frames and results). Account and
-        device metadata live with the backend.
-      </p>
-      <p>
-        Image bytes are not processed by the API. The client uploads them to org storage.
+        device metadata live with the backend. Image bytes are uploaded by the device to org storage
+        — not processed by the API.
       </p>
       <p>
         Settings → Analyses data management lists local and cloud rows. You can back up, restore, or
-        delete per row.
+        delete per row. Home can show <strong>Only in cloud</strong> rows after Free up space; tap to
+        download them back.
+      </p>
+      <p>
+        <strong>Your data</strong> also offers <strong>Export my data</strong> (everything on this
+        phone) and <strong>Download my cloud account data</strong> (the server&apos;s copy).
       </p>
 
       <h3 id="data-policy">Data policy</h3>
@@ -83,6 +101,10 @@ const mail = `mailto:${SUPPORT_EMAIL}`;
           Analysis backups when cloud backup is on (frames and results you choose to sync).
         </li>
         <li>
+          Crash and error diagnostics <strong>only if you opt in</strong> (off by default; never
+          includes images or results). Change under Settings → Your data → Send crash reports.
+        </li>
+        <li>
           Support mail you send — the app can attach account, device id, app version, and phone
           model.
         </li>
@@ -91,12 +113,15 @@ const mail = `mailto:${SUPPORT_EMAIL}`;
       <ul>
         <li>Sign-in, email verification, and admin approval.</li>
         <li>Optional backup and restore.</li>
+        <li>Fixing crashes when you have opted in.</li>
         <li>Private account support.</li>
       </ul>
       <p><strong>Your controls</strong></p>
       <ul>
         <li>Leave cloud backup off. No new uploads are queued.</li>
+        <li>Leave crash reports off (the default).</li>
         <li>Delete local only, cloud backup only, or everywhere — read the dialog.</li>
+        <li>Export phone data or download your cloud account data from Settings → Your data.</li>
         <li>Delete the account to erase cloud copy, device data, and sign-in.</li>
         <li>Email <a href={mail}>{SUPPORT_EMAIL}</a> for private account issues.</li>
       </ul>
@@ -104,6 +129,7 @@ const mail = `mailto:${SUPPORT_EMAIL}`;
         Community posts (Q&amp;A, bugs, features) go to GitHub. That content follows GitHub&apos;s
         terms, not this backup path.
       </p>
+      <p>Semper does not use generative AI providers.</p>
 
       <h3 id="privacy-policy">Privacy policy</h3>
       <p>
@@ -122,8 +148,14 @@ const mail = `mailto:${SUPPORT_EMAIL}`;
         Correlation runs on device. Optional cloud backup stores what you sync so you can restore
         it — not so the cloud can re-run DIC.
       </p>
-      <p>Material changes to this page will be posted here.</p>
-      <p>Last updated: 3 Aug 2026.</p>
+      <p>
+        Canonical text:
+        <a href={fullPrivacy} rel="noopener noreferrer">Privacy Policy</a>
+        and
+        <a href={fullTerms} rel="noopener noreferrer">Terms of Service</a>.
+      </p>
+      <p>Material changes to this summary will be posted here.</p>
+      <p>Last updated: 5 Aug 2026.</p>
     </div>
   </section>
 </BaseLayout>

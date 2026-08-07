@@ -64,7 +64,11 @@ import { withBase } from '../../lib/github';
           </tr>
         </tbody>
       </table>
-      <p>Start at 3 × 3. Look for the VSG where the curves stop separating.</p>
+      <p>
+        Start at 3 × 3. The sweep varies the <strong>strain window</strong> directly; VSG is still
+        what you quote — it is shown per node — but it is derived
+        (<code>(window − 1) × step + 1</code>). Look for the VSG where the curves stop separating.
+      </p>
       <Figure
         src="/manual/vsg.svg"
         alt="VSG formula diagram"
@@ -77,17 +81,64 @@ import { withBase } from '../../lib/github';
       <h3>Result lattice</h3>
       <Figure
         src="/manual/screenshots/result-lattice.webp"
-        alt="Sweep result lattice with filled and hollow nodes"
-        caption="Filled dots solved. Hollow rings were skipped — tap a hollow node for the reason."
+        alt="Sweep result lattice with filled and hollow nodes, line-cut plot, scrub slider, and pinned Save graph and View actions"
+        caption="Filled dots solved; hollow rings were skipped (tap one for the reason). Current builds also pin Save graph and View at the bottom with a scrub slider under the plot — re-capture this shot after those land on your build."
         phone
         width={460}
         height={1022}
       />
+      <p class="plain">
+        The screen is built for one thumb: lattice, then controls, then the plot scroll together,
+        while <strong>Save graph</strong> and <strong>View</strong> stay pinned at the bottom.
+      </p>
+
+      <h4 class="minor">Choosing a combination</h4>
       <ul>
-        <li>Tap — highlight that curve</li>
-        <li>Double-tap or long-press — open that result</li>
-        <li>Exx / Eyy / Exy — switch strain component</li>
+        <li>
+          <strong>Tap</strong> a node, or use the <strong>‹ · ›</strong> stepper above the plot to
+          walk solved nodes. The chip between the arrows names the current one.
+        </li>
+        <li>
+          <strong>Double-tap</strong> or <strong>long-press</strong> a node — opens that result. So
+          does <strong>View</strong>.
+        </li>
+        <li>Tapping a hollow node explains why that combination was skipped.</li>
       </ul>
+
+      <h4 class="minor">Reading the plot</h4>
+      <ul>
+        <li>
+          <strong>Isolate</strong> (default) shows only the selected combination.
+          <strong>Highlight</strong> draws all of them, with the selected one at full strength.
+        </li>
+        <li>
+          <strong>Drag across the plot</strong> — a guide follows your finger and prints the value.
+          The <strong>scrub slider</strong> under the plot does the same and stays in sync (easier
+          one-handed).
+        </li>
+        <li>
+          <strong>Pinch to zoom</strong>, two-finger drag to pan, <strong>double-tap</strong> to
+          reset zoom. Zoom survives stepping to another node; changing Exx / Eyy / Exy resets it.
+        </li>
+        <li>The <strong>Exx / Eyy / Exy</strong> selector switches component.</li>
+      </ul>
+
+      <h4 class="minor">Taking the answer with you</h4>
+      <ul>
+        <li>
+          <strong>Double-tap the readout</strong> to copy that combination&apos;s subset, step and
+          strain window. Start a new single-setting analysis and a <strong>Paste params</strong>
+          chip on step 2 fills them in.
+        </li>
+        <li>
+          <strong>Save graph</strong> writes an annotated PNG: study header, fit-to-data plot, and a
+          colour legend. On-screen zoom is not baked into the file.
+        </li>
+      </ul>
+      <p>
+        If every combination fails, you still land on the lattice (all nodes hollow).
+        <strong>View</strong> and <strong>Save graph</strong> are disabled until something solves.
+      </p>
 
       <h3>Reading results</h3>
       <p class="plain">

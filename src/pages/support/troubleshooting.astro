@@ -80,7 +80,15 @@ const groups: Group[] = [
           'Use 8+ characters with upper and lower case, a digit, and a special character.',
           'Or tap Generate secure password to have a strong one filled in and revealed so you can save it.',
         ],
-        why: 'A forgotten password is reset through Firebase’s own page, which the app cannot reach directly.',
+      },
+      {
+        symptom: 'I forgot my password',
+        meaning: 'You can reset it without leaving the app.',
+        fix: [
+          'Tap Forgot password on the sign-in screen. Semper emails a reset link.',
+          'Open the link on this device — App Links reopen the app on a set-new-password form with the same password rules.',
+        ],
+        why: 'When App Links are verified, the link stays in-app instead of falling through to a browser page.',
       },
       {
         msg: 'Could not verify account securely.',
@@ -264,7 +272,39 @@ const groups: Group[] = [
           'You may be offline, on mobile data with Wi-Fi-only uploads set, or have cloud backup off.',
           'Connect to Wi-Fi, or check Settings → Cloud backup.',
         ],
-        why: 'There are no notifications for background work — a quiet screen does not mean the upload failed.',
+        why: 'While a transfer runs you should see a system notification and, on Home, a progress bar on the row. Pending alone means it has not started the upload yet.',
+      },
+      {
+        symptom: 'Badge shows Failed',
+        meaning: 'The backup ended for good — device conflict, analysis too large, or out of memory.',
+        fix: [
+          'Tap the badge — the dialog names why and offers Try again.',
+        ],
+      },
+      {
+        symptom: 'Row says Only in cloud',
+        meaning:
+          'Local frames were freed (by you via Free up space, or by the auto-free budget). The cloud backup is still there.',
+        fix: [
+          'Tap the row — Semper offers to download the analysis back before opening it.',
+        ],
+      },
+      {
+        symptom: 'Restore never arrived / Restore failed',
+        meaning: 'The backup could not be restored (deleted, wrong account, or a hard failure).',
+        fix: [
+          'Check Home and Settings → Analyses data management for the failure message.',
+          'On a flaky network the transfer retries; a permanent failure says so instead of spinning forever.',
+        ],
+      },
+      {
+        symptom: 'Phone out of space',
+        meaning: 'Analyses and cache are filling storage.',
+        fix: [
+          'Settings → Storage → Free up space (drops local frames of backed-up analyses).',
+          'Consider setting an Auto-free budget (0–64 GB) so the app reclaims space at start-up.',
+          'Clear cache removes regenerable previews and exports waiting to be shared.',
+        ],
       },
       {
         msg: 'Analysis limit reached',
@@ -279,14 +319,14 @@ const groups: Group[] = [
         msg: 'Data no longer on this device',
         meaning: 'This analysis was cleaned up locally.',
         fix: [
-          'If it was synced, the files are still in your cloud folder — restore it from Settings → Analyses data management.',
+          'If it was synced, the files are still in your cloud folder — restore it from Settings → Analyses data management, or tap an Only in cloud row on Home to download it back.',
         ],
       },
       {
         symptom: 'Deleting my account opened the sign-in screen',
         meaning: 'This is expected — that is where your identity is confirmed before erasure.',
         fix: [
-          'Sign in the way you normally do to confirm; your address is filled in and cannot be changed.',
+          'Sign in the way you normally do (password, Google, or emailed link) to confirm; your address is filled in and cannot be changed.',
           'Back out and nothing is deleted. If the cloud cannot be reached, nothing is deleted at all.',
         ],
       },
