@@ -4,7 +4,7 @@ The private app repository builds the signed APK. **This repo does not auto-publ
 
 ## Checklist
 
-1. **Build** a signed release APK from the private `semperdic/semperdic-app` Release workflow (or local release assemble).
+1. **Build** a signed release APK from the private Android app repo Release workflow (or local release assemble).
 2. **Host the APK** (pick one):
    - **Preferred:** create a GitHub Release on this repo and attach the APK; copy the asset URL.
    - Or place a small APK under `public/downloads/` (avoid committing large binaries long-term).
@@ -43,7 +43,7 @@ The private app repository builds the signed APK. **This repo does not auto-publ
 
 | Step | Where |
 |------|--------|
-| Sign APK | Private `semperdic/semperdic-app` `release.yml` |
+| Sign APK | Private app repo `release.yml` |
 | Host APK + site | This repo → GitHub Releases + GitHub Pages |
 | Store listing | Google Play Console |
 | Customer Q&A / bugs | This repo Discussions / Issues |

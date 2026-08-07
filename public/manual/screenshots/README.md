@@ -1,9 +1,10 @@
 # Manual screenshots
 
-Real Semper device captures from `semperdic-app/docs/images/`, exported to WebP
-(source captures are 460×1022 phone frames).
+Phone stills published with the Manual. Sources for these exports live in this
+repo at `docs/source/images/` (PNG captures + SVG diagrams). Convert to WebP
+here for the Astro pages (quality ~82; frames are 460×1022).
 
-| File | OM source | Used on |
+| File | Source PNG | Used on |
 |---|---|---|
 | `home.webp` | `home.png` | Getting started, Exports |
 | `step1-frames.webp` | `step1-frames.png` | Analysis · Step 1 |
@@ -11,18 +12,18 @@ Real Semper device captures from `semperdic-app/docs/images/`, exported to WebP
 | `result-viewer.webp` | `result-viewer.png` | Sweeps & results · Reading |
 | `result-lattice.webp` | `result-lattice.png` | Sweeps & results · Lattice |
 
-Keep filenames stable. After replacing a file, re-export to WebP (quality ~82)
-and bump `FIGURE_CACHE` in `src/components/Figure.astro`. `Figure` references use
-the `.webp` name and pass intrinsic `width`/`height` to reserve layout space.
+Extra WebPs in this folder (`home-selection`, `step2-parameters`, `viewer-tools`,
+etc.) match `docs/source/images/` for reuse; Manual pages do not reference them
+yet.
 
-## Re-capture owed (app tip ahead of stills)
+Keep filenames stable. After replacing a file, bump `FIGURE_CACHE` in
+`src/components/Figure.astro`. `Figure` references use the `.webp` name and
+pass intrinsic `width`/`height` to reserve layout space.
 
-As of the 2026-08-07 app tip, prose documents UX that these stills do **not**
-yet show:
+## Stills vs newer chrome
 
-- Lattice: pinned **Save graph · View** bar, scrub slider under the plot,
-  Isolate/Highlight, colour-matched nodes, scrollable layout
-- Home: **Only in cloud** badge and determinate restore/upload progress on rows
-
-Until fresh device captures replace `result-lattice.webp` / `home.webp`, page
-captions call out the gap so readers are not misled by the photo alone.
+These captures predate some lattice/Home chrome documented in prose (pinned
+**Save graph · View**, scrub slider, **Only in cloud**, determinate transfer
+progress). Captions describe what the photo shows; the surrounding Manual copy
+covers the newer controls. Replace `home.webp` / `result-lattice.webp` when
+fresh device shots are available.
