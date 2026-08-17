@@ -7,7 +7,7 @@ const idics = 'https://idics.org/guide/';
 
 // Conceptual "what / why" questions only. Anything of the form "X broke, what do
 // I do" lives on /support/troubleshooting, keyed by the on-screen message.
-const faqs = [
+const faqs: { id?: string; q: string; a: string }[] = [
   {
     q: 'What is Semper for?',
     a: 'It measures how a surface deforms from photographs — full-field displacement and strain maps, computed on your Android phone. It is aimed at mechanical testing and materials work.',
@@ -35,6 +35,16 @@ const faqs = [
   {
     q: 'How accurate is it?',
     a: 'The engine locates each subset to roughly 1/100 of a pixel, and recommends a subset size that targets about 0.007 px displacement accuracy on your image. Real accuracy depends on your speckle, lighting, and camera — the parameters and a sweep let you check it.',
+  },
+  {
+    id: 'jpeg-warning',
+    q: 'Why does Semper warn about JPEG?',
+    a: 'JPEG works, but compression damages the intensity gradients correlation needs, so Semper shows a non-blocking warning. Prefer PNG or TIFF. RAW and DNG import only through Files, not the gallery.',
+  },
+  {
+    id: 'speckle-contrast',
+    q: 'Why is speckle contrast too low?',
+    a: 'On import the app measures your speckle. A weak pattern cannot reach the target accuracy even at the largest subset, so you see a warning and a larger subset suggestion. Treat it as feedback on the pattern, not just a slider tip: accept the larger subset, redraw the ROI over well-speckled surface, or re-shoot. For how to paint and light a speckle, see the iDICs guide below.',
   },
   {
     q: 'Is my data uploaded to the cloud?',
@@ -82,7 +92,7 @@ const faqs = [
       {
         faqs.map((item) => (
           <article class="faq-item">
-            <h3>{item.q}</h3>
+            <h3 id={item.id}>{item.q}</h3>
             <p>{item.a}</p>
           </article>
         ))
