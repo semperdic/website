@@ -5,9 +5,9 @@ import { withBase } from '../../lib/github';
 
 const idics = 'https://idics.org/guide/';
 
-// Conceptual "what / why" questions only. Anything of the form "X broke, what do
-// I do" lives on /support/troubleshooting, keyed by the on-screen message.
-const faqs: { id?: string; q: string; a: string }[] = [
+// Conceptual "what / why" questions. In-app Why? chips open the anchored
+// entries below (ids must match semperdic-app url_faq_* / FAQ_LINKS.md).
+const faqs = [
   {
     q: 'What is Semper for?',
     a: 'It measures how a surface deforms from photographs — full-field displacement and strain maps, computed on your Android phone. It is aimed at mechanical testing and materials work.',
@@ -68,7 +68,144 @@ const faqs: { id?: string; q: string; a: string }[] = [
   },
   {
     q: 'Something went wrong — where do I look?',
-    a: 'Troubleshooting is indexed by the exact message the app showed you. For how-to, use the Manual; for account or private matters, email support.',
+    a: 'The From the app section below covers the messages the app links here. Troubleshooting has the full list keyed by on-screen text. For how-to, use the Manual; for account or private matters, email support.',
+  },
+];
+
+interface AppFaq {
+  id: string;
+  q: string;
+  a: string;
+  moreHref?: string;
+  moreLabel?: string;
+}
+
+const appFaqs: AppFaq[] = [
+  {
+    id: 'jpeg-warning',
+    q: 'Why the JPEG accuracy warning?',
+    a: 'JPEG compression damages the intensity gradients correlation needs. Prefer PNG or TIFF for the reference and deformed frames.',
+    moreHref: '/manual/getting-started',
+    moreLabel: 'Getting started · images',
+  },
+  {
+    id: 'speckle-contrast',
+    q: 'Why the low speckle / contrast warning?',
+    a: 'Your pattern is weak for this region — the match may be unreliable. Accept the larger subset Semper suggests, or re-shoot with a finer, higher-contrast speckle.',
+    moreHref: '/support/troubleshooting#loading',
+    moreLabel: 'Troubleshooting · loading',
+  },
+  {
+    id: 'frame-size-mismatch',
+    q: 'Why the frame-size mismatch warning?',
+    a: 'Every deformed frame must match the reference’s pixel dimensions exactly. Re-export the odd frame at the same resolution, or drop it.',
+    moreHref: '/support/troubleshooting#loading',
+    moreLabel: 'Troubleshooting · loading',
+  },
+  {
+    id: 'roi-too-small',
+    q: 'Why “ROI too small”?',
+    a: 'The region of interest is smaller than a single subset, so nothing can be matched. Enlarge the ROI, or shrink the subset size in Advanced parameters.',
+    moreHref: '/manual/analysis',
+    moreLabel: 'Manual · region of interest',
+  },
+  {
+    id: 'sweep-subset-range',
+    q: 'Why does the sweep say the subset range is too big?',
+    a: 'The subset range starts above what this image and ROI can hold. Lower the minimum subset, or draw a larger region of interest.',
+    moreHref: '/manual/sweeps-results',
+    moreLabel: 'Manual · sweeps',
+  },
+  {
+    id: 'sweep-empty-plan',
+    q: 'Why is the sweep plan empty?',
+    a: 'No combination fits this ceiling. Raise Max strain window, or lower the subset range, then check the plan again.',
+    moreHref: '/manual/sweeps-results',
+    moreLabel: 'Manual · sweeps',
+  },
+  {
+    id: 'engine-features',
+    q: 'Why did feature detection fail?',
+    a: 'The reference and deformed pair could not be correlated at all. Check you paired the right frames, and that the speckle is strong enough over the region.',
+    moreHref: '/support/troubleshooting#during-a-run',
+    moreLabel: 'Troubleshooting · during a run',
+  },
+  {
+    id: 'engine-roi',
+    q: 'Why did the engine fail on the ROI?',
+    a: 'The region was too small or fully masked by erased holes. Enlarge the ROI, or remove some of the erased holes.',
+    moreHref: '/support/troubleshooting#during-a-run',
+    moreLabel: 'Troubleshooting · during a run',
+  },
+  {
+    id: 'engine-init',
+    q: 'Why couldn’t the engine start?',
+    a: 'An image failed to decode before correlation began. Re-import the frames as PNG or TIFF.',
+    moreHref: '/support/troubleshooting#loading',
+    moreLabel: 'Troubleshooting · loading',
+  },
+  {
+    id: 'engine-convergence',
+    q: 'Why did the run stop for low convergence?',
+    a: 'Two frames in a row fell below 50% convergence — the images decorrelated (pattern change, large deformation, or the specimen moved out of view). Frames solved before the stop are kept as a shorter analysis.',
+    moreHref: '/support/troubleshooting#during-a-run',
+    moreLabel: 'Troubleshooting · during a run',
+  },
+  {
+    id: 'engine-vsg',
+    q: 'Why did this sweep combination fail (VSG)?',
+    a: 'No strain survived this window at this step, or every lattice node failed for the same family of reasons. Tap a hollow node for its exact reason; enlarge the ROI or narrow the ranges.',
+    moreHref: '/manual/sweeps-results',
+    moreLabel: 'Manual · result lattice',
+  },
+  {
+    id: 'import-reference',
+    q: 'Why did the reference fail to load?',
+    a: 'The reference frame could not be opened, or a RAW/DNG file could not be decoded. Prefer PNG or TIFF; import RAW and DNG through Files, not Photos.',
+    moreHref: '/support/troubleshooting#loading',
+    moreLabel: 'Troubleshooting · loading',
+  },
+  {
+    id: 'import-deformed',
+    q: 'Why did the deformed frames fail to load?',
+    a: 'The deformed batch could not be opened. Try different files, or convert them to PNG or TIFF and load those.',
+    moreHref: '/support/troubleshooting#loading',
+    moreLabel: 'Troubleshooting · loading',
+  },
+  {
+    id: 'video-read',
+    q: 'Why couldn’t Semper read this video?',
+    a: 'The video file could not be opened for sampling. Try a standard MP4, or export the frames as images and load those instead.',
+    moreHref: '/support/troubleshooting#loading',
+    moreLabel: 'Troubleshooting · loading',
+  },
+  {
+    id: 'video-extract',
+    q: 'Why weren’t enough frames extracted from the video?',
+    a: 'The time segment and frame rate you chose do not yield enough frames. Widen the segment, raise the sampling frame rate, and watch the live frame-count estimate before confirming.',
+    moreHref: '/manual/getting-started',
+    moreLabel: 'Getting started · video',
+  },
+  {
+    id: 'no-batch-data',
+    q: 'Why “No valid batch data found”?',
+    a: 'The result viewer opened without a usable `.dat` batch for this analysis. Re-open the analysis from Home, or re-run if the files were removed from the device.',
+    moreHref: '/support/troubleshooting#reading',
+    moreLabel: 'Troubleshooting · reading',
+  },
+  {
+    id: 'viewer-oom',
+    q: 'Why isn’t there enough memory to open this frame?',
+    a: 'Android ran out of memory loading the frame. Close other apps, or open a smaller analysis.',
+    moreHref: '/support/troubleshooting#reading',
+    moreLabel: 'Troubleshooting · reading',
+  },
+  {
+    id: 'custom-scale',
+    q: 'Why are the custom scale inputs invalid?',
+    a: 'The colour-scale minimum must be below the maximum. Enter a lower min, a higher max, or clear the fields to return to Auto.',
+    moreHref: '/manual/sweeps-results',
+    moreLabel: 'Manual · reading results',
   },
 ];
 ---
@@ -84,8 +221,9 @@ const faqs: { id?: string; q: string; a: string }[] = [
     </p>
     <h2>FAQ</h2>
     <p class="sub">
-      Short answers to the questions people arrive with. Hit an actual error or a “why did it do
-      that”? That lives in <a href={withBase('/support/troubleshooting')}>Troubleshooting</a>.
+      Short answers to the questions people arrive with. In-app <strong>Why?</strong> chips land on
+      the matching heading in <a href="#from-the-app">From the app</a>. The full message list is in
+      <a href={withBase('/support/troubleshooting')}>Troubleshooting</a>.
     </p>
 
     <div class="faq">
@@ -94,6 +232,28 @@ const faqs: { id?: string; q: string; a: string }[] = [
           <article class="faq-item">
             <h3 id={item.id}>{item.q}</h3>
             <p>{item.a}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <h3 id="from-the-app" class="faq-section-title">From the app</h3>
+    <p class="sub">
+      Answers for the exact warnings and errors the app can open here. Heading IDs match the app’s
+      FAQ links — do not rename them without updating the app strings.
+    </p>
+
+    <div class="faq">
+      {
+        appFaqs.map((item) => (
+          <article class="faq-item" id={item.id}>
+            <h3>{item.q}</h3>
+            <p>{item.a}</p>
+            {item.moreHref && item.moreLabel && (
+              <p class="faq-more">
+                <a href={withBase(item.moreHref)}>{item.moreLabel}</a>
+              </p>
+            )}
           </article>
         ))
       }

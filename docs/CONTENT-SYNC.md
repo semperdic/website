@@ -19,12 +19,12 @@ Android app **code**, not docs.
 
 | Website page | Mirrors (snapshot) |
 |---|---|
-| `src/pages/manual/getting-started.astro` | OM §1 What it does, §2 Getting in (incl. Forgot password App Link, email-link sign-in, crash-report opt-in), §3 Images (incl. video) |
-| `src/pages/manual/analysis.astro` | OM §4 Running an analysis (incl. **Paste params** / Reset), §5 Parameters, §6 Region of interest |
-| `src/pages/manual/sweeps-results.astro` | OM §7 Sweeps (lattice scroll, View / Save graph, Isolate/Highlight, scrub slider, pinch/pan, copy params), §8 Reading results |
-| `src/pages/manual/exports-manage.astro` | OM §9 Exports, §10 Managing analyses (Only in cloud, storage tools, transfer progress, Your data exports) |
-| `src/pages/manual/faq.astro` | Conceptual questions — no single OM section |
-| `src/pages/support/troubleshooting.astro` | OM §11 Troubleshooting table + app `strings.xml` messages |
+| `src/pages/manual/getting-started.astro` | OM §1 What it does, §2 Getting in, §3 Images it accepts (incl. video) |
+| `src/pages/manual/analysis.astro` | OM §4 Running an analysis, §5 Parameters, §6 Region of interest |
+| `src/pages/manual/sweeps-results.astro` | OM §7 Sweeps, §8 Reading results |
+| `src/pages/manual/exports-manage.astro` | OM §9 Exports, §10 Managing analyses |
+| `src/pages/manual/faq.astro` | Conceptual questions + in-app Why? anchors from `docs/app/FAQ_LINKS.md` / `url_faq_*` in `strings.xml` |
+| `src/pages/support/troubleshooting.astro` | OM §11 Troubleshooting table + `res/values/strings.xml` messages |
 | `src/pages/learn/dic.astro` | OM §1 + Appendix B glossary |
 | `src/pages/learn/glossary.astro` | OM Appendix B |
 | `src/pages/learn/parameters.astro` | OM §5 + Appendix A |
@@ -70,6 +70,20 @@ verbatim quote here to match.
 Note: `error_low_convergence` contains the app-side typo "spackle pattern". It is
 quoted verbatim in the message block (for searchability) but **our own prose must
 spell it "speckle"** — do not propagate the typo.
+
+### In-app FAQ anchors (`FAQ_LINKS.md`)
+
+The Android app opens `https://semperdic.github.io/website/manual/faq/#…` from
+Why? chips. The hashes are defined in the app as `url_faq_*` strings and mapped
+in `docs/app/FAQ_LINKS.md`. The matching `<article id="…">` entries live in
+`src/pages/manual/faq.astro` under **From the app**.
+
+**Do not rename those ids** without also changing the app `url_faq_*` strings.
+Current ids: `jpeg-warning`, `speckle-contrast`, `frame-size-mismatch`,
+`roi-too-small`, `sweep-subset-range`, `sweep-empty-plan`, `engine-features`,
+`engine-roi`, `engine-init`, `engine-convergence`, `engine-vsg`,
+`import-reference`, `import-deformed`, `video-read`, `video-extract`,
+`no-batch-data`, `viewer-oom`, `custom-scale`.
 
 ## Do NOT document (built but unreachable)
 
