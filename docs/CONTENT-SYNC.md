@@ -18,7 +18,7 @@ per-screen behaviour. Where the two disagree, verify against **code**, not docs.
 | `src/pages/manual/analysis.astro` | OM §4 Running an analysis, §5 Parameters, §6 Region of interest |
 | `src/pages/manual/sweeps-results.astro` | OM §7 Sweeps, §8 Reading results |
 | `src/pages/manual/exports-manage.astro` | OM §9 Exports, §10 Managing analyses |
-| `src/pages/manual/faq.astro` | Conceptual questions — no single OM section |
+| `src/pages/manual/faq.astro` | Conceptual questions + in-app Why? anchors from `docs/app/FAQ_LINKS.md` / `url_faq_*` in `strings.xml` |
 | `src/pages/support/troubleshooting.astro` | OM §11 Troubleshooting table + `res/values/strings.xml` messages |
 | `src/pages/learn/dic.astro` | OM §1 + Appendix B glossary |
 | `src/pages/learn/glossary.astro` | OM Appendix B |
@@ -63,6 +63,20 @@ verbatim quote here to match.
 Note: `error_low_convergence` contains the app-side typo "spackle pattern". It is
 quoted verbatim in the message block (for searchability) but **our own prose must
 spell it "speckle"** — do not propagate the typo.
+
+### In-app FAQ anchors (`FAQ_LINKS.md`)
+
+The Android app opens `https://semperdic.github.io/website/manual/faq/#…` from
+Why? chips. The hashes are defined in the app as `url_faq_*` strings and mapped
+in `docs/app/FAQ_LINKS.md`. The matching `<article id="…">` entries live in
+`src/pages/manual/faq.astro` under **From the app**.
+
+**Do not rename those ids** without also changing the app `url_faq_*` strings.
+Current ids: `jpeg-warning`, `speckle-contrast`, `frame-size-mismatch`,
+`roi-too-small`, `sweep-subset-range`, `sweep-empty-plan`, `engine-features`,
+`engine-roi`, `engine-init`, `engine-convergence`, `engine-vsg`,
+`import-reference`, `import-deformed`, `video-read`, `video-extract`,
+`no-batch-data`, `viewer-oom`, `custom-scale`.
 
 ## Do NOT document (built but unreachable)
 
