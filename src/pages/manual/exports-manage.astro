@@ -21,7 +21,7 @@ import { withBase } from '../../lib/github';
       <Figure
         src="/manual/screenshots/home.webp"
         alt="Semper Home screen listing analyses"
-        caption="Home is where you open, rename, delete, and sync analyses."
+        caption="Home is where you open, rename, delete, and sync analyses. Rows show upload state; newer builds also surface restore progress and Only in cloud when local frames were freed."
         phone
         width={460}
         height={1022}
@@ -79,7 +79,9 @@ import { withBase } from '../../lib/github';
         >
         (match quality) to drop poorly correlated points. For a paper, export
         <strong>Everything</strong> and keep it with your raw images — inputs, fields and parameters in
-        one archive is what makes the result reproducible.
+        one archive is what makes the result reproducible. Sweep lattices also have their own
+        <strong>Save graph</strong> annotated PNG (see
+        <a href={withBase('/manual/sweeps-results')}>Sweeps &amp; results</a>).
       </p>
 
       <h3>Managing analyses</h3>
@@ -95,10 +97,16 @@ import { withBase } from '../../lib/github';
         only</strong> (keeping the backup) or <strong>everywhere</strong>. A deleted backup has a
         <strong>5-second Undo</strong>.
       </p>
+      <p>
+        <span class="lead-label">Deleting on this device only is not losing it.</span> The row stays
+        on Home, badged <strong>Only in cloud</strong>, and tapping it offers to download the
+        analysis back before opening it. Freeing space is a reversible decision.
+      </p>
       <div class="callout">
-        <span class="lead-label">No notifications, anywhere.</span> Background uploads, restores and
-        deletes report nothing until you come back to the app — a quiet screen does not mean nothing is
-        happening.
+        <span class="lead-label">Transfers are honest about progress and failure.</span> Uploads and
+        restores keep running if you leave the screen (with a system notification), and while you
+        are on Home they show a progress bar on the row. Success is quiet. A backup or restore that
+        fails for good raises a dialog or Home message explaining why — you are not left guessing.
       </div>
       <p>
         <span class="lead-label">If it fails:</span> hit the analysis limit? It is not a paywall —
@@ -111,7 +119,24 @@ import { withBase } from '../../lib/github';
       <h3>Useful Settings</h3>
       <ul>
         <li><strong>Max frames</strong> — 10–150, default 50</li>
-        <li><strong>Save to cloud</strong> — queue uploads when online</li>
+        <li>
+          <strong>Save to cloud</strong> — queue uploads when online; <strong>Wi-Fi only</strong>
+          holds them until Wi-Fi
+        </li>
+        <li>
+          <strong>Analyses data management</strong> — local and cloud rows together; back up,
+          restore, or delete per row
+        </li>
+        <li>
+          <strong>Storage</strong> —
+          <strong>Free up space</strong> (drop local frames of backed-up analyses → Only in cloud),
+          <strong>Clear cache</strong>, and an <strong>Auto-free budget</strong> slider (0–64 GB)
+        </li>
+        <li>
+          <strong>Your data</strong> — <strong>Export my data</strong> (ZIP of everything on this
+          phone), <strong>Download my cloud account data</strong>, account delete, and
+          <strong>Send crash reports</strong> (opt-in)
+        </li>
         <li>
           <strong>Help &amp; support</strong> — Manual, community, and email for private account
           issues

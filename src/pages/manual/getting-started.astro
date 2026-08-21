@@ -75,14 +75,16 @@ import { withBase } from '../../lib/github';
       </p>
       <p><span class="lead-label">In the app:</span></p>
       <ol>
-        <li>Sign in with Google or email.</li>
+        <li>Sign in with Google or email (password, or an emailed sign-in link).</li>
         <li>
           Email passwords need 8+ characters with upper and lower case, a digit, and a special
           character. Use <strong>Generate secure password</strong> if you want one filled in.
+          <strong>Forgot password</strong> mails a link that reopens the app on a set-new-password
+          form — you never leave the app to reset.
         </li>
         <li>
           After email sign-up, open the verification link, then sign in. Until you verify, sign-in
-          is refused.
+          is refused and a fresh link is sent each time you try.
         </li>
         <li>
           New accounts show <strong>Pending approval</strong>. Support is emailed automatically.
@@ -94,13 +96,23 @@ import { withBase } from '../../lib/github';
         </li>
       </ol>
       <p>
+        Google and email-link sign-ins already prove the address, so they skip the password step.
+      </p>
+      <div class="callout">
+        <span class="lead-label">Crash reports are opt-in.</span> After the beta notice on first run
+        the app asks once whether it may send crash diagnostics. Nothing is collected unless you say
+        yes, and you can change your mind under
+        <strong>Settings → Your data → Send crash reports</strong>. Reports never include your
+        images or measurement results.
+      </div>
+      <p>
         Auth, storage, and erasure:
         <a href={withBase('/privacy')}>Privacy</a>.
       </p>
       <Figure
         src="/manual/screenshots/home.webp"
         alt="Semper Home screen listing analyses with upload badges and add button"
-        caption="Home lists your analyses. Tap to open, long-press to select, + to start a new one."
+        caption="Home lists your analyses. Tap to open, long-press to select, pull down to sync, + to start a new one. Rows show upload state; newer builds also show restore progress or Only in cloud when local frames were freed."
         phone
         width={460}
         height={1022}

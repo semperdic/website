@@ -9,6 +9,10 @@ This repository is the public home for:
 - Customer **Issues** (bugs and feature requests)
 
 The Android app and correlation engine live in a separate private repository.
+A snapshot of the app operating manual, workflows, legal drafts, and images used
+for content sync lives in [`docs/source/`](docs/source/) so public contributors
+can review Manual copy without private-repo access. See
+[`docs/CONTENT-SYNC.md`](docs/CONTENT-SYNC.md).
 
 A custom domain (`semperdic.com`) can be added later when traffic justifies it — see [docs/HOSTING.md](docs/HOSTING.md).
 

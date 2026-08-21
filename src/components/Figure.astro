@@ -15,7 +15,7 @@ interface Props {
 
 const { src, alt, caption, phone = false, wide = false, width, height } = Astro.props;
 /** Bump when replacing Manual figures so CDNs/browsers drop stale SVG bodies. */
-const FIGURE_CACHE = '20260804a';
+const FIGURE_CACHE = '20260807b';
 const baseHref = src.startsWith('http') ? src : withBase(src.startsWith('/') ? src : `/${src}`);
 const href = `${baseHref}${baseHref.includes('?') ? '&' : '?'}v=${FIGURE_CACHE}`;
 ---

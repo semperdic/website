@@ -37,12 +37,34 @@ const faqs = [
     a: 'The engine locates each subset to roughly 1/100 of a pixel, and recommends a subset size that targets about 0.007 px displacement accuracy on your image. Real accuracy depends on your speckle, lighting, and camera — the parameters and a sweep let you check it.',
   },
   {
+    id: 'jpeg-warning',
+    q: 'Why does Semper warn about JPEG?',
+    a: 'JPEG works, but compression damages the intensity gradients correlation needs, so Semper shows a non-blocking warning. Prefer PNG or TIFF. RAW and DNG import only through Files, not the gallery.',
+  },
+  {
+    id: 'speckle-contrast',
+    q: 'Why is speckle contrast too low?',
+    a: 'On import the app measures your speckle. A weak pattern cannot reach the target accuracy even at the largest subset, so you see a warning and a larger subset suggestion. Treat it as feedback on the pattern, not just a slider tip: accept the larger subset, redraw the ROI over well-speckled surface, or re-shoot. For how to paint and light a speckle, see the iDICs guide below.',
+  },
+  {
     q: 'Is my data uploaded to the cloud?',
     a: 'Only if you turn on Save to cloud. The correlation always runs on the phone; cloud backup just stores the results you choose to sync, so you can restore them. See Privacy for the full picture.',
   },
   {
     q: 'Can I use Semper results in a paper?',
-    a: 'Yes. Export “Everything”, quote the VSG with any strain value, and keep the archive with your raw images — inputs, fields, and parameters together are what make the result reproducible.',
+    a: 'Yes. Export “Everything”, quote the VSG with any strain value, and keep the archive with your raw images — inputs, fields, and parameters together are what make the result reproducible. From a sweep you can also Save graph for an annotated lattice plot PNG.',
+  },
+  {
+    q: 'I forgot my password — do I leave the app?',
+    a: 'No. Forgot password mails a link that reopens Semper on a set-new-password form (same password rules). Email sign-in links work the same way once App Links are verified.',
+  },
+  {
+    q: 'Does Semper send crash reports?',
+    a: 'Only if you opt in. After the beta notice on first run you are asked once; you can change it later under Settings → Your data → Send crash reports. Declining is the default. Reports never include your images or results.',
+  },
+  {
+    q: 'How do I reuse parameters from a sweep?',
+    a: 'On the lattice plot, double-tap the value readout to copy that combination’s subset, step, and strain window. Start a new single-setting analysis and tap Paste params on step 2.',
   },
   {
     q: 'Something went wrong — where do I look?',
@@ -208,7 +230,7 @@ const appFaqs: AppFaq[] = [
       {
         faqs.map((item) => (
           <article class="faq-item">
-            <h3>{item.q}</h3>
+            <h3 id={item.id}>{item.q}</h3>
             <p>{item.a}</p>
           </article>
         ))
